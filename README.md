@@ -1,3 +1,3 @@
 # SkyAccessories
 
-Testing Slack
+Sky boot camp Django project.
