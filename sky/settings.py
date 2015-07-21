@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SkyStore',
-    'south',
 )
 
 MIDDLEWARE_CLASSES = (
