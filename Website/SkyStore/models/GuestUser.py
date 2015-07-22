@@ -12,7 +12,4 @@ class GuestUser(models.Model):
         app_label = 'SkyStore'
         db_table = 'guest_user'
 
-    def __init__(self):
-        super(User, self).__init__()
-
 
