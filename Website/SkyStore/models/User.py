@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Login(models.Model):
+class User(models.Model):
     user = models.OneToOneField(User)
 
     # we could use json field for addresses

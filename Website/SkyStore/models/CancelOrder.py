@@ -1,6 +1,6 @@
 __author__ = 'bog02'
 
-import Order
+from Order import Order
 
 
 class CancelOrder(Order):
