@@ -1,1 +1,1 @@
-from models import GuestUser, User, Address, Order, CancelOrder, NormalOrder
+from models import GuestUser, User, Address, CancelOrder, NormalOrder, ShoppingBag, Wishlist

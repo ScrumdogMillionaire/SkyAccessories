@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'SkyStore',
     'Warehouse',
+    'RewardsApp',
+    'StoreStaffApp',
 )
 
 MIDDLEWARE_CLASSES = (
