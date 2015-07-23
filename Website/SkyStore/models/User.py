@@ -13,5 +13,5 @@ class Login(models.Model):
 
     class Meta:
         app_label = 'SkyStore'
-        db_table = 'user'
+        db_table = 'logins'
 
