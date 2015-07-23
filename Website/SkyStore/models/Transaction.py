@@ -4,4 +4,10 @@ from django.db import models
 
 
 class Transaction(models.Model):
-    pass
+
+    def __init__(self, order, payment):
+        self.order = order
+        self.payment = payment
+
+
+
