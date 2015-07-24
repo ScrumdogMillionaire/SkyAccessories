@@ -28,8 +28,8 @@ public class MainMenu extends Activity {
                 .setRequestId("1")
 
                 .setCircularRegion(
-                        100,
-                        100,
+                        53.796676,
+                        -1.544610,
                         100
                 )
                 .setExpirationDuration(10)
