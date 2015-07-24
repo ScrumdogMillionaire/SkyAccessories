@@ -10,7 +10,6 @@ import android.view.View;
 import com.google.android.gms.location.Geofence;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 public class MainMenu extends Activity {
@@ -67,7 +66,7 @@ public class MainMenu extends Activity {
     }
 
     public void loadLocalStore(View v){
-        Intent resultIntent = new Intent(this, LocalStore.class);
+        Intent resultIntent = new Intent(this, FindStore.class);
         startActivity(resultIntent);
     }
 
