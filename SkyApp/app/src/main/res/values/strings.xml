@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sky App</string>
+
+    <string name="hello_user">Hello James. You have 1000 points!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sky Login</string>
+    <string name="title_activity_signup">Sky Sign Up</string>
+    <string name="title_activity_menu">Sky Menu</string>
+    <string name="title_activity_redeem_reward">Sky Redeem Reward</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_local_store">LocalStore</string>
+    <string name="title_activity_account_page">AccountPage</string>
+</resources>
