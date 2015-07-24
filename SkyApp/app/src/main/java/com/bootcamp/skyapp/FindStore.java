@@ -85,5 +85,5 @@ public class FindStore extends FragmentActivity {
         return locations;
     }
 
-    
+
 }

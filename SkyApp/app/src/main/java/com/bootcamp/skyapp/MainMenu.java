@@ -40,8 +40,8 @@ public class MainMenu extends Activity implements GoogleApiClient.ConnectionCall
                 .setRequestId("1")
 
                 .setCircularRegion(
-                        53.796676,
-                        -1.544610,
+                        53.647370,
+                        -1.784994,
                         100
                 )
                 .setExpirationDuration(10)
@@ -62,10 +62,11 @@ public class MainMenu extends Activity implements GoogleApiClient.ConnectionCall
 
 
     private PendingIntent getGeofencePendingIntent() {
-        Intent intent = new Intent(this, LandingActivity.class);
+
+        Intent intent = new Intent(this, FindStore.class);
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
         // calling addGeofences() and removeGeofences().
-        return PendingIntent.getService(this, 0, intent, PendingIntent.
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.
                 FLAG_UPDATE_CURRENT);
     }
 
