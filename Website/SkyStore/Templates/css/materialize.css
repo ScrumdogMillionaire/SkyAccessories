@@ -5524,7 +5524,7 @@ small {
       font-size: 1.2rem; } }
 
 .card-panel {
-  transition: box-shadow .25s;
+  /*transition: box-shadow .25s;*/
   padding: 20px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
@@ -5535,7 +5535,7 @@ small {
   overflow: hidden;
   margin: 0.5rem 0 1rem 0;
   background-color: #fff;
-  transition: box-shadow .25s;
+  /*transition: box-shadow .25s;*/
   border-radius: 2px; }
   .card .card-title {
     color: #fff;
