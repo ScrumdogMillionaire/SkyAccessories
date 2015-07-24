@@ -11,3 +11,8 @@ class Payment(models.Model):
     def __init__(self, p_method):
         self.payment_method = p_method
 
+    class Meta:
+        app_label = 'SkyStore'
+        db_table = 'payment'
+
+

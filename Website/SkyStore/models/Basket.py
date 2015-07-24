@@ -3,7 +3,7 @@ __author__ = 'bog02'
 
 from django.db import models
 from ProductItem import ProductItem
-from User import User
+from Customer import User
 
 
 class Basket(models.Model):

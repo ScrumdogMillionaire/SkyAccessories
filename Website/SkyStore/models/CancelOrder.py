@@ -1,12 +1,12 @@
 __author__ = 'bog02'
 
+from django.db import models
 from Order import Order
 
 
-class CancelOrder(Order):
-    def __init__(self, request_date, *args):
-        super(CancelOrder, self).__init__(*args)
-        self.request_date = request_date
+class CancelOrder(models.Model):
+    request_date = models.DateField(default=None)
+    order = models.OneToOneField(Order, default=None)
 
     class Meta:
         app_label = 'SkyStore'

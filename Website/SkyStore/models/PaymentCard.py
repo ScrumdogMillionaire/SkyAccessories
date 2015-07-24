@@ -3,7 +3,7 @@ __author__ = 'bog02'
 import datetime
 from django.db import models
 from PaymentMethod import PaymentMethod
-from User import User
+from Customer import User
 
 
 class PaymentCard(PaymentMethod):
