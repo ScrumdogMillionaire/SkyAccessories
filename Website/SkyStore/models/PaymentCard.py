@@ -1,9 +1,8 @@
 __author__ = 'bog02'
 
-import datetime
 from django.db import models
-from PaymentMethod import PaymentMethod
-from Customer import User
+from Website.SkyStore.models.PaymentMethod import PaymentMethod
+from Website.SkyStore.models.Customer import Customer
 
 
 class PaymentCard(PaymentMethod):
@@ -14,7 +13,7 @@ class PaymentCard(PaymentMethod):
     # start_date = start_date
     # end_date = end_date
     # cvv = cvv
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(Customer)
 
     def validate_card(self):
         pass

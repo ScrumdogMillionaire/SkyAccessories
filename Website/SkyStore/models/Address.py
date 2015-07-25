@@ -3,6 +3,7 @@ TYPES = [('default', 'default'), ('billing', 'billing')]
 
 from django.db import models
 
+
 class Address(models.Model):
 
     address_type = models.CharField(max_length=20, choices=TYPES, default='default')

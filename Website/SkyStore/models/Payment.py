@@ -2,7 +2,7 @@ __author__ = 'bog02'
 
 
 from django.db import models
-from PaymentMethod import PaymentMethod
+from Website.SkyStore.models.PaymentMethod import PaymentMethod
 
 
 class Payment(models.Model):

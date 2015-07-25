@@ -16,8 +16,9 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from Website import SkyStore
 from Website.SkyStore.views.OrderListController import OrderListController
+
 
 urlpatterns = [
     url(r'^$', 'SkyStore.views.AccountController.home', name='home'),

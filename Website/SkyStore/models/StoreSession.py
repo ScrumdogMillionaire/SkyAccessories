@@ -1,15 +1,15 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Customer import User
-from ShoppingBag import ShoppingBag
-from Wishlist import Wishlist
+from Website.SkyStore.models.Customer import Customer
+from Website.SkyStore.models.ShoppingBag import ShoppingBag
+from Website.SkyStore.models.Wishlist import Wishlist
 
 
 class StoreSession(models.Model):
     shopping_bag = models.OneToOneField(ShoppingBag)
     wishlist = models.OneToOneField(Wishlist)
-    user = models.OneToOneField(User, default=None)
+    user = models.OneToOneField(Customer, default=None)
 
     def get_contents(self):
         return self.contents

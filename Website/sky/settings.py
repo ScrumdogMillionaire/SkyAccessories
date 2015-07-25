@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 base_parent = os.path.dirname(BASE_DIR)
 sys.path.append(BASE_DIR)
 sys.path.append(base_parent)
-# sys.path.append(os.path.join(BASE_DIR, 'SkyStore'))
+# sys.path.append(os.path.join(BASE_DIR, 'Website'))
 # sys.path.append(os.path.join(BASE_DIR, 'SkyStore', 'models', 'views'))
 
 
@@ -47,11 +47,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'SkyStore',
-    'Website',
     'Warehouse',
     'RewardsApp',
     'StoreStaffApp',
+    'SkyStore',
 )
 
 MIDDLEWARE_CLASSES = (
