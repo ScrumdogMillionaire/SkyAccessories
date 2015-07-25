@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from SkyStore.models.Address import Address
 # Create your views here.
 
 
@@ -8,4 +8,7 @@ def home(request):
 
 
 def index(request):
-    return render(request, "index.html", {})
+
+    add = Address.objects.get(pk=1);
+
+    return render(request, "index.html", {'add': add})
