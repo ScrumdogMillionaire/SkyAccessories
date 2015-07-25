@@ -9,9 +9,9 @@ class Order(models.Model):
     STATUSES = [('Order Placed', 'Order Placed'), ('Out for Delivery', 'Out for Delivery'), ('Delivered', 'Delivered')]
     # status = models.BooleanField(default=False)
 
-    creation_date = models.DateField(default=None)  # Creation Date of Order
-    completed_date = models.DateField(default=None)  # Order Delivery Date
-    expected_delivery_date = models.DateField(default=None)  # Expected Delivery Date
+    creation_date = models.DateField(null=True)  # Creation Date of Order
+    completed_date = models.DateField(null=True)  # Order Delivery Date
+    expected_delivery_date = models.DateField(null=True)  # Expected Delivery Date
 
     status = models.CharField(max_length=20, choices=STATUSES)  # Status of Order
     user = models.ForeignKey(Customer, null=True)  # User who the order belongs to
@@ -19,8 +19,7 @@ class Order(models.Model):
 
     def get_delivery_address(self):
         # Returns a delivery address for an order
-        # return self.user.get_delivery_address()
-        pass
+        return self.user.get_delivery_address()
 
     def calculate_order_price(self):
         # Returns the total price of an order

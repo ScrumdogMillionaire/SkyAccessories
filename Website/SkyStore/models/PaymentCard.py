@@ -8,18 +8,13 @@ from Customer import User
 
 class PaymentCard(PaymentMethod):
 
-    start_date = 0
-    end_date = 0
-    cvv = 0
-    user = 0
-
-    def __init__(self, card_type, start_date, end_date, cvv, *args):
-        super(PaymentCard, self).__init__(*args)
-        self.card_type = card_type
-        self.start_date = start_date
-        self.end_date = end_date
-        self.cvv = cvv
-        self.user = models.OneToOneField(User)
+    start_date = models.DateField(default=None)
+    end_date = models.DateField(default=None)
+    # card_type = models.CharField()
+    # start_date = start_date
+    # end_date = end_date
+    # cvv = cvv
+    user = models.OneToOneField(User)
 
     def validate_card(self):
         pass

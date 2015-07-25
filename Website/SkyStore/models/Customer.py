@@ -17,7 +17,6 @@ class Customer(AbstractBaseUser):
     username = models.CharField(unique=True, max_length=40)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    addresses = models.ForeignKey('Address')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
