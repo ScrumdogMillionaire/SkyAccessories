@@ -1,5 +1,6 @@
 __author__ = 'bog02'
 
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
@@ -43,5 +44,9 @@ def change_password():
 
 def logout(request):
     logout(request)
+
+
+def home(request):
+    return render(request, "home.html", {'name': 'ScrumdogMillionaires'})
 
 
