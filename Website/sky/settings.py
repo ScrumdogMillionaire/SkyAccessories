@@ -12,8 +12,17 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# paths trouble hack -- need to check this with Megan
+# because of the next 3 lines, there is no need to register the app
+base_parent = os.path.dirname(BASE_DIR)
+sys.path.append(BASE_DIR)
+sys.path.append(base_parent)
+# sys.path.append(os.path.join(BASE_DIR, 'SkyStore'))
+# sys.path.append(os.path.join(BASE_DIR, 'SkyStore', 'models', 'views'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +46,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'SkyStore',
+    'rest_framework',
+    # 'SkyStore',
+    'Website',
     'Warehouse',
     'RewardsApp',
     'StoreStaffApp',
@@ -107,3 +118,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':
+        ['rest_framework.permissions.AllowAny']
+}

@@ -13,11 +13,19 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
 from django.conf.urls import include, url
 from django.contrib import admin
+
+from Website.SkyStore.views.OrderListController import OrderListController
 
 urlpatterns = [
     url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
+    # url(r'^api/orders/$', api.OrderList.as_view()),
+    # url(r'^api/orders/$', 'SkyStore.apis.api.OrderList.as_view()'),
+    # url(r'^SkyStore/', include('SkyStore.urls')),
+    # url(r'^', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/orders/$', OrderListController.as_view()),
 ]

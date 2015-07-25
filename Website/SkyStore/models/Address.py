@@ -3,7 +3,6 @@ __author__ = 'bog02'
 
 from django.db import models
 
-
 class Address(models.Model):
     TYPES = [('default', 'default'), ('billing', 'billing')]
     address_type = models.CharField(max_length=20, choices=TYPES, default='default')

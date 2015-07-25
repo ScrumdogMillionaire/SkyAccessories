@@ -1,7 +1,7 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Customer import Customer
+from Website.SkyStore.models.Customer import Customer
 
 
 class Order(models.Model):
@@ -14,7 +14,7 @@ class Order(models.Model):
     expected_delivery_date = models.DateField(default=None)  # Expected Delivery Date
 
     status = models.CharField(max_length=20, choices=STATUSES)  # Status of Order
-    user = models.ForeignKey(Customer, default=None)  # User who the order belongs to
+    user = models.ForeignKey(Customer, null=True)  # User who the order belongs to
     price = models.DecimalField(decimal_places=2, max_digits=14)
 
     def get_delivery_address(self):
