@@ -30,7 +30,7 @@ public class Marker {
         this.longitude = longitude;
     }
 
-    public String getLocation() {
+    public String getLocationDescription() {
         return location;
     }
 

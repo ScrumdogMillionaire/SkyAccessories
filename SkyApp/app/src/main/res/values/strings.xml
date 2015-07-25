@@ -12,4 +12,5 @@
     <string name="title_activity_local_store">LocalStore</string>
     <string name="title_activity_account_page">AccountPage</string>
     <string name="title_activity_find_astore">Map</string>
+    <string name="title_activity_buy_product_nfc">BuyProductNFC</string>
 </resources>

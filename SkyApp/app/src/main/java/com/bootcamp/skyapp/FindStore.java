@@ -68,19 +68,21 @@ public class FindStore extends FragmentActivity {
         storeLocations = populateLocations();
 
         for (int i = 0; i < storeLocations.length; i++) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(storeLocations[i].getLatitude(), storeLocations[i].getLongitude())).title(storeLocations[i].getLocation()));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(storeLocations[i].getLatitude(), storeLocations[i].getLongitude())).title(storeLocations[i].getLocationDescription()));
         }
 
     }
 
-    private Marker[] populateLocations() {
-        int numberOfLocations = 4;
+    public static Marker[] populateLocations() {
+        int numberOfLocations = 6;
         Marker[] locations = new Marker[numberOfLocations];
 
         locations[0] = new Marker(53.796590, -1.544412, "Trinity Leeds");
         locations[1] = new Marker(53.466085, -2.348114, "Trafford Center");
         locations[2] = new Marker(52.477747, -1.892496, "Bullring Shopping Center");
         locations[3] = new Marker(51.507453, -0.221144, "Westfield");
+        locations[4] = new Marker(53.794613, -1.547621, "Leeds Train Station");
+        locations[5] = new Marker(53.647308, -1.785154, "Huddersfield Train Station");
 
         return locations;
     }

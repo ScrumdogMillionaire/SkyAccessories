@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -22,7 +25,7 @@ import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
 
 
-public class MainMenu extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ResultCallback<Status> {
+public class MainMenu extends Activity {
 
     ArrayList<Geofence> mGeofenceList = new ArrayList<Geofence>();
     GoogleApiClient mGoogleApiClient;
@@ -32,53 +35,15 @@ public class MainMenu extends Activity implements GoogleApiClient.ConnectionCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        buildGoogleApiClient();
 
-        mGeofenceList.add(new Geofence.Builder()
-                // Set the request ID of the geofence. This is a string to identify this
-                // geofence.
-                .setRequestId("1")
+        String fontPath = "skymed.ttf";
+        TextView txtGhost = (TextView) findViewById(R.id.helloUser);
+        Button redeemReward = (Button) findViewById(R.id.actionRedeem);
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+        txtGhost.setTypeface(tf);
+        redeemReward.setTypeface(tf);
 
-                .setCircularRegion(
-                        53.647370,
-                        -1.784994,
-                        100
-                )
-                .setExpirationDuration(10)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-                        Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build());
-
-        mGoogleApiClient.connect();
     }
-
-
-    private GeofencingRequest getGeofencingRequest() {
-        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
-        builder.addGeofences(mGeofenceList);
-        return builder.build();
-    }
-
-
-    private PendingIntent getGeofencePendingIntent() {
-
-        Intent intent = new Intent(this, FindStore.class);
-        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
-        // calling addGeofences() and removeGeofences().
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.
-                FLAG_UPDATE_CURRENT);
-    }
-
-
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menuActivity) {
@@ -101,64 +66,6 @@ public class MainMenu extends Activity implements GoogleApiClient.ConnectionCall
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-    /**
-     * Runs when a GoogleApiClient object successfully connects.
-     */
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        Log.i("", "Connected to GoogleApiClient");
-
-        LocationServices.GeofencingApi.addGeofences(
-                mGoogleApiClient,
-                getGeofencingRequest(),
-                getGeofencePendingIntent()
-        ).setResultCallback(this);
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
-        // onConnectionFailed.
-        Log.i("", "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-    }
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-        // The connection to Google Play services was lost for some reason.
-        Log.i("", "Connection suspended");
-
-        // onConnected() will be called again automatically when the service reconnects
-    }
-
-
-
-
-
-    public void onResult(Status status) {
-        if (status.isSuccess()) {
-
-            Toast.makeText(
-                    this,
-                    "Geofence added!",
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else {
-            Toast.makeText(
-                    this,
-                    "Geofence not added!",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-    }
-
-
-
-
 
     public void loadRedeemReward(View v){
         Intent resultIntent = new Intent(this, RedeemReward.class);

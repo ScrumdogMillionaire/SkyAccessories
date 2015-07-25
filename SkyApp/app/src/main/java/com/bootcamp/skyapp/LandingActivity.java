@@ -23,7 +23,10 @@ public class LandingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        NotificationLauncher.fireNotification(this, "RICK AND MORTY THOUSAND YEARS OVER AND OVER", "hundred years");
+        //Intent intent = new Intent(this, NotificationService.class);
+        //startService(intent);
+
+        this.startService(new Intent(this, GeofenceService.class));
 
     }
 
