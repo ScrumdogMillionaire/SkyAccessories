@@ -1,1 +1,1 @@
-from SkyStore.models import GuestUser, User
+from models import Order, Product, ProductItem, Address, Customer
