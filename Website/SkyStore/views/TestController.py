@@ -9,6 +9,6 @@ def home(request):
 
 def index(request):
 
-    add = Address.objects.get(pk=1);
+    add = Address.objects.get(pk=1)
 
     return render(request, "index.html", {'add': add})
