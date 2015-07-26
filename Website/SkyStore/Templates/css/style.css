@@ -13,14 +13,21 @@ footer.page-footer {
 	padding: 0;
 }
 
-@media only screen and (min-width : 993px) {
-	nav a.button-collapse {
-		display: initial;
-		} }
-
 .logo-header {
 	border: 0;
 	padding-top: 10px;
 	}
 
-.grid-item{ width: 200px;}
+.grid-item { 
+	width: 200px;
+}
+
+@media only screen and (min-width : 993px) {
+	nav a.button-collapse {
+		display: initial;
+		} }
+
+@media only screen and (max-width : 600px) {
+  	.logo-header {
+  		padding-top: 6px;
+  	} }
