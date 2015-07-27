@@ -2,7 +2,8 @@ __author__ = 'bog02'
 
 from django.db import models
 from Website.SkyStore.models.PaymentMethod import PaymentMethod
-from Website.SkyStore.models.Customer import Customer
+from django.contrib.auth.models import User
+# from Website.SkyStore.models.Customer import Customer
 
 
 class PaymentCard(PaymentMethod):
@@ -13,7 +14,7 @@ class PaymentCard(PaymentMethod):
     # start_date = start_date
     # end_date = end_date
     # cvv = cvv
-    user = models.OneToOneField(Customer)
+    user = models.OneToOneField(User)
 
     def validate_card(self):
         pass

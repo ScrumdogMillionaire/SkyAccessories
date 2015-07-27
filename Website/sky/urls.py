@@ -16,8 +16,11 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from Website import SkyStore
-from Website.SkyStore.views.OrderListController import OrderListController
+# from Website import SkyStore
+from Website.SkyStore.views.ApiController import OrderListController
+from Website.SkyStore.views.ApiController import StoreListController
+from Website.SkyStore.views.ApiController import ProductListController
+from Website.SkyStore.views.ApiController import AuthController
 
 
 urlpatterns = [
@@ -29,4 +32,8 @@ urlpatterns = [
     # url(r'^', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/orders/$', OrderListController.as_view()),
+    url(r'^api/stores/$', StoreListController.as_view()),
+    url('^api/product/(?P<prod_id>[0-9]+)$', ProductListController.as_view()),
+    # url(r'^api/login/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/auth/$', AuthController.as_view(), name='authenticate'),
 ]
