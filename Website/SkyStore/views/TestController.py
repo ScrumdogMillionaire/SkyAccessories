@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
@@ -78,4 +79,3 @@ def login_user(username, password, request):
 # Return a single product in the product page template
 # def product(request, product_id=1):
 #     return render(request, "product.html", {'product': Product.object.get(id=product_id)})
-

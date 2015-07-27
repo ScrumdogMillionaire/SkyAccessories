@@ -1,17 +1,10 @@
-<!DOCTYPE html>
 
+{% extends 'base.html'%}
 {%  load static from staticfiles %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+{% block body_block %}
 
-    {% include "header.html" %}
 
-    <main class="blue-grey lighten-5">
-		<div class="container">
             <div class="col s12 offset-m2 m8 offset-l3 l6">
                 <div class="card-panel z-depth-0">
                     <div class="row center">
@@ -28,10 +21,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-
-    {% include "footer.html" %}
-
-</body>
-</html>
+{% endblock %}

@@ -1,28 +1,17 @@
-<!DOCTYPE html>
 
+
+{% extends 'base.html'%}
 {%  load static from staticfiles %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+{% block body_block %}
 
-    {% include "header.html" %}
-
-    <main class="blue-grey lighten-5">
-		<div class="container">
 
             {% if user.is_authenticated %}
             {{ request.user}} hello
             {% else %}
-            hello
+            no
             {% endif %}
 
-        </div>
-    </main>
+{% endblock %}
 
-    {% include "footer.html" %}
 
-</body>
-</html>
