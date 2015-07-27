@@ -1,2 +1,3 @@
-# Create your models here.
+__author__ = 'bog02'
 
+from django.db import models

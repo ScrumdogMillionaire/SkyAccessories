@@ -21,5 +21,16 @@ from Website.SkyStore.views.OrderListController import OrderListController
 
 
 urlpatterns = [
-        url(r'^skystore/', include('SkyStore.urls')),
+<<<<<<< HEAD
+    url(r'^skystore/', include('SkyStore.urls')),
+=======
+    url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
+    url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
+    # url(r'^api/orders/$', api.OrderList.as_view()),
+    # url(r'^api/orders/$', 'SkyStore.apis.api.OrderList.as_view()'),
+    # url(r'^SkyStore/', include('SkyStore.urls')),
+    # url(r'^', include(router.urls)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/orders/$', OrderListController.as_view()),
+>>>>>>> db-dev
 ]

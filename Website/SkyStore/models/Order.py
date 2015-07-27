@@ -1,7 +1,7 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Customer import Customer
+from Website.SkyStore.models.Customer import Customer
 
 
 class Order(models.Model):

@@ -1,7 +1,7 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Order import Order
+from Website.SkyStore.models.Order import Order
 
 
 class CancelOrder(models.Model):

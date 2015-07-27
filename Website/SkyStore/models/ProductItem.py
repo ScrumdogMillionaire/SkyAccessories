@@ -1,8 +1,8 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Product import Product
-from Order import Order
+from Website.SkyStore.models.Product import Product
+from Website.SkyStore.models.Order import Order
 
 
 class ProductItem(models.Model):

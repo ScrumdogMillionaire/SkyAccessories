@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from models.Address import Address
-# from models.CancelOrder import CancelOrder
-from models.Customer import Customer
-from models.Order import Order
-from models.Product import Product
-from models.ProductItem import ProductItem
+
+# from Customer import Customer
+from Website.SkyStore.models.Order import Order
+from Website.SkyStore.models.Product import Product
+from Website.SkyStore.models.ProductItem import ProductItem
 
 
-models = [Order, Product, ProductItem, Address, Customer]
+models = [Order, Product, ProductItem, Address]
 admin.site.register(models)

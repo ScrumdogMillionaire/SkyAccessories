@@ -10,6 +10,9 @@ def home(request):
 def index(request):
     return render(request, "base.html", {})
 
+def imageslider(request):
+    return render(request, "imageslider.html", {})
+
 def productlist(request):
     return render(request, "productlist.html", {})
 
@@ -43,7 +46,11 @@ def register(request):
 # def products(request):
 #     return render(request, "products.html", {'products': Product.object.All()})
 
+<<<<<<< HEAD
 # Return a single product in the product page template
 # def product(request, product_id=1):
 #     return render(request, "product.html", {'product': Product.object.get(id=product_id)})
+=======
+    add = Address.objects.get(pk=1)
+>>>>>>> db-dev
 
