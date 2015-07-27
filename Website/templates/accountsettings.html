@@ -1,0 +1,36 @@
+{%  extends 'base.html' %}
+
+{%  load static from staticfiles %}
+
+{% block body_block %}
+
+    <main class="blue-grey lighten-5">
+		<div class="container">
+
+            <div class="row" style="padding-top:20px">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <!-- NOTE: Indicator color in .tabs .indicator -->
+                        <li class="tab col s3"><a class="active grey-text" href="#test1">General</a></li>
+                        <li class="tab col s3"><a class="grey-text" href="#test2">Address</a></li>
+                        <li class="tab col s3"><a class="grey-text" href="#test3">Payment</a></li>
+                        <li class="tab col s3"><a class="grey-text" href="#test4">Delete Account</a></li>
+                    </ul>
+                </div>
+                <div id="test1" class="col s12">
+                    <div class="card-panel z-depth-0">General Settings</div>
+                </div>
+                <div id="test2" class="col s12">
+                    <div class="card-panel z-depth-0">Address Settings</div>
+                </div>
+                <div id="test3" class="col s12">
+                    <div class="card-panel z-depth-0">Payment Details</div>
+                </div>
+                <div id="test4" class="col s12">
+                    <div class="card-panel z-depth-0">Delete</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{%  endblock %}

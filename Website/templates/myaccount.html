@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{%  load static from staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    {% include "header.html" %}
+
+    <main class="blue-grey lighten-5">
+		<div class="container">
+
+            {{ hello }}
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+
+</body>
+</html>

@@ -17,7 +17,5 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
-    url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^skystore/', include('SkyStore.urls')),
 ]
