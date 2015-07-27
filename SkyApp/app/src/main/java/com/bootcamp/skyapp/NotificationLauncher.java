@@ -1,5 +1,6 @@
 package com.bootcamp.skyapp;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,6 +24,7 @@ public class NotificationLauncher {
                         .setSmallIcon(R.drawable.notification) //MUST BE WHITE
                         .setLargeIcon(bm)
                         .setContentTitle(title)
+                        .setDefaults(Notification.DEFAULT_ALL)
                         .setContentText(text);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(ctx, passedClass);
