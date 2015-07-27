@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+{%  load static from staticfiles %}
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sky</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- Google Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{%  static 'assets/Sky_logo_2014_small.png' %}">
+
+</head>
+<body>
+
+	<!-- Header/NavBar -->
+	<header>
+		<div class="navbar-fixed">
+			<nav class="z-depth-0 white" role="navigation">
+				<div class="nav-wrapper container">
+					<a href="/skystore/index/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo_2014_small.png' %}"/></a>
+					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix grey-text">menu</i></a>
+					<ul class="right hide-on-med-and-down">
+						<li><a href="#" class="tooltipped" data-position="bottom" data-tooltip="Search"><i class="material-icons grey-text">search</i></a></li>
+						<li><a href="/skystore/accountsettings/" class="tooltipped" data-position="bottom" data-tooltip="Account"><i class="material-icons grey-text">perm_identity</i></a></li>
+						<li><a href="#"><i class="material-icons grey-text">shopping_cart</i></a></li>
+					</ul>
+					<ul class="side-nav" id="side-menu">
+						<li><a href="#">Search</a></li>
+						<li><a href="#">Account</a></li>
+						<li><a href="#">Basket</a></li>
+						<li><a href="#">Categories</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<!-- JavaScript/jQuery -->
+	<script src="{%  static 'js/jquery-2.1.4.js' %}"></script>
+    <script src="{%  static 'js/jquery-ui.js' %}"></script>
+	<script src="{%  static 'js/materialize.js' %}"></script>
+
+	<script type="text/javascript">
+        $( document ).ready(function(){
+            $(".button-collapse").sideNav();
+        })
+	</script>
+
+</body>
+</html>

@@ -12,7 +12,8 @@ class Customer(AbstractBaseUser):
         verbose_name='email address',
         max_length=255,
         unique=True,
-        default=None
+        default=None,
+
     )
 
     username = models.CharField(unique=True, max_length=40)
