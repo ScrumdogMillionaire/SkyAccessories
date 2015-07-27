@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from Website.SkyStore.views.OrderListController import OrderListController
 
 urlpatterns = [
     url(r'^home/', 'SkyStore.views.AccountController.home', name='home'),
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^myaccount/', 'SkyStore.views.TestController.myaccount', name='myaccount'),
     url(r'^login/', 'SkyStore.views.TestController.login', name="login"),
     url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
+    url(r'^api/orders/$', OrderListController.as_view()),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     #url(r'^get/(?P<product_id>\d+)/$', 'SkyStore.views.TestController.product, name="product"),

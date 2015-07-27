@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'Warehouse',
     'RewardsApp',
     'StoreStaffApp',
-    # 'SkyStore',
+    'SkyStore',
 )
 
 MIDDLEWARE_CLASSES = (

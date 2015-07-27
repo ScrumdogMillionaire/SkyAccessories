@@ -1,14 +1,16 @@
 __author__ = 'bog02'
 
 from Website.SkyStore.models.Order import Order
-from Website.SkyStore.models.Customer import Customer
+# from Website.SkyStore.models.Customer import Customer
+from django.contrib.auth.models import User
+
 from rest_framework import serializers
 
 
 class CustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Customer
+        model = User
         fields = (
             'id'
         )
