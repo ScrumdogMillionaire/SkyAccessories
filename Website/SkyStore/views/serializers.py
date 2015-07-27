@@ -7,6 +7,8 @@ from Website.SkyStore.models.Address import Address
 from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
 from rest_framework import serializers
+from django.contrib.auth import authenticate
+from django.core import exceptions
 
 
 class AddressSerializer(serializers.ModelSerializer):
@@ -72,3 +74,29 @@ class ProductSerializer(serializers.ModelSerializer):
             'product_image'
         )
 
+
+class AuthCustomTokenSerializer(serializers.Serializer):
+    email_or_username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        email_or_username = attrs.get('email_or_username')
+        password = attrs.get('password')
+
+        if email_or_username and password:
+
+            user = authenticate(username=email_or_username, password=password)
+            print user
+            if user:
+                if not user.is_active:
+                    msg = 'User account is disabled.'
+                    raise exceptions.ValidationError(msg)
+            else:
+                msg = 'Unable to log in with provided credentials.'
+                raise exceptions.ValidationError(msg)
+        else:
+            msg = 'Must include "email or username" and "password"'
+            raise exceptions.ValidationError(msg)
+
+        attrs['user'] = user
+        return attrs

@@ -20,7 +20,8 @@ from django.contrib import admin
 from Website.SkyStore.views.ApiController import OrderListController
 from Website.SkyStore.views.ApiController import StoreListController
 from Website.SkyStore.views.ApiController import ProductListController
-from Website.SkyStore.views.ApiController import AuthController
+from Website.SkyStore.views.ApiController import AuthTokenController
+from rest_framework.authtoken import views
 
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
     url(r'^api/orders/$', OrderListController.as_view()),
     url(r'^api/stores/$', StoreListController.as_view()),
     url('^api/product/(?P<prod_id>[0-9]+)$', ProductListController.as_view()),
-    # url(r'^api/login/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/auth/$', AuthController.as_view(), name='authenticate'),
+    url(r'^api-auth/', AuthTokenController.as_view()),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+
 ]

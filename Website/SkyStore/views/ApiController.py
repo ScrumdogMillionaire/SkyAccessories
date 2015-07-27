@@ -3,8 +3,9 @@ __author__ = 'bog02'
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
+from rest_framework import parsers
+from rest_framework import renderers
 
 from serializers import OrderSerializer
 from serializers import StoreSerializer
@@ -12,7 +13,7 @@ from serializers import ProductSerializer
 from Website.SkyStore.models.Order import Order
 from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
-from . import authentication, serializers
+from . import serializers
 
 
 class OrderListController(APIView):
@@ -44,17 +45,25 @@ class ProductListController(APIView):
         return Response(serialized_product.data)
 
 
-class AuthController(APIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
-    serializer_class = serializers.CustomerSerializer
+class AuthTokenController(APIView):
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (
+        parsers.FormParser,
+        parsers.MultiPartParser,
+        parsers.JSONParser,
+    )
 
-    def post(self, request, *args, **kwargs):
-        return Response(self.serializer_class(request.user).data)
+    renderer_classes = (renderers.JSONRenderer,)
 
-    def get(self, request, format=None):
+    def post(self, request):
+        serializer = serializers.AuthCustomTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+
         content = {
-            'user': unicode(request.user),  # `django.contrib.auth.User` instance.
-            'auth': unicode(request.auth),  # None
+            'token': unicode(token.key),
         }
+
         return Response(content)
