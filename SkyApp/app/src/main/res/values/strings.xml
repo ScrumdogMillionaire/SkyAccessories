@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sky App</string>
+    <string name="app_name">Sky Rewards</string>
 
     <string name="hello_user">Hello James. You have 1000 points!</string>
     <string name="action_settings">Settings</string>

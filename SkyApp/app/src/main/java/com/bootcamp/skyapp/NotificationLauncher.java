@@ -16,11 +16,11 @@ public class NotificationLauncher {
 
     public static void fireNotification(Context ctx, String title, String text, Class<?> passedClass) {
 
-        Bitmap bm = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.skygreenicon96);
+        Bitmap bm = BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.ic_launcher);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
-                        .setSmallIcon(R.drawable.skyiconsmall) //MUST BE WHITE
+                        .setSmallIcon(R.drawable.notification) //MUST BE WHITE
                         .setLargeIcon(bm)
                         .setContentTitle(title)
                         .setContentText(text);
