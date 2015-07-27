@@ -13,16 +13,35 @@ footer.page-footer {
 	padding: 0;
 }
 
-@media only screen and (min-width : 993px) {
-	nav a.button-collapse {
-		display: initial;
-		} }
-
 .logo-header {
 	border: 0;
 	padding-top: 10px;
-	}
+}
 
-.grid-item{ width: 325px;}
+.grid-item { 
+	width: 325px;
+}
 
-.hovercard{display: none;}
+.hovercard {
+	display: none;
+}
+
+#main_content {
+	margin-top: 20px; 
+}
+
+#drop-search {
+	display:  none;
+}
+
+@media only screen and (min-width : 993px) {
+	nav a.button-collapse {
+		display: initial;
+	} 
+}
+
+@media only screen and (max-width : 600px) {
+  	.logo-header {
+  		padding-top: 6px;
+  	}
+}
