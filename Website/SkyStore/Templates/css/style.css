@@ -13,14 +13,25 @@ footer.page-footer {
 	padding: 0;
 }
 
-@media only screen and (min-width : 993px) {
-	nav a.button-collapse {
-		display: initial;
-		} }
-
 .logo-header {
 	border: 0;
 	padding-top: 10px;
 	}
 
+<<<<<<< HEAD
 .grid-item{ width: 325px;}
+=======
+.grid-item { 
+	width: 200px;
+}
+
+@media only screen and (min-width : 993px) {
+	nav a.button-collapse {
+		display: initial;
+		} }
+
+@media only screen and (max-width : 600px) {
+  	.logo-header {
+  		padding-top: 6px;
+  	} }
+>>>>>>> 919a63fc5d82a77a716c8c2d3608879592ccb50f
