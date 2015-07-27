@@ -7,7 +7,7 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>{% block title %}Sky Accessories{% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
@@ -29,13 +29,27 @@
 		<div class="navbar-fixed">
 			<nav class="z-depth-0 white" role="navigation">
 				<div class="nav-wrapper container">
+
+					<!-- Sky Home Button-->
+
 					<a href="/skystore/home/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo_2014_small.png' %}"/></a>
+
+					<!-- Menu Icon-->
+
 					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix grey-text">menu</i></a>
+
+					<!-- Navigation on the right -->
+
 					<ul class="right hide-on-med-and-down">
-						<li><a href="#" class="tooltipped" data-position="bottom" data-tooltip="Search"><i class="material-icons grey-text">search</i></a></li>
-						<li><a href="/skystore/accountsettings/" class="tooltipped" data-position="bottom" data-tooltip="Account"><i class="material-icons grey-text">perm_identity</i></a></li>
-						<li><a href="#"><i class="material-icons grey-text">shopping_cart</i></a></li>
+						<li><a href="#" class="grey-text"><i class="material-icons grey-text left">search</i>Search</a></li>
+
+						<li><a href="/skystore/accountsettings/" class="grey-text"><i class="material-icons grey-text left">perm_identity</i>Account</a></li>
+
+						<li><a href="#" class="grey-text"><i class="material-icons grey-text left">shopping_cart</i>Basket</a></li>
 					</ul>
+
+					<!-- Side Navigation-->
+
 					<ul class="side-nav" id="side-menu">
 						<li><a href="#">Search</a></li>
 						<li><a href="#">Account</a></li>
@@ -49,13 +63,12 @@
 
     <!-- CONTENT -->
     <main class="blue-grey lighten-5">
-		<div class="container">
+		<div id="main_content" class="container">
 
-				<!-- First Row -->
-				<div class="row" style="padding-top:20px">
-                    {% block body_block %}{% endblock %}
-				</div>
-			</div>
+				{% block body_block %}
+
+				{% endblock %}
+
 		</div>
 	</main>
 
@@ -73,6 +86,7 @@
 	<script src="{%  static 'js/jquery-2.1.4.js' %}"></script>
     <script src="{%  static 'js/jquery-ui.js' %}"></script>
 	<script src="{%  static 'js/materialize.js' %}"></script>
+	<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 
     <!-- Javascrit -->
 	<script type="text/javascript">
