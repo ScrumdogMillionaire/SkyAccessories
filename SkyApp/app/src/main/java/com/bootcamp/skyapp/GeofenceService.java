@@ -17,6 +17,7 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -38,7 +39,7 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
 
         buildGoogleApiClient();
 
-        Marker[] storeLocations = FindStore.populateLocations();
+        ArrayList<Marker> storeLocations = RetrieveJSON.getMarkers();
         populateGeofences(storeLocations);
 
         mGoogleApiClient.connect();
@@ -148,7 +149,7 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
         }
     }
 
-    private void populateGeofences(Marker[] storeLocations) {
+    private void populateGeofences(ArrayList<Marker> storeLocations) {
 
         for (Marker store : storeLocations) {
             mGeofenceList.add(new Geofence.Builder()

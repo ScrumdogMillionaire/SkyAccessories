@@ -7,13 +7,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 public class LandingActivity extends Activity {
@@ -23,8 +31,15 @@ public class LandingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        //Intent intent = new Intent(this, NotificationService.class);
-        //startService(intent);
+        //AsyncTask task = new RetrieveJSON().execute("http://192.168.1.21:3001/skystore/api/orders/");
+
+        ArrayList<Marker> markers = RetrieveJSON.getMarkers();
+
+        for (Marker store : markers) {
+            Log.d("Store Latitude: ", ""+store.getLatitude());
+            Log.d("Store Longitude: ", ""+store.getLongitude());
+            Log.d("Store Description: ", store.getLocationDescription());
+        }
 
         this.startService(new Intent(this, GeofenceService.class));
 

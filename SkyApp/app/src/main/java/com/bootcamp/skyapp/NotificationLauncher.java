@@ -14,7 +14,7 @@ import android.support.v4.app.TaskStackBuilder;
  */
 public class NotificationLauncher {
 
-    public static void fireNotification(Context ctx, String title, String text) {
+    public static void fireNotification(Context ctx, String title, String text, Class<?> passedClass) {
 
         Bitmap bm = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.skygreenicon96);
 
@@ -25,7 +25,7 @@ public class NotificationLauncher {
                         .setContentTitle(title)
                         .setContentText(text);
         // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(ctx, LandingActivity.class);
+        Intent resultIntent = new Intent(ctx, passedClass);
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
@@ -33,7 +33,7 @@ public class NotificationLauncher {
         // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(ctx);
         // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(LandingActivity.class);
+        stackBuilder.addParentStack(passedClass);
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,

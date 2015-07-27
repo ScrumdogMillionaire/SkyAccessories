@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
@@ -20,7 +21,7 @@ public class BuyProductNFC extends Activity {
 
     NdefMessage[] msgs;
     NdefRecord[] records;
-    String productID;
+    Product watch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,10 @@ public class BuyProductNFC extends Activity {
                 for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                     records = msgs[i].getRecords();
-                    try {
-                        for (int j = 0; j < records.length; j++) {
-                            String payloadString = new String(records[j].getPayload(), "US-ASCII");
-                            if(payloadString.length() > 0){
-                                loadProduct(payloadString);
-                            }
+                    try { //TODO Improve to allow loop through records
+                        String payloadString = new String(records[0].getPayload(), "US-ASCII");
+                        if(payloadString.length() > 0){
+                            loadProduct(payloadString);
                         }
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
@@ -54,9 +53,12 @@ public class BuyProductNFC extends Activity {
 
                 Toast.makeText(
                         this,
-                        "Product ID: " + productID,
+                        "Product Name: " + watch.getName(),
                         Toast.LENGTH_SHORT
                 ).show();
+
+                ImageView productPicture = (ImageView) findViewById(R.id.productPicture);
+                new ImageDownloader(productPicture).execute(watch.getPictureURL());
             }
         }
         //process the msgs array
@@ -85,7 +87,7 @@ public class BuyProductNFC extends Activity {
     }
 
     private void loadProduct(String payloadString){
-        productID = payloadString;
+        watch = RetrieveJSON.getProduct(Integer.parseInt(payloadString));
 
         //TODO change gui
     }

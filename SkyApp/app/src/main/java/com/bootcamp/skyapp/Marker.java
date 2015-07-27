@@ -11,7 +11,7 @@ public class Marker {
     public Marker(double latitude, double longitude, String location) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.location = "Sky Store, " + location;
+        this.location = location;
     }
 
     public double getLatitude() {
@@ -35,7 +35,7 @@ public class Marker {
     }
 
     public void setLocation(String location) {
-        this.location = "Sky Store, " + location;
+        this.location = location;
     }
 }
 

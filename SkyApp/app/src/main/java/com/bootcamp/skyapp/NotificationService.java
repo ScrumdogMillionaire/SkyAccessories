@@ -24,7 +24,7 @@ public class NotificationService extends IntentService {
 
             Geofence triggeredStore = triggeringGeofences.get(0);
 
-            NotificationLauncher.fireNotification(this, triggeredStore.getRequestId(), "fuuuccckkkkkk");
+            NotificationLauncher.fireNotification(this, triggeredStore.getRequestId(), "Visit today and get 10% off!", FindStore.class);
             //this.stopSelf();
         }
     }
