@@ -22,23 +22,10 @@ class Migration(migrations.Migration):
                 ('city', models.CharField(max_length=100, null=True)),
                 ('county', models.CharField(max_length=100, null=True)),
                 ('postcode', models.CharField(max_length=8, null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'db_table': 'address',
-            },
-        ),
-        migrations.CreateModel(
-            name='Customer',
-            fields=[
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(null=True, verbose_name='last login', blank=True)),
-                ('email', models.EmailField(default=None, unique=True, max_length=255, verbose_name=b'email address')),
-                ('username', models.CharField(max_length=40, unique=True, serialize=False, primary_key=True)),
-                ('is_active', models.BooleanField(default=False)),
-                ('is_admin', models.BooleanField(default=False)),
-            ],
-            options={
-                'db_table': 'customer_login',
             },
         ),
         migrations.CreateModel(
@@ -50,7 +37,7 @@ class Migration(migrations.Migration):
                 ('expected_delivery_date', models.DateField(null=True)),
                 ('status', models.CharField(max_length=20, choices=[(b'Order Placed', b'Order Placed'), (b'Out for Delivery', b'Out for Delivery'), (b'Delivered', b'Delivered')])),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
-                ('user', models.ForeignKey(to='SkyStore.Customer', null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'db_table': 'order',
@@ -91,10 +78,5 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'staff_login',
             },
-        ),
-        migrations.AddField(
-            model_name='address',
-            name='user',
-            field=models.ForeignKey(default=None, to='SkyStore.Customer'),
         ),
     ]

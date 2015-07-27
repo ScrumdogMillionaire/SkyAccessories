@@ -18,7 +18,7 @@
                         <div class="col s12"><h5>Registration</h5></div>
                         <div class="col s12 m4 l2"><p></p></div>
                         <div class="col s12 m4 l8"><p></p>
-                            <form action="/myaccount/" method="POST">{% csrf_token %}
+                            <form action="/skystore/myaccount/" method="POST">{% csrf_token %}
                                 {{ customerform.as_p }}
                                 {{ addressform.as_p }}
                                 <input type="submit" value="Register">

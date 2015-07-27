@@ -1,8 +1,16 @@
 from django.shortcuts import render
-
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
 from SkyStore.forms.customerForm import Register
 from SkyStore.forms.addressForm import addressRegister
+
+from django.contrib.auth.models import User
 # from SkyStore.models import Product
+
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
 
 def home(request):
     return render(request, "home.html", {})
@@ -23,13 +31,31 @@ def myaccount(request):
     if request.method == "POST":
         customerform = Register(request.POST)
         addressform = addressRegister(request.POST)
+        print "post"
         if customerform.is_valid() & addressform.is_valid():
-            user = customerform.save()
-            print 'customer'
-            addressform.save(commit=False)
-            # addressform.user = user
-            # addressform.save()
-            print 'address'
+            # Save Customer
+            print "here"
+            username = customerform.cleaned_data['username']
+            password = customerform.cleaned_data['password']
+
+            user = customerform.save(commit=False)
+
+            user = User.objects.create_user(username=username, email=user.email)
+            # Hash the password
+            user.set_password(password)
+            user.save()
+            print "User:", user
+
+            # Save Address
+            address = addressform.save()
+            address.user_id = user.id
+            print "address:", user.id
+            address.save()
+
+            # Login User
+
+            login_user(username, password, request)
+
             return render(request, "myaccount.html", {})
     return render(request, "myaccount.html", {})
 
@@ -37,6 +63,12 @@ def register(request):
     addressform = addressRegister()
     customerform = Register()
     return render(request, "register.html", {'customerform': customerform, 'addressform': addressform})
+
+def login_user(username, password, request):
+    # Data must be cleaned before passing
+    authenticated_user = authenticate(username=username, password=password)
+    auth_login(request, authenticated_user)
+
 
 # Return all the products in the database
 # Can modified by passing search options such as categories
