@@ -41,9 +41,13 @@
 					<!-- Navigation on the right -->
 
 					<ul class="right hide-on-med-and-down">
-						<li><a href="#" class="grey-text"><i class="material-icons grey-text left">search</i>Search</a></li>
+						<li><a id="search-button" href="#" class="grey-text"><i class="material-icons grey-text left">search</i>Search</a></li>
 
+						<!-- {% if user.is_authenticated %} -->
 						<li><a href="/skystore/accountsettings/" class="grey-text"><i class="material-icons grey-text left">perm_identity</i>Account</a></li>
+						<!-- {% else %} -->
+						<!-- <li><a href="/skystore/login/" class="grey-text"><i class="material-icons grey-text left">perm_identity</i>Sign In</a></li> -->
+						<!-- {% endif %} -->
 
 						<li><a href="#" class="grey-text"><i class="material-icons grey-text left">shopping_cart</i>Basket</a></li>
 					</ul>
@@ -59,6 +63,16 @@
 				</div>
 			</nav>
 		</div>
+
+
+		<div id="drop-search" class="blue">
+			<div class="container">
+				<form>
+					<input id="search" type="search" placeholder="Search..." required>
+				</form>
+			</div>
+		</div>
+
 	</header>
 
     <!-- CONTENT -->
@@ -100,6 +114,26 @@
 		    columnWidth: 325,
 		    gutter: 10
 	    });
+
+		$(document).ready(function(){
+
+			var status = 0;
+
+		    $("#search-button").click(function(){
+
+		    	if(status == 0)
+		    	{
+		    		$("#drop-search").slideDown();
+		    		status = 1;
+		    	}
+		    	else if(status == 1)
+		    	{
+		    		$("#drop-search").slideUp();
+		    		status = 0;
+		    	}   
+		    });
+
+		});
 	</script>
 
 </body>

@@ -30,6 +30,10 @@ footer.page-footer {
 	margin-top: 20px; 
 }
 
+#drop-search {
+	display:  none;
+}
+
 @media only screen and (min-width : 993px) {
 	nav a.button-collapse {
 		display: initial;
