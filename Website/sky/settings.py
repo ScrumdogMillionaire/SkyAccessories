@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'Warehouse',
     'RewardsApp',
     'StoreStaffApp',
+    'djangosecure',
+    'sslserver',
     # 'SkyStore',
 )
 
@@ -63,9 +65,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'djangosecure.middleware.SecurityMiddleware',
 )
 
+
 ROOT_URLCONF = 'sky.urls'
+
+SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
