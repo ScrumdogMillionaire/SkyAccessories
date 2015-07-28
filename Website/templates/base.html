@@ -18,7 +18,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{%  static 'assets/Sky_logo_2014_small.png' %}">
+    <link rel="icon" type="image/png" href="{%  static 'assets/Sky_logo-2.png' %}">
 
 </head>
 
@@ -30,9 +30,14 @@
 
 			<!-- Dropdown Structure -->
 			<ul id="dropdown1" class="dropdown-content z-depth-0">
+<<<<<<< HEAD
 			  	<li><a href="#!" class="grey-text">Orders</a></li>
 			  	<li><a href="#!" class="grey-text">Settings</a></li>
 			  	<li><a href="/skystore/logout/" class="grey-text">Logout</a></li>
+=======
+			  	<li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
+			  	<li><a href="#!" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
+>>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c
 			</ul>
 
 			<nav class="z-depth-0 white" role="navigation">
@@ -40,11 +45,11 @@
 
 					<!-- Sky Home Button-->
 
-					<a href="/skystore/home/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo_2014_small.png' %}"/></a>
+					<a href="/skystore/home/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo-2.png' %}"/></a>
 
 					<!-- Menu Icon-->
 
-					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix grey-text">menu</i></a>
+					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix blue-grey-text text-darken-4">menu</i></a>
 
 					<!-- Navigation on the right -->
 
@@ -52,8 +57,8 @@
 
 						<li>
 							<!-- Search -->
-							<a id="search-button" href="#" class="grey-text">
-								<i class="material-icons grey-text right">search</i>
+							<a id="search-button" href="#" class="blue-grey-text text-darken-4">
+								<i class="material-icons blue-grey-text text-darken-4 right">search</i>
 								Search
 							</a>
 						</li>
@@ -61,17 +66,17 @@
 						{% if request.user.is_authenticated %}
 						<li>
 							<!-- Account Dropdown -->
-							<a class="dropdown-button grey-text" href="#!" data-activates="dropdown1" data-beloworigin="true" data-hover="true">
+							<a class="dropdown-button blue-grey-text text-darken-4" href="/skystore/login/" data-activates="dropdown1" data-beloworigin="true" data-hover="true">
 								<!-- <i class="material-icons grey-text left">perm_identity</i> -->
-								<i class="material-icons right">arrow_drop_down</i>
+								<i class="material-icons blue-grey-text text-darken-4 right">arrow_drop_down</i>
 								Account
 							</a>
 						</li>
 						{% else %}
 						<li>
 							<!-- Sign In -->
-							<a href="/skystore/login/" class="grey-text">
-								<i class="material-icons grey-text left">perm_identity</i>
+							<a href="/skystore/login/" class="blue-grey-text text-darken-4">
+								<i class="material-icons blue-grey-text text-darken-4 right">perm_identity</i>
 								Sign In
 							</a>
 						</li>
@@ -79,8 +84,8 @@
 
 						<li>
 							<!-- Shopping Cart -->
-							<a href="#" class="grey-text">
-								<i class="material-icons grey-text right">shopping_cart</i>
+							<a href="/skystore/basket/" class="blue-grey-text text-darken-4">
+								<i class="material-icons blue-grey-text text-darken-4 right">shopping_cart</i>
 								Basket (0)
 							</a>
 						</li>
@@ -89,14 +94,19 @@
 					<!-- Side Navigation-->
 
 					<ul class="side-nav" id="side-menu">
+                        <li><a href="/skystore/productlist/" class="blue-grey-text text-darken-4">Categories</a></li>
 						<li>
-							<a id="search-buttn" href="#" >
+							<a id="search-buttn" href="#" class="blue-grey-text text-darken-4">
 								Search
 							</a>
 						</li>
-						<li><a href="#">Account</a></li>
-						<li><a href="#">Basket</a></li>
-						<li><a href="#">Categories</a></li>
+                        {% if request.user.is_authenticated %}
+						    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4">My Account</a></li>
+                        {%  else %}
+                            <li><a href="#" class="blue-grey-text text-darken-4">Login</a></li>
+                        {% endif %}
+						<li><a href="/skystore/basket/" class="blue-grey-text text-darken-4">Basket</a></li>
+
 					</ul>
 				</div>
 			</nav>
@@ -110,7 +120,7 @@
     <!-- CONTENT -->
     <main class="blue-grey lighten-5">
 		<div id="main_content" class="container">
-			<div id="drop-search" class="orange">
+			<div id="drop-search" class="blue-grey darken-4">
 				
 					<form>
 						<input id="search" class="white-text" type="search" autocomplete="off" placeholder="Search..." required>
