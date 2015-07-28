@@ -15,7 +15,7 @@
                     <form action="/skystore/myaccount/" method="POST" name="register">{% csrf_token %}
                         {{ customerform.as_p }}
                         {{ addressform.as_p }}
-                        <a class="waves-effect waves-light btn z-depth-0" onclick="this.Forms['register'].submit()">Sign Up</a>
+                        <input type="submit" value="Register">
                     </form>
                 </div>
                 <div class="col s12 m4 l2"><p></p></div>

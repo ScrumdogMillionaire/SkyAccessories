@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import resolve
 from Website.SkyStore.models.Product import Product
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def product_handler(request, product_id):
@@ -14,12 +15,16 @@ def product_handler(request, product_id):
 
 
 def search(request):
-    search_request = request.POST.get('search')
-    return render(request, "search_result/", {})
+    if request.method == 'GET':
 
-
-def search_result(request, search_term):
-    products = Product.objects.get(name__icontains=search_term)
-    return render(request, "product.html", {"product": products})
-
+        search_term = request.GET.get('search')
+        print 'Search Term', search_term
+        try:
+            products = Product.objects.filter(name__icontains=search_term)
+            print "Products", products
+            return render(request, "search.html", {"products": products})
+        except ObjectDoesNotExist:
+            return render(request, "search.html", {"noproducts": True})
+    else:
+        return render(request, "index.html")
 
