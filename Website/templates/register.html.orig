@@ -1,0 +1,58 @@
+<<<<<<< HEAD
+=======
+{%  extends 'base.html' %}
+>>>>>>> 09db08c38fbc50bd1ea0ab49b6311b0e9886ec90
+
+{% extends 'base.html'%}
+{%  load static from staticfiles %}
+
+<<<<<<< HEAD
+{% block body_block %}
+
+
+            <div class="col s12 offset-m2 m8 offset-l3 l6">
+                <div class="card-panel z-depth-0">
+                    <div class="row center">
+                        <div class="col s12"><h5>Registration</h5></div>
+                        <div class="col s12 m4 l2"><p></p></div>
+                        <div class="col s12 m4 l8"><p></p>
+                            <form action="/skystore/myaccount/" method="POST">{% csrf_token %}
+                                {{ customerform.as_p }}
+                                {{ addressform.as_p }}
+                                <input type="submit" value="Register">
+                            </form>
+                        </div>
+                        <div class="col s12 m4 l2"><p></p></div>
+=======
+{% block title %}Sky Accessories{% endblock %}
+
+{% block body_block %}
+
+
+<main class="blue-grey lighten-5">
+	<div class="container">
+        <div class="col s12 offset-m2 m8 offset-l3 l6">
+            <div class="card-panel z-depth-0">
+                <div class="row center">
+                    <div class="col s12"><h5>Registration</h5></div>
+                    <div class="col s12 m4 l2"><p></p></div>
+                    <div class="col s12 m4 l8"><p></p>
+                        <form action="/myaccount/" method="POST">{% csrf_token %}
+                            {{ customerform.as_p }}
+                            {{ addressform.as_p }}
+                            <input type="submit" value="Register">
+                        </form>
+>>>>>>> 09db08c38fbc50bd1ea0ab49b6311b0e9886ec90
+                    </div>
+                    <div class="col s12 m4 l2"><p></p></div>
+                </div>
+            </div>
+<<<<<<< HEAD
+{% endblock %}
+=======
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+>>>>>>> 09db08c38fbc50bd1ea0ab49b6311b0e9886ec90

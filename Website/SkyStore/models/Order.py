@@ -2,8 +2,6 @@ __author__ = 'bog02'
 
 from django.db import models
 from django.contrib.auth.models import User
-# from Website.SkyStore.models.Customer import Customer
-
 
 class Order(models.Model):
 

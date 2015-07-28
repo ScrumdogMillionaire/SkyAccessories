@@ -16,24 +16,31 @@ class Migration(migrations.Migration):
             name='Address',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('address_type', models.CharField(default=b'default', max_length=20, choices=[(b'default', b'default'), (b'billing', b'billing')])),
                 ('street_line1', models.CharField(max_length=100, null=True)),
                 ('street_line2', models.CharField(max_length=100, null=True)),
                 ('city', models.CharField(max_length=100, null=True)),
                 ('county', models.CharField(max_length=100, null=True)),
                 ('postcode', models.CharField(max_length=8, null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'db_table': 'address',
             },
         ),
         migrations.CreateModel(
-            name='GuestUser',
+            name='Order',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('addresses', models.ForeignKey(to='SkyStore.Address')),
+                ('creation_date', models.DateField(null=True)),
+                ('completed_date', models.DateField(null=True)),
+                ('expected_delivery_date', models.DateField(null=True)),
+                ('status', models.CharField(max_length=20, choices=[(b'Order Placed', b'Order Placed'), (b'Out for Delivery', b'Out for Delivery'), (b'Delivered', b'Delivered')])),
+                ('price', models.DecimalField(max_digits=14, decimal_places=2)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
-                'db_table': 'guest_user',
+                'db_table': 'order',
             },
         ),
         migrations.CreateModel(
@@ -54,6 +61,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('serial_number', models.CharField(max_length=20)),
+                ('order', models.ForeignKey(default=None, to='SkyStore.Order')),
                 ('product', models.ForeignKey(default=None, to='SkyStore.Product')),
             ],
             options={
@@ -61,19 +69,14 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='User',
+            name='StaffLogin',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('addresses', models.ForeignKey(to='SkyStore.Address')),
+                ('status', models.BooleanField(default=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'db_table': 'user',
+                'db_table': 'staff_login',
             },
-        ),
-        migrations.AddField(
-            model_name='guestuser',
-            name='user',
-            field=models.OneToOneField(to=settings.AUTH_USER_MODEL),
         ),
     ]

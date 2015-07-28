@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+{%  load static from staticfiles %}
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>{% block title %}{% endblock %}</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- Google Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{%  static 'assets/Sky_logo_2014_small.png' %}">
+
+</head>
+
+<body>
+
+    <!-- NavBar -->
+	<header>
+		<div class="navbar-fixed">
+
+			<!-- Dropdown Structure -->
+			<ul id="dropdown1" class="dropdown-content z-depth-0">
+			  	<li><a href="#!" class="grey-text">Orders</a></li>
+			  	<li><a href="#!" class="grey-text">Settings</a></li>
+			  	<li><a href="#!" class="grey-text">Logout</a></li>
+			</ul>
+
+			<nav class="z-depth-0 white" role="navigation">
+				<div class="nav-wrapper container">
+
+					<!-- Sky Home Button-->
+
+					<a href="/skystore/home/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo_2014_small.png' %}"/></a>
+
+					<!-- Menu Icon-->
+
+					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix grey-text">menu</i></a>
+
+					<!-- Navigation on the right -->
+
+					<ul class="right hide-on-med-and-down">
+
+						<li>
+							<!-- Search -->
+							<a id="search-button" href="#" class="grey-text">
+								<i class="material-icons grey-text right">search</i>
+								Search
+							</a>
+						</li>
+
+						{% if request.user.is_authenticated %}
+						<li>
+							<!-- Account Dropdown -->
+							<a class="dropdown-button grey-text" href="#!" data-activates="dropdown1" data-beloworigin="true" data-hover="true">
+								<!-- <i class="material-icons grey-text left">perm_identity</i> -->
+								<i class="material-icons right">arrow_drop_down</i>
+								Account
+							</a>
+						</li>
+						{% else %}
+						<li>
+							<!-- Sign In -->
+							<a href="/skystore/login/" class="grey-text">
+								<i class="material-icons grey-text left">perm_identity</i>
+								Sign In
+							</a>
+						</li>
+						{% endif %}
+
+						<li>
+							<!-- Shopping Cart -->
+							<a href="#" class="grey-text">
+								<i class="material-icons grey-text right">shopping_cart</i>
+								Basket (0)
+							</a>
+						</li>
+					</ul>
+
+					<!-- Side Navigation-->
+
+					<ul class="side-nav" id="side-menu">
+						<li>
+							<a id="search-buttn" href="#" >
+								Search
+							</a>
+						</li>
+						<li><a href="#">Account</a></li>
+						<li><a href="#">Basket</a></li>
+						<li><a href="#">Categories</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+
+
+
+	</header>
+
+    <!-- CONTENT -->
+    <main class="blue-grey lighten-5">
+		<div id="main_content" class="container">
+			<div id="drop-search" class="orange">
+				
+					<form>
+						<input id="search" class="white-text" type="search" autocomplete="off" placeholder="Search..." required>
+					</form>
+				
+			</div>
+
+			<div id="top-spacer"></div>
+			{% block body_block %}
+
+			{% endblock %}
+
+		</div>
+	</main>
+
+    <!-- Footer -->
+	<footer class="page-footer">
+		<div class="footer-copyright white">
+			<div class="container grey-text">
+				© 2015 Sky UK
+				<a class="grey-text right" href="#!">Terms & Conditions</a>
+			</div>
+		</div>
+	</footer>
+
+	<!-- JavaScript/jQuery Includes -->
+	<script src="{%  static 'js/jquery-2.1.4.js' %}"></script>
+    <script src="{%  static 'js/jquery-ui.js' %}"></script>
+	<script src="{%  static 'js/materialize.js' %}"></script>
+	<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+
+    <!-- Javascrit -->
+	<script type="text/javascript">
+        $( document ).ready(function(){
+            $(".button-collapse").sideNav();
+        })
+
+        $('.grid').masonry({
+		    // options
+		    itemSelector: '.grid-item',
+		    columnWidth: 325,
+		    gutter: 10
+	    });
+
+		$(document).ready(function(){
+
+			var status = 0;
+
+			//Navigation Top Right
+		    $("#search-button").click(function(){
+
+		    	if(status == 0)
+		    	{
+		    		$("#drop-search").slideDown();
+		    		status = 1;
+		    	}
+		    	else if(status == 1)
+		    	{
+		    		$("#drop-search").slideUp();
+		    		status = 0;
+		    	}   
+		    });
+
+		    //Side Nav
+		    $("#search-buttn").click(function(){
+
+		    	if(status == 0)
+		    	{
+		    		$("#drop-search").slideDown();
+		    		status = 1;
+		    	}
+		    	else if(status == 1)
+		    	{
+		    		$("#drop-search").slideUp();
+		    		status = 0;
+		    	}   
+		    });
+
+		});
+
+	</script>
+
+</body>
+</html>

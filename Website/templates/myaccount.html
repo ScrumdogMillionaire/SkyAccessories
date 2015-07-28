@@ -1,0 +1,17 @@
+
+
+{% extends 'base.html'%}
+{%  load static from staticfiles %}
+
+{% block body_block %}
+
+
+            {% if user.is_authenticated %}
+            {{ request.user}} hello
+            {% else %}
+            no
+            {% endif %}
+
+{% endblock %}
+
+
