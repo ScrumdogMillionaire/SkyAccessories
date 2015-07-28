@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 from django.conf import settings
+import django.core.files.storage
 
 
 class Migration(migrations.Migration):
@@ -22,7 +23,7 @@ class Migration(migrations.Migration):
                 ('city', models.CharField(max_length=100, null=True)),
                 ('county', models.CharField(max_length=100, null=True)),
                 ('postcode', models.CharField(max_length=8, null=True)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
+                ('user', models.ForeignKey(related_name='address', default=None, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'db_table': 'address',
@@ -50,7 +51,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, null=True)),
                 ('description', models.TextField()),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
-                ('product_image', models.ImageField(upload_to=b'')),
+                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/mpa45/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
             ],
             options={
                 'db_table': 'product',
@@ -77,6 +78,18 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'staff_login',
+            },
+        ),
+        migrations.CreateModel(
+            name='Store',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('description', models.CharField(default=None, max_length=200)),
+                ('longitude', models.CharField(default=None, max_length=10)),
+                ('latitude', models.CharField(default=None, max_length=10)),
+            ],
+            options={
+                'db_table': 'store_coordinates',
             },
         ),
     ]

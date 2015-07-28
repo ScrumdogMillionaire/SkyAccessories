@@ -26,8 +26,7 @@ def index(request):
 def productlist(request):
     return render(request, "productlist.html", {})
 
-def accountsettings(request):
-    return render(request, "accountsettings.html", {})
+
 
 def login(request):
     formLogin = loginForm()

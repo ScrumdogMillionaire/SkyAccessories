@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 
 
 class Basket(models.Model):
-    contents = models.ForeignKey(ProductItem, default=None)
-    user = models.OneToOneField(User, default=None)
+    # contents = models.ForeignKey(ProductItem, null=True)
+    # user = models.OneToOneField(User, null=True)
 
     def get_contents(self):
         return self.contents

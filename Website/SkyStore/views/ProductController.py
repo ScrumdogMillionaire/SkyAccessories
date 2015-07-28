@@ -27,4 +27,3 @@ def search(request):
             return render(request, "search.html", {"noproducts": True})
     else:
         return render(request, "index.html")
-

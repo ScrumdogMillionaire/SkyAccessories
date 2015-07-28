@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'StoreStaffApp',
     'djangosecure',
     'sslserver',
-    # 'SkyStore',
+    'SkyStore',
 )
 
 MIDDLEWARE_CLASSES = (
