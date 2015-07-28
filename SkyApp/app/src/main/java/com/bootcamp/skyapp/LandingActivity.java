@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,17 +34,23 @@ public class LandingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        //AsyncTask task = new RetrieveJSON().execute("http://192.168.1.21:3001/skystore/api/orders/");
+        String fontPath = "skymed.ttf";
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
-        ArrayList<Marker> markers = RetrieveJSON.getMarkers();
+        TextView user = (TextView) findViewById(R.id.loginUser);
+        user.setTypeface(tf);
 
-        for (Marker store : markers) {
-            Log.d("Store Latitude: ", ""+store.getLatitude());
-            Log.d("Store Longitude: ", ""+store.getLongitude());
-            Log.d("Store Description: ", store.getLocationDescription());
-        }
+        TextView pass = (TextView) findViewById(R.id.loginPass);
+        pass.setTypeface(tf);
+
+        Button login = (Button) findViewById(R.id.loginButton);
+        login.setTypeface(tf);
+
+        Button signup = (Button) findViewById(R.id.signupButton);
+        signup.setTypeface(tf);
 
         this.startService(new Intent(this, GeofenceService.class));
+
 
     }
 
@@ -64,8 +73,9 @@ public class LandingActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadLogin(View v){
-        Intent resultIntent = new Intent(this, Login.class);
+    public void loadMenu(View v){
+        Intent resultIntent = new Intent(this, MainMenu.class);
+        RetrieveJSONPost.tryLogin();
         startActivity(resultIntent);
     }
 

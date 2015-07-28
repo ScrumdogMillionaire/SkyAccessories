@@ -2,6 +2,7 @@ package com.bootcamp.skyapp;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -68,7 +69,15 @@ public class FindStore extends FragmentActivity {
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(54.437499, -2.384573), 6));
 
-        storeLocations = RetrieveJSON.getMarkers();
+        try {
+            storeLocations = RetrieveJSON.getMarkers();
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "Markers Not Available",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
 
         for (Marker stores : storeLocations) {
             mMap.addMarker(new MarkerOptions().position(new LatLng(stores.getLatitude(), stores.getLongitude())).title(stores.getLocationDescription()));

@@ -3,25 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/skywallpaper"
+    android:background="#e0f2f1"
+    android:gravity="center_vertical"
+    android:focusableInTouchMode="true"
     tools:context=".LandingActivity">
 
+    <ImageView
+        android:id="@+id/skylogo"
+        android:layout_width="280dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"
+        android:layout_height="200dp"
+        android:background="@drawable/skylogo"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:hint="Sky ID"
+        android:id="@+id/loginUser"
+        android:singleLine="true"
+        android:layout_width="345dp"
+        android:layout_below="@id/skylogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-3dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+
+        android:hint="Password"
+        android:id="@+id/loginPass"
+        android:layout_width="345dp"
+        android:singleLine="true"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/loginUser"/>
 
     <Button
-        android:id="@+id/actionLogin"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:onClick="loadLogin"
+        android:id="@+id/loginButton"
+        android:onClick="loadMenu"
+        android:text="Log in"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_below="@+id/loginPass"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="26dp"
         android:layout_centerHorizontal="true"
-        android:text="Login"/>
+        android:background="@drawable/selector"
+        />
 
     <Button
-        android:id="@+id/actionSignup"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/actionLogin"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/signupButton"
         android:onClick="loadSignup"
-        android:text="Sign Up"/>
+        android:text="Sign up"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_below="@+id/loginButton"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector"
+        />
+
 
 </RelativeLayout>

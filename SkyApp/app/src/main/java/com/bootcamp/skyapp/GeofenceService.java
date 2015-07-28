@@ -39,8 +39,16 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
 
         buildGoogleApiClient();
 
-        ArrayList<Marker> storeLocations = RetrieveJSON.getMarkers();
-        populateGeofences(storeLocations);
+        try {
+            ArrayList<Marker> storeLocations = RetrieveJSON.getMarkers();
+            populateGeofences(storeLocations);
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "Markers Not Available",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
 
         mGoogleApiClient.connect();
     }
@@ -55,7 +63,7 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
 
     }
 
-    private GeofencingRequest getGeofencingRequest() {
+    private GeofencingRequest getGeofencingRequest() throws IllegalArgumentException {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
         builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
         builder.addGeofences(mGeofenceList);
@@ -85,11 +93,19 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
     public void onConnected(Bundle connectionHint) {
         Log.i("", "Connected to GoogleApiClient");
 
-        LocationServices.GeofencingApi.addGeofences(
-                mGoogleApiClient,
-                getGeofencingRequest(),
-                getGeofencePendingIntent()
-        ).setResultCallback(this);
+        try {
+            LocationServices.GeofencingApi.addGeofences(
+                    mGoogleApiClient,
+                    getGeofencingRequest(),
+                    getGeofencePendingIntent()
+            ).setResultCallback(this);
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "Markers Not Available",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
 
         //new timer task
 
@@ -110,11 +126,7 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
     }
 
     public void superCoolToast(){
-        Toast.makeText(
-                this,
-                "Still ALIVE!",
-                Toast.LENGTH_SHORT
-        ).show();
+
     }
 
     @Override
@@ -135,17 +147,8 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
     public void onResult(Status status) {
         if (status.isSuccess()) {
 
-            Toast.makeText(
-                    this,
-                    "Geofence added!",
-                    Toast.LENGTH_SHORT
-            ).show();
         } else {
-            Toast.makeText(
-                    this,
-                    "Geofence not added!",
-                    Toast.LENGTH_SHORT
-            ).show();
+
         }
     }
 

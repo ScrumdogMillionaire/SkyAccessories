@@ -1,5 +1,9 @@
 package com.bootcamp.skyapp;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,7 +14,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,34 +28,33 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.ogaclejapan.arclayout.ArcLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainMenu extends Activity {
 
-    ArrayList<Geofence> mGeofenceList = new ArrayList<Geofence>();
-    GoogleApiClient mGoogleApiClient;
+    private boolean curVisible = false;
+    private View menuLayout;
+    private ArcLayout arcLayout;
+    private ImageView fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
-        String fontPath = "skymed.ttf";
-        TextView txtGhost = (TextView) findViewById(R.id.helloUser);
-        Button redeemReward = (Button) findViewById(R.id.actionRedeem);
-        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
-        txtGhost.setTypeface(tf);
-        redeemReward.setTypeface(tf);
-
+        menuLayout = findViewById(R.id.menu_layout);
+        arcLayout = (ArcLayout) findViewById(R.id.arc_layout);
+        fab = (ImageView) findViewById(R.id.fab);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menuActivity) {
-        // Inflate the menuActivity; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu, menuActivity);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_menu, menu);
         return true;
     }
 
@@ -67,18 +73,119 @@ public class MainMenu extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadRedeemReward(View v){
-        Intent resultIntent = new Intent(this, RedeemReward.class);
-        startActivity(resultIntent);
+    public void toggleLayout(final View v){
+        if (!curVisible){
+            menuLayout.setVisibility(View.VISIBLE);
+
+            List<Animator> animList = new ArrayList<>();
+
+            for (int i = 0, len = arcLayout.getChildCount(); i < len; i++) {
+                animList.add(createShowItemAnimator(arcLayout.getChildAt(i)));
+            }
+
+            AnimatorSet animSet = new AnimatorSet();
+            animSet.setDuration(400);
+            animSet.setInterpolator(new OvershootInterpolator());
+            animSet.playTogether(animList);
+            animSet.start();
+
+            fab.setBackgroundResource(R.drawable.pause);
+            curVisible = true;
+        } else {
+            List<Animator> animList = new ArrayList<>();
+
+            for (int i = arcLayout.getChildCount() - 1; i >= 0; i--) {
+                animList.add(createHideItemAnimator(arcLayout.getChildAt(i)));
+            }
+
+            AnimatorSet animSet = new AnimatorSet();
+            animSet.setDuration(400);
+            animSet.setInterpolator(new AnticipateInterpolator());
+            animSet.playTogether(animList);
+            animSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    menuLayout.setVisibility(View.INVISIBLE);
+
+                    switch(v.getId()) {
+                        case R.id.reward:
+                            loadActivity(RedeemReward.class);
+                            break;
+                        case R.id.account:
+                            loadActivity(AccountPage.class);
+                            break;
+                        case R.id.location:
+                            loadActivity(FindStore.class);
+                            break;
+                        case R.id.info:
+                            //loadActivity(InfoPage.class);
+                            break;
+                        case R.id.logout:
+                            loadActivity(LandingActivity.class);
+                    }
+
+                }
+            });
+            animSet.start();
+
+            fab.setBackgroundResource(R.drawable.middle);
+            curVisible = false;
+        }
     }
 
-    public void loadLocalStore(View v){
+
+    private Animator createShowItemAnimator(View item) {
+
+        float dx = fab.getX() - item.getX();
+        float dy = fab.getY() - item.getY();
+
+        item.setRotation(0f);
+        item.setTranslationX(dx);
+        item.setTranslationY(dy);
+
+        Animator anim = ObjectAnimator.ofPropertyValuesHolder(
+                item,
+                AnimatorUtils.rotation(0f, 720f),
+                AnimatorUtils.translationX(dx, 0f),
+                AnimatorUtils.translationY(dy, 0f)
+        );
+
+        return anim;
+    }
+
+    private Animator createHideItemAnimator(final View item) {
+        float dx = fab.getX() - item.getX();
+        float dy = fab.getY() - item.getY();
+
+        Animator anim = ObjectAnimator.ofPropertyValuesHolder(
+                item,
+                AnimatorUtils.rotation(720f, 0f),
+                AnimatorUtils.translationX(0f, dx),
+                AnimatorUtils.translationY(0f, dy)
+        );
+
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                item.setTranslationX(0f);
+                item.setTranslationY(0f);
+            }
+        });
+
+        return anim;
+    }
+
+    public void loadLocation(View v){
         Intent resultIntent = new Intent(this, FindStore.class);
+        toggleLayout(v);
+
         startActivity(resultIntent);
     }
 
-    public void loadAccount(View v){
-        Intent resultIntent = new Intent(this, AccountPage.class);
+    public void loadActivity(Class<?> activity) {
+        Intent resultIntent = new Intent(this, activity);
         startActivity(resultIntent);
     }
 }
