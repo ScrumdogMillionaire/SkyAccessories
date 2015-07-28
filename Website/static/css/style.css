@@ -18,7 +18,7 @@ footer.page-footer {
 	padding-top: 10px;
 }
 
-.grid-item { 
+.grid-item {
 	width: 325px;
 }
 
@@ -42,38 +42,95 @@ footer.page-footer {
 	height: 20px;
 }
 
+.formWrapper {
+	width: 100%;
+}
+
+.login-form {
+	padding: 30px;
+	background-color: #fff;
+	width: 49%;
+	min-height: 350px;
+	display: inline-block;
+}
+
+.login-form:last-of-type {
+	vertical-align:top;
+	position: relative;
+
+}
+
+#reg {
+	position: absolute;
+    bottom: 43px;
+}
+
+.logo-header {
+	border: 0;
+	padding-top: 5px;
+	width:70px;
+	height:60px;
+}
 
 ::-webkit-input-placeholder {
-  color: #ffcc80; }
+  color: #26a69a; }
 
 :-moz-placeholder {
   /* Firefox 18- */
-  color: #ffcc80; }
+  color: #2ab7a9; }
 
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: #ffcc80; }
+  color: #26a69a; }
 
 :-ms-input-placeholder {
-  color: #ffcc80; }
+  color: #26a69a; }
 
  input[type=search]{
- 	border-bottom: 1px solid #ffcc80;
+ 	border-bottom: 1px solid #26a69a;
  }
 
  input[type=search]:focus:not([readonly]){
- 	border-bottom: 1px solid #fff;
+ 	border-bottom: 1px solid #26a69a;
  	box-shadow: none;
  }
+
+.tabs .indicator {
+    background-color: #1a237e;
+}
+
+.slider .indicators .indicator-item.active {
+	background-color: #1a237e;
+}
 
 @media only screen and (min-width : 993px) {
 	nav a.button-collapse {
 		display: initial;
-	} 
+	}
+}
+
+@media only screen and (max-width : 793px) {
+
+	.login-form {
+	  	margin: 0 auto;
+	  	width: 95%;
+	  	display: block;
+	  	margin-bottom: 10px;
+	}
+
 }
 
 @media only screen and (max-width : 600px) {
   	.logo-header {
   		padding-top: 6px;
   	}
+
+  	.login-form {
+  		margin: 0 auto;
+  		width: 95%;
+  		margin-bottom: 10px;
+  		display: block;
+  	}
 }
+
+

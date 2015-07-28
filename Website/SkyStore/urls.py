@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^myaccount/', 'SkyStore.views.TestController.myaccount', name='myaccount'),
     url(r'^login/', 'SkyStore.views.TestController.login', name="login"),
     url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
+    url(r'^basket/', 'SkyStore.views.TestController.basket', name="basket"),
+    url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
     url(r'^api/orders/$', OrderListController.as_view()),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),

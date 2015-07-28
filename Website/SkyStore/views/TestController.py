@@ -28,6 +28,12 @@ def accountsettings(request):
 def login(request):
     return render(request, "login.html", {})
 
+def basket(request):
+    return render(request, "basket.html", {})
+
+def productlist(request):
+    return render(request, "productlist.html", {})
+
 def myaccount(request):
     if request.method == "POST":
         customerform = Register(request.POST)
