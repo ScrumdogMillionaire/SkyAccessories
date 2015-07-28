@@ -50,10 +50,9 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'Warehouse',
     'RewardsApp',
-    'StoreStaffApp',
     'djangosecure',
     'sslserver',
-    # 'SkyStore',
+    'SkyStore',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,7 +70,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'sky.urls'
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {

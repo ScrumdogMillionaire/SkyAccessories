@@ -13,6 +13,9 @@ class Product(models.Model):
     # Weight
     # Brand
 
+    def get_price(self):
+        return self.price
+
     class Meta:
         app_label = 'SkyStore'
         db_table = 'product'

@@ -8,7 +8,7 @@ from Website.SkyStore.models.Wishlist import Wishlist
 class StoreSession(models.Model):
     shopping_bag = models.OneToOneField(ShoppingBag)
     wishlist = models.OneToOneField(Wishlist)
-    user = models.OneToOneField(Useer, null=True)
+    user = models.OneToOneField(User, null=True)
 
     def get_contents(self):
         return self.contents
