@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^api/orders/$', OrderListController.as_view()),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
-    #url(r'^get/(?P<product_id>\d+)/$', 'SkyStore.views.TestController.product, name="product"),
+    url(r'^get/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),
 ]
