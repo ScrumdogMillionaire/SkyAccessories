@@ -56,25 +56,20 @@ footer.page-footer {
 
 .login-form:last-of-type {
 	vertical-align:top;
-<<<<<<< HEAD
 	position: relative; 
-=======
 	position: relative;
->>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c
+
 
 }
 
 #reg {
-<<<<<<< HEAD
+
 	position: absolute; 
     bottom: 43px;
 }
 
 #errorLogin {
 	height: 0px;
-=======
-	position: absolute;
-    bottom: 43px;
 }
 
 .logo-header {
@@ -82,7 +77,6 @@ footer.page-footer {
 	padding-top: 5px;
 	width:70px;
 	height:60px;
->>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c
 }
 
 ::-webkit-input-placeholder {
@@ -145,8 +139,3 @@ footer.page-footer {
   		display: block;
   	}
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c

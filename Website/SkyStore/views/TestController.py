@@ -2,16 +2,12 @@
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
-<<<<<<< HEAD
 from SkyStore.forms.customerForm import Register
 from SkyStore.forms.addressForm import addressRegister
 from django.shortcuts import redirect
 from SkyStore.forms.loginForm import Login as loginForm
-=======
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
-
->>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c
 from django.contrib.auth.models import User
 # from SkyStore.models import Product
 
@@ -70,7 +66,8 @@ def myaccount(request):
 
             # Login User
 
-            login_user(username, password, request)
+            user = authenticate(username=username, password=password)
+            auth_login(request, user)
 
             return render(request, "myaccount.html", {})
     return render(request, "myaccount.html", {})

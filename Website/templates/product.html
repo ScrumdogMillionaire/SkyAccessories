@@ -1,3 +1,13 @@
-{{product.name}}
+{%  extends 'base.html' %}
 
-<img src="{{ product.image.url }}">
+{%  load static from staticfiles %}
+
+{% block title %}Sky Accessories{% endblock %}
+
+{% block body_block %}
+
+	{{product.name}}
+
+	<img src="{{ product.image.url }}">
+
+{% endblock %}

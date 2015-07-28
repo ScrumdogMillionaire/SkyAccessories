@@ -30,14 +30,8 @@
 
 			<!-- Dropdown Structure -->
 			<ul id="dropdown1" class="dropdown-content z-depth-0">
-<<<<<<< HEAD
-			  	<li><a href="#!" class="grey-text">Orders</a></li>
-			  	<li><a href="#!" class="grey-text">Settings</a></li>
-			  	<li><a href="/skystore/logout/" class="grey-text">Logout</a></li>
-=======
 			  	<li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
-			  	<li><a href="#!" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
->>>>>>> 30b10a65f1a1f2c3d2577a0777cde78865a3c56c
+			  	<li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
 			</ul>
 
 			<nav class="z-depth-0 white" role="navigation">
@@ -45,7 +39,7 @@
 
 					<!-- Sky Home Button-->
 
-					<a href="/skystore/home/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo-2.png' %}"/></a>
+					<a href="/skystore/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo-2.png' %}"/></a>
 
 					<!-- Menu Icon-->
 
@@ -66,10 +60,10 @@
 						{% if request.user.is_authenticated %}
 						<li>
 							<!-- Account Dropdown -->
-							<a class="dropdown-button blue-grey-text text-darken-4" href="/skystore/login/" data-activates="dropdown1" data-beloworigin="true" data-hover="true">
+							<a class="dropdown-button blue-grey-text text-darken-4" data-activates="dropdown1" data-beloworigin="true" data-hover="true">
 								<!-- <i class="material-icons grey-text left">perm_identity</i> -->
 								<i class="material-icons blue-grey-text text-darken-4 right">arrow_drop_down</i>
-								Account
+								{{ request.user.username }}
 							</a>
 						</li>
 						{% else %}
