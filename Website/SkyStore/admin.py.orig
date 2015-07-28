@@ -9,5 +9,10 @@ from Website.SkyStore.models.ProductItem import ProductItem
 from Website.SkyStore.models.Store import Store
 
 
+<<<<<<< HEAD
 models = [Order, Product, ProductItem, Address, Store]
 admin.site.register(models)
+=======
+models = [Order, Product, ProductItem, Address]
+admin.site.register(models)
+>>>>>>> template2

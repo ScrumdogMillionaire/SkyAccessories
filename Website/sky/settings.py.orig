@@ -47,10 +47,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'Warehouse',
     'RewardsApp',
     'StoreStaffApp',
+<<<<<<< HEAD
+    'djangosecure',
+    'sslserver',
+    # 'SkyStore',
+=======
     'SkyStore',
+>>>>>>> template2
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,10 +69,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'djangosecure.middleware.SecurityMiddleware',
 )
+
 
 ROOT_URLCONF = 'sky.urls'
 
+<<<<<<< HEAD
+SECURE_SSL_REDIRECT = True
+=======
+>>>>>>> template2
 
 TEMPLATES = [
     {
@@ -119,8 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-STATIC_ROOT = os.path.join(os.path.abspath(
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', (
     os.path.join(BASE_DIR, 'sky', 'static')), '')
 
 STATICFILES_DIRS = (
@@ -131,11 +143,14 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     BASE_DIR + '/templates/',
 )
-=======
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':
-        ['rest_framework.permissions.AllowAny']
+        ['rest_framework.permissions.AllowAny'],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', )
 }
->>>>>>> db-dev
+
