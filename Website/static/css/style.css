@@ -42,6 +42,32 @@ footer.page-footer {
 	height: 20px;
 }
 
+.formWrapper {
+	width: 100%;
+}
+
+.login-form {
+	padding: 30px;
+	background-color: #fff;
+	width: 49%;
+	min-height: 350px;
+	display: inline-block;
+}
+
+.login-form:last-of-type {
+	vertical-align:top;
+	position: relative; 
+
+}
+
+#reg {
+	position: absolute; 
+    bottom: 43px;
+}
+
+#errorLogin {
+	height: 0px;
+}
 
 ::-webkit-input-placeholder {
   color: #ffcc80; }
@@ -69,11 +95,30 @@ footer.page-footer {
 @media only screen and (min-width : 993px) {
 	nav a.button-collapse {
 		display: initial;
-	} 
+	}
+}
+
+@media only screen and (max-width : 793px) {
+
+	.login-form {
+	  	margin: 0 auto;
+	  	width: 95%;
+	  	display: block;
+	  	margin-bottom: 10px;
+	}
+
 }
 
 @media only screen and (max-width : 600px) {
   	.logo-header {
   		padding-top: 6px;
   	}
+
+  	.login-form {
+  		margin: 0 auto;
+  		width: 95%;
+  		margin-bottom: 10px;
+  		display: block;
+  	}
 }
+

@@ -47,6 +47,6 @@ def logout(request):
 
 
 def home(request):
-    return render(request, "home.html", {'name': 'ScrumdogMillionaires'})
+    return render(request, "home.html", {'name': 'ScrumdogMillionaires', 'user' : User})
 
 

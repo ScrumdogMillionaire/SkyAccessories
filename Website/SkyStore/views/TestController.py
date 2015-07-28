@@ -4,7 +4,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from SkyStore.forms.customerForm import Register
 from SkyStore.forms.addressForm import addressRegister
-
+from django.shortcuts import redirect
+from SkyStore.forms.loginForm import Login as loginForm
 from django.contrib.auth.models import User
 # from SkyStore.models import Product
 
@@ -12,6 +13,7 @@ from django.contrib.auth import logout
 
 def logout_view(request):
     logout(request)
+    return redirect('/skystore/')
 
 def home(request):
     return render(request, "home.html", {})
@@ -26,7 +28,8 @@ def accountsettings(request):
     return render(request, "accountsettings.html", {})
 
 def login(request):
-    return render(request, "login.html", {})
+    formLogin = loginForm()
+    return render(request, "login.html", {'formLogin': formLogin})
 
 def myaccount(request):
     if request.method == "POST":
@@ -65,10 +68,30 @@ def register(request):
     customerform = Register()
     return render(request, "register.html", {'customerform': customerform, 'addressform': addressform})
 
-def login_user(username, password, request):
+def loginuser(request):
     # Data must be cleaned before passing
-    authenticated_user = authenticate(username=username, password=password)
-    auth_login(request, authenticated_user)
+    # authenticated_user = authenticate(username=username, password=password)
+    # auth_login(request, authenticated_user)
+    print "enter login"
+    username = request.POST['username']
+    password = request.POST['password']
+
+    # username = cleaned_data['username']
+    # password = cleaned_data['password']
+    user = authenticate(username=username, password=password)
+
+    print user
+    if user is not None:
+        if user.is_active:
+            auth_login(request, user)
+            return redirect('/skystore/')
+            # Redirect to a success page.
+        else:
+            return render(request, "login.html", {'error' : 'Account is disabled'})
+            # Return a 'disabled account' error message
+    else:
+        return render(request, "login.html", {'error' : 'Invalid login information'})
+
 
 
 # Return all the products in the database

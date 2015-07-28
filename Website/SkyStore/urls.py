@@ -18,12 +18,14 @@ from django.contrib import admin
 from Website.SkyStore.views.OrderListController import OrderListController
 
 urlpatterns = [
-    url(r'^home/', 'SkyStore.views.AccountController.home', name='home'),
+    url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', 'SkyStore.views.TestController.register', name='register'),
     url(r'^myaccount/', 'SkyStore.views.TestController.myaccount', name='myaccount'),
     url(r'^login/', 'SkyStore.views.TestController.login', name="login"),
+    url(r'^loginuser/', 'SkyStore.views.TestController.loginuser', name="loginuser"),
+    url(r'^logout/', 'SkyStore.views.TestController.logout_view', name="logout"),
     url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
     url(r'^api/orders/$', OrderListController.as_view()),
 
