@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^basket/', 'SkyStore.views.TestController.basket', name="basket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
     url(r'^api/orders/$', OrderListController.as_view()),
+    url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     url(r'^get/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),

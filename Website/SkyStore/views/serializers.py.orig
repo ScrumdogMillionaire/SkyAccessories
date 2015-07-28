@@ -1,11 +1,17 @@
 __author__ = 'bog02'
 
 from Website.SkyStore.models.Order import Order
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 # from Website.SkyStore.models.Customer import Customer
 from Website.SkyStore.models.Address import Address
 from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
+=======
+# from Website.SkyStore.models.Customer import Customer
+from django.contrib.auth.models import User
+
+>>>>>>> template2
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.core import exceptions
