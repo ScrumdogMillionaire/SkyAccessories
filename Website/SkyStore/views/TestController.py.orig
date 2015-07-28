@@ -1,17 +1,28 @@
-from django.shortcuts import render
 
-from SkyStore.forms.customerForm import Register
-from SkyStore.forms.addressForm import addressRegister
+from django.shortcuts import render
+<<<<<<< HEAD
+from Website.SkyStore.models.Address import Address
+# Create your views here.
+=======
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
+from Website.SkyStore.forms.customerForm import Register
+from Website.SkyStore.forms.addressForm import addressRegister
+>>>>>>> template2
+
+from django.contrib.auth.models import User
 # from SkyStore.models import Product
+
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
 
 def home(request):
     return render(request, "home.html", {})
 
 def index(request):
     return render(request, "base.html", {})
-
-def imageslider(request):
-    return render(request, "imageslider.html", {})
 
 def productlist(request):
     return render(request, "productlist.html", {})
@@ -26,13 +37,31 @@ def myaccount(request):
     if request.method == "POST":
         customerform = Register(request.POST)
         addressform = addressRegister(request.POST)
+        print "post"
         if customerform.is_valid() & addressform.is_valid():
-            user = customerform.save()
-            print 'customer'
-            addressform.save(commit=False)
-            # addressform.user = user
-            # addressform.save()
-            print 'address'
+            # Save Customer
+            print "here"
+            username = customerform.cleaned_data['username']
+            password = customerform.cleaned_data['password']
+
+            user = customerform.save(commit=False)
+
+            user = User.objects.create_user(username=username, email=user.email)
+            # Hash the password
+            user.set_password(password)
+            user.save()
+            print "User:", user
+
+            # Save Address
+            address = addressform.save()
+            address.user_id = user.id
+            print "address:", user.id
+            address.save()
+
+            # Login User
+
+            login_user(username, password, request)
+
             return render(request, "myaccount.html", {})
     return render(request, "myaccount.html", {})
 
@@ -41,16 +70,17 @@ def register(request):
     customerform = Register()
     return render(request, "register.html", {'customerform': customerform, 'addressform': addressform})
 
+def login_user(username, password, request):
+    # Data must be cleaned before passing
+    authenticated_user = authenticate(username=username, password=password)
+    auth_login(request, authenticated_user)
+
+
 # Return all the products in the database
 # Can modified by passing search options such as categories
 # def products(request):
 #     return render(request, "products.html", {'products': Product.object.All()})
 
-<<<<<<< HEAD
 # Return a single product in the product page template
 # def product(request, product_id=1):
 #     return render(request, "product.html", {'product': Product.object.get(id=product_id)})
-=======
-    add = Address.objects.get(pk=1)
->>>>>>> db-dev
-
