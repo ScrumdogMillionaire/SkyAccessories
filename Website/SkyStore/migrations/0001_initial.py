@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, null=True)),
                 ('description', models.TextField()),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
-                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/mpa45/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
+                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/gradtech/Desktop/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
             ],
             options={
                 'db_table': 'product',
@@ -101,10 +101,5 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'store_coordinates',
             },
-        ),
-        migrations.AddField(
-            model_name='product',
-            name='shopping_bag',
-            field=models.ForeignKey(to='SkyStore.ShoppingBag', null=True),
         ),
     ]

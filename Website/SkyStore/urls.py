@@ -35,6 +35,5 @@ urlpatterns = [
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
-    url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
     url(r'^product/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),
 ]
