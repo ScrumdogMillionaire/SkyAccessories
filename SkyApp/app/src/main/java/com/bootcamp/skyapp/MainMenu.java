@@ -46,6 +46,17 @@ public class MainMenu extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        String fontPath = "skymed.ttf";
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+
+        TextView hello = (TextView) findViewById(R.id.hello);
+        hello.setTypeface(tf);
+        hello.setText("Hi " + User.getInstance().getFirstName() + ". You have");
+
+        TextView points = (TextView) findViewById(R.id.points);
+        points.setTypeface(tf);
+        points.setText(User.getInstance().getPoints() + " points");
+
         menuLayout = findViewById(R.id.menu_layout);
         arcLayout = (ArcLayout) findViewById(R.id.arc_layout);
         fab = (ImageView) findViewById(R.id.fab);
@@ -119,7 +130,7 @@ public class MainMenu extends Activity {
                             loadActivity(FindStore.class);
                             break;
                         case R.id.info:
-                            //loadActivity(InfoPage.class);
+                            loadActivity(InfoActivity.class);
                             break;
                         case R.id.logout:
                             loadActivity(LandingActivity.class);

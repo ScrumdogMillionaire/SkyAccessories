@@ -13,12 +13,14 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +30,9 @@ import java.util.concurrent.ExecutionException;
 
 
 public class LandingActivity extends Activity {
+    TextView user;
+    TextView pass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +42,10 @@ public class LandingActivity extends Activity {
         String fontPath = "skymed.ttf";
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
-        TextView user = (TextView) findViewById(R.id.loginUser);
+        user = (TextView) findViewById(R.id.loginUser);
         user.setTypeface(tf);
 
-        TextView pass = (TextView) findViewById(R.id.loginPass);
+        pass = (TextView) findViewById(R.id.loginPass);
         pass.setTypeface(tf);
 
         Button login = (Button) findViewById(R.id.loginButton);
@@ -74,9 +79,23 @@ public class LandingActivity extends Activity {
     }
 
     public void loadMenu(View v){
-        Intent resultIntent = new Intent(this, MainMenu.class);
-        RetrieveJSONPost.tryLogin();
-        startActivity(resultIntent);
+
+        try {
+            RetrieveJSONPost.tryLogin(user.getText().toString(), pass.getText().toString());
+            Intent resultIntent = new Intent(this, MainMenu.class);
+            startActivity(resultIntent);
+        } catch (Exception e) {
+            Log.d("This is why", "It failed", e);
+            Toast toast = Toast.makeText(
+                    this,
+                    "Login Failed! :(",
+                    Toast.LENGTH_SHORT
+            );
+
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+
     }
 
     public void loadSignup(View v){

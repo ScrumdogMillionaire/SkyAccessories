@@ -3,10 +3,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/skywallpaper"
+    android:background="#E0F2F1"
     tools:context="com.bootcamp.skyapp.AccountPage">
 
-    <TextView android:text="This is your account settings." android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/skylogo"
+        android:layout_width="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="110dp"
+        android:background="@drawable/skylogo"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/accounttitle"
+        android:text="Your Account"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/skylogo"
+        android:textSize="40sp"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/username"
+        android:text="Username:"
+        android:layout_width="wrap_content"
+        android:textColor="#26A69A"
+        android:layout_below="@+id/accounttitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/email"
+        android:text="Email:"
+        android:textColor="#26A69A"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/points"
+        android:text="Points: 1000"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/firstname"
+        android:text="Points: 1000"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/points"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/usernameValue"
+        android:text="Joe Bloggs"
+        android:textColor="#FF8E3A"
+        android:layout_below="@id/accounttitle"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/username"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/emailValue"
+        android:text="J.Bloggs@email.com"
+        android:textColor="#FF8E3A"
+        android:layout_below="@id/usernameValue"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/username"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>

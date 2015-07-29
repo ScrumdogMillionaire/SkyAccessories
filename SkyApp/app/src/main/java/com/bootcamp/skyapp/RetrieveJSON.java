@@ -64,7 +64,7 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
             return jArray;
 
         } catch (Exception e) {
-            Log.d("Something", "SOmething ELSE", e);
+            Log.d("JSON", "Error Fetching JSON", e);
         } finally {
             try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
         }
@@ -84,7 +84,9 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
         JSONArray jarry = new JSONArray();
         ArrayList<Marker> markers = new ArrayList<Marker>();
 
-        AsyncTask task = new RetrieveJSON().execute("http://192.168.1.14:3001/api/stores/");
+        //AsyncTask task = new RetrieveJSON().execute("http://192.168.1.14:3001/api/stores/");
+        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/markers");
+
         try {
             jarry = (JSONArray) task.get();
 
@@ -110,7 +112,8 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
         JSONArray jarry = new JSONArray();
         Product watch = new Product("", "");
 
-        AsyncTask task = new RetrieveJSON().execute("http://demo1828387.mockable.io/product/"+productID);
+        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
+
         try {
             jarry = (JSONArray) task.get();
 

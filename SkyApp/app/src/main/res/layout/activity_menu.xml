@@ -6,11 +6,14 @@
     android:background="#E0F2F1"
     tools:context="com.bootcamp.skyapp.MainMenu">
 
-    <TextView
-        android:id="@+id/helloUser"
-        android:text="@string/hello_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/skylogo"
+        android:layout_width="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_height="110dp"
+        android:background="@drawable/skylogo"
+        android:layout_centerHorizontal="true"/>
 
     <FrameLayout
         android:id="@+id/menu_layout"
@@ -97,11 +100,33 @@
 
     <ImageButton
         android:id="@+id/fab"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/selectorplay"
         android:onClick="toggleLayout"
         />
+
+    <TextView
+        android:id="@+id/hello"
+        android:text="Hi Joe. You have"
+        android:textSize="20sp"
+        android:layout_marginBottom="110dp"
+        android:layout_above="@+id/points"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/points"
+        android:text="N/A points"
+        android:textSize="50sp"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

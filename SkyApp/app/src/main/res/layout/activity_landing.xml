@@ -35,6 +35,7 @@
         android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
         android:layout_below="@+id/loginUser"/>
 
     <Button

@@ -36,16 +36,15 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
         DefaultHttpClient httpclient = new DefaultHttpClient(httpParameters);
         HttpPost httppost = new HttpPost(url[0]);
         // Depends on your web service
-        httppost.setHeader("Content-type", "application/json");
+        httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
 
         InputStream inputStream = null;
         String result = null;
         try {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("email_or_username", "tim"));
-            nameValuePairs.add(new BasicNameValuePair("password", "password"));
+            nameValuePairs.add(new BasicNameValuePair("email_or_username", url[1]));
+            nameValuePairs.add(new BasicNameValuePair("password", url[2]));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            System.out.println(httppost.getParams());
 
             HttpResponse response = httpclient.execute(httppost);
 
@@ -83,22 +82,25 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
 
     }
 
-    public static void tryLogin(){
+    public static void tryLogin(String user, String password) throws Exception {
         JSONArray jarry = new JSONArray();
 
-        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.14:3001/api-auth/");
-        try {
-            jarry = (JSONArray) task.get();
-            System.out.print(jarry);
+        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api-auth/", user, password);
 
-            //String name = jarry.getJSONObject(0).get("name").toString();
-            //String url = jarry.getJSONObject(0).get("url").toString();
+        jarry = (JSONArray) task.get();
 
+        Log.d("LOgin json", jarry.getJSONObject(0).toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String token = jarry.getJSONObject(0).get("token").toString();
+        String id = jarry.getJSONObject(0).get("user_id").toString();
+        //int points = jarry.getJSONObject(0).getInt("points");
+        String email = jarry.getJSONObject(0).get("email").toString();
+        String username = jarry.getJSONObject(0).get("username").toString();
+        String firstName = jarry.getJSONObject(0).get("first_name").toString();
+        String lastName = jarry.getJSONObject(0).get("last_name").toString();
 
+        User.makeUser(token, id, 2001, email, username, firstName, lastName);
+        //User.makeUser(token, id, 2001, "tim@tim.tim", "timmy", "Timothy", "Timpson");
 
     }
 }
