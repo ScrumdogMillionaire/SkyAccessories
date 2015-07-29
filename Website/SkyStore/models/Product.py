@@ -3,6 +3,7 @@ __author__ = 'bog02'
 from django.db import models
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from ShoppingBag import ShoppingBag
 
 fs = FileSystemStorage(location=settings.STATIC_ROOT)
 
@@ -11,6 +12,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=14)
     product_image = models.ImageField(upload_to="images", storage=fs, null=True)
+    shopping_bag = models.ForeignKey(ShoppingBag, null=True)
 
     # Dimensions
     # Weight

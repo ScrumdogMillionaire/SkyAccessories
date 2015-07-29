@@ -62,11 +62,21 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('serial_number', models.CharField(max_length=20)),
-                ('order', models.ForeignKey(default=None, to='SkyStore.Order')),
-                ('product', models.ForeignKey(default=None, to='SkyStore.Product')),
+                ('order', models.ForeignKey(to='SkyStore.Order', null=True)),
+                ('product', models.ForeignKey(to='SkyStore.Product', null=True)),
             ],
             options={
                 'db_table': 'product_item',
+            },
+        ),
+        migrations.CreateModel(
+            name='ShoppingBag',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('user', models.OneToOneField(null=True, to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'db_table': 'shopping_bag',
             },
         ),
         migrations.CreateModel(
@@ -91,5 +101,10 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'store_coordinates',
             },
+        ),
+        migrations.AddField(
+            model_name='product',
+            name='shopping_bag',
+            field=models.ForeignKey(to='SkyStore.ShoppingBag', null=True),
         ),
     ]

@@ -4,7 +4,9 @@
 
 {% block body_block %}
 
-
+{% for product in basket_contents %}
+{{product}} <a href="{% url 'removefrombasket' product.id %}">Remove from Basket</a>
+{% endfor %}
 
 
 

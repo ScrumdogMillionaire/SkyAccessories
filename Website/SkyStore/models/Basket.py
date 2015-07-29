@@ -11,8 +11,5 @@ class Basket(models.Model):
     # contents = models.ForeignKey(ProductItem, null=True)
     # user = models.OneToOneField(User, null=True)
 
-    def get_contents(self):
-        return self.contents
-
     class Meta:
         abstract = True

@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^logout/', 'SkyStore.views.TestController.logout_view', name="logout"),
     url(r'^accountsettings/', 'SkyStore.views.AccountController.accountsettings', name="accountsettings"),
     url(r'^basket/', 'SkyStore.views.BasketController.basket', name="basket"),
+    url(r'^addtobasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.add_to_basket', name="addtobasket"),
+    url(r'^removefrombasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.remove_from_basket', name="removefrombasket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
     url(r'^api/orders/$', OrderListController.as_view()),
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),

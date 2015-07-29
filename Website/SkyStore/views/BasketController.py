@@ -7,31 +7,27 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def add_to_basket(request, product_id):
     current_user = request.user
+
+    basket, request = get_basket(current_user, request)
+
     if current_user.is_authenticated():
         # User is logged in
         try:
-            current_user.basket
-            print "current user has a basket"
-        except ObjectDoesNotExist:
-            ShoppingBag.create(user=current_user)
-            print "basket created"
-
-        try:
             product = Product.objects.get(id=product_id)
-            current_user.basket.product_set.add(product)
+            print current_user.shoppingbag
+            current_user.shoppingbag.product_set.add(product)
             print "product added"
         except ObjectDoesNotExist:
             pass
     else:
         # User is not logged in
-        if request.session.get('basket') is None:
-            request.session['basket'] = []
         try:
             product = Product.objects.get(id=product_id)
             request.session.get('basket').append(product)
             print "product added"
         except ObjectDoesNotExist:
             pass
+    return render(request, 'basket.html')
 
 
 def remove_from_basket(request, product_id):
@@ -39,7 +35,7 @@ def remove_from_basket(request, product_id):
     if current_user.is_authenticated():
         try:
             product = Product.objects.get(id=product_id)
-            current_user.basket.product_set.remove(product)
+            current_user.shoppingbag.product_set.remove(product)
         except ObjectDoesNotExist:
             pass
     else:
@@ -52,17 +48,22 @@ def remove_from_basket(request, product_id):
             print "product removed"
         except ObjectDoesNotExist:
             pass
+    return render(request, 'basket.html')
+
 
 def basket(request):
     current_user = request.user
-    if current_user.is_authenticated():
+    basket, request = get_basket(current_user, request)
+    return render(request, 'basket.html', {'basket_contents': basket})
+
+def get_basket(user, request):
+    if user.is_authenticated():
         try:
-            basket = current_user.basket
+            basket = user.shoppingbag
             print basket
-
         except AttributeError:
-
-            basket = ShoppingBag.objects.create(user=current_user)
+            print user
+            basket = ShoppingBag.objects.create(user=user)
             print basket
             # basket.save()
             print 'basket created'
@@ -73,4 +74,4 @@ def basket(request):
             request.session['basket'] = []
         basket = request.session.get('basket')
 
-    return render(request, 'basket.html', {'basket_contents': basket})
+    return basket, request

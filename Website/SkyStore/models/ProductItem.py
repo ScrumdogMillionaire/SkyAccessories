@@ -1,14 +1,14 @@
 __author__ = 'bog02'
 
 from django.db import models
-from Website.SkyStore.models.Product import Product
-from Website.SkyStore.models.Order import Order
+# from Product import Product
+# from Order import Order
 
 
 class ProductItem(models.Model):
     serial_number = models.CharField(max_length=20)
-    product = models.ForeignKey(Product, default=None)
-    order = models.ForeignKey(Order, default=None)
+    product = models.ForeignKey('Product', null=True)
+    order = models.ForeignKey('Order', null=True)
 
     class Meta:
         app_label = 'SkyStore'
