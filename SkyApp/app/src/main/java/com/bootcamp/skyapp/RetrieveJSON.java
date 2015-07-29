@@ -112,13 +112,14 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
         JSONArray jarry = new JSONArray();
         Product watch = new Product("", "");
 
-        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
+        //AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
+        AsyncTask task = new RetrieveJSON().execute("http://192.168.1.2:3001/api/product/"+productID);
 
         try {
             jarry = (JSONArray) task.get();
 
             String name = jarry.getJSONObject(0).get("name").toString();
-            String url = jarry.getJSONObject(0).get("url").toString();
+            String url = jarry.getJSONObject(0).get("product_image").toString();
 
            watch = new Product(name, url);
         } catch (Exception e) {

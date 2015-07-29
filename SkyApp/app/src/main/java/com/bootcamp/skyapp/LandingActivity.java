@@ -93,14 +93,6 @@ public class LandingActivity extends Activity {
             os.close();
             fos.close();
 
-            FileInputStream fis = openFileInput("userstate");
-            ObjectInputStream is = new ObjectInputStream(fis);
-            User restoredUser = (User) is.readObject();
-            is.close();
-            fis.close();
-
-            Log.d("user first name", restoredUser.getFirstName());
-
             Intent resultIntent = new Intent(this, MainMenu.class);
             startActivity(resultIntent);
         } catch (Exception e) {

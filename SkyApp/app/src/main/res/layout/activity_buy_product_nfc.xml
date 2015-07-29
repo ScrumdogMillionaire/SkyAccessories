@@ -16,8 +16,75 @@
 
     <ImageView
         android:id="@+id/productPicture"
+        android:layout_below="@id/skylogo"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/orderButton"
+        android:onClick="orderNow"
+        android:text="Yes"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/middle"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:background="@drawable/selector"
+        />
+
+    <Button
+        android:id="@+id/no"
+        android:onClick="gotomenu"
+        android:text="No"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/middle"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector"
+        />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:onClick="loadMenu"
+        android:text="Log in"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector"
+        />
+
+    <Button
+        android:id="@+id/middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please log in"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/loginButton"/>
+
 
 </RelativeLayout>

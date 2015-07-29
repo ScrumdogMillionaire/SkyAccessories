@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 
 
@@ -22,6 +25,7 @@ public class BuyProductNFC extends Activity {
     NdefMessage[] msgs;
     NdefRecord[] records;
     Product watch;
+    String watchId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +46,46 @@ public class BuyProductNFC extends Activity {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                     records = msgs[i].getRecords();
                     try { //TODO Improve to allow loop through records
-                        String payloadString = new String(records[0].getPayload(), "US-ASCII");
-                        if(payloadString.length() > 0){
-                            loadProduct(payloadString);
+                        watchId = new String(records[0].getPayload(), "US-ASCII");
+                        if(watchId.length() > 0){
+                            loadProduct(watchId);
                         }
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
                 }
 
-                Toast.makeText(
-                        this,
-                        "Product Name: " + watch.getName(),
-                        Toast.LENGTH_SHORT
-                ).show();
-
                 ImageView productPicture = (ImageView) findViewById(R.id.productPicture);
-                new ImageDownloader(productPicture).execute(watch.getPictureURL());
+                new ImageDownloader(productPicture).execute("http://192.168.1.2:3001/" + watch.getPictureURL());
+
+                FileInputStream fis = null;
+
+                try {
+                    fis = openFileInput("userstate");
+                    ObjectInputStream is = new ObjectInputStream(fis);
+                    User restoredUser = (User) is.readObject();
+                    is.close();
+                    fis.close();
+                    Log.d("user first name", restoredUser.getFirstName());
+
+                    User.makeUser(restoredUser.getToken(), restoredUser.getId(), restoredUser.getPoints(), restoredUser.getEmail(), restoredUser.getUsername(), restoredUser.getFirstName(), restoredUser.getLastName());
+
+                    Log.d("It all worked", User.getInstance().getPoints() + "");
+
+                    RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId);
+
+                    Toast.makeText(
+                            this,
+                            "Product ordered",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+
             }
         }
         //process the msgs array

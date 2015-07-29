@@ -42,9 +42,13 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
         String result = null;
         try {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("email_or_username", url[1]));
-            nameValuePairs.add(new BasicNameValuePair("password", url[2]));
+            nameValuePairs.add(new BasicNameValuePair(url[1], url[2]));
+            nameValuePairs.add(new BasicNameValuePair(url[3], url[4]));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            if (url[5] != null) {
+                httppost.setHeader("Authorization", "Token " + url[5]);
+            }
 
             HttpResponse response = httpclient.execute(httppost);
 
@@ -88,7 +92,7 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
     public static void tryLogin(String user, String password) throws Exception {
         JSONArray jarry = new JSONArray();
 
-        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api-auth/", user, password);
+        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api-auth/", "email_or_username", user, "password", password, null);
 
         jarry = (JSONArray) task.get();
 
@@ -96,14 +100,18 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
 
         String token = jarry.getJSONObject(0).get("token").toString();
         String id = jarry.getJSONObject(0).get("user_id").toString();
-        //int points = jarry.getJSONObject(0).getInt("points");
+        int points = jarry.getJSONObject(0).getInt("reward_points");
         String email = jarry.getJSONObject(0).get("email").toString();
         String username = jarry.getJSONObject(0).get("username").toString();
         String firstName = jarry.getJSONObject(0).get("first_name").toString();
         String lastName = jarry.getJSONObject(0).get("last_name").toString();
 
-        User.makeUser(token, id, 2001, email, username, firstName, lastName);
+        User.makeUser(token, id, points, email, username, firstName, lastName);
         //User.makeUser(token, id, 2001, "tim@tim.tim", "timmy", "Timothy", "Timpson");
 
+    }
+
+    public static void placeOrder(String token, String userID, String productID) {
+        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api/place-order/", "user_id", userID, "prod_id", productID, token);
     }
 }
