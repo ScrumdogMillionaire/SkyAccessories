@@ -34,12 +34,21 @@
     <!-- NavBar -->
 	<header>
 		<div class="navbar-fixed">
+            {% if user.is_staff %}
+                <!-- Non-Staff Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content z-depth-0">
+                    <li><a href="/skystore/adminpage/" class="blue-grey-text text-darken-4"><h6>Admin Page</h6></a></li>
+                    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
+                    <li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
+                </ul>
+            {% else %}
+                <!-- Staff Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content z-depth-0">
+                    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
+                    <li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
+                </ul>
+            {% endif %}
 
-			<!-- Dropdown Structure -->
-			<ul id="dropdown1" class="dropdown-content z-depth-0">
-			  	<li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
-			  	<li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
-			</ul>
 
 			<nav class="z-depth-0 white" role="navigation">
 				<div class="nav-wrapper container">
@@ -130,9 +139,9 @@
 			</div>
 
 			<div id="top-spacer"></div>
-			{% block body_block %}
+                {% block body_block %}
 
-			{% endblock %}
+                {% endblock %}
 		</div>
 	</main>
 

@@ -18,7 +18,7 @@ from django.contrib import admin
 # from Website.SkyStore.views.ApiController import OrderListController
 
 urlpatterns = [
-    url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
+    url(r'^$', 'SkyStore.views.TestController.home', name='home'),
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', 'SkyStore.views.TestController.register', name='register'),
@@ -29,7 +29,9 @@ urlpatterns = [
     url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
     url(r'^basket/', 'SkyStore.views.TestController.basket', name="basket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
-    url(r'^api/orders/$', OrderListController.as_view()),
+    url(r'^adminpage/', 'SkyStore.views.TestController.adminpage', name="adminpage"),
+    url(r'^addproduct/', 'SkyStore.views.TestController.addproduct', name="addproduct"),
+    # url(r'^api/orders/$', OrderListController.as_view()),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
