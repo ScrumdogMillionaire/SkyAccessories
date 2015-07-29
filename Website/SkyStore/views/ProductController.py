@@ -60,12 +60,15 @@ def review_order(request):
     return render(request, "revieworder.html", {'order': current_basket})
 
 def successful_order(request):
+    token = request.POST['stripeToken']
+    print token
+
 
 
 
     # product.stock = len(product.productitem_set.filter(status='not_ordered'))
 
-    return render(request, "checkout.html")
+    return render(request, "successfulorder.html")
 
 def get_delivery_address(user):
     return user.address.filter(address_type='default').all()[0]
