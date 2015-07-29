@@ -84,7 +84,6 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email_or_username and password:
-
             user = authenticate(username=email_or_username, password=password)
             print user
             if user:

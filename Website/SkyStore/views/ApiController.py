@@ -68,14 +68,23 @@ class AuthTokenController(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        user_id = User.objects.only('id').get(username=user).id
+        user = User.objects.only('id').get(username=user)
+        user_id = user.id
+        email = user.email
+
+        customer = {
+            'user_id': user_id,
+            'email': email,
+        }
 
         content = {
             'token': unicode(token.key),
             'user': user_id,
+            'customer': customer,
         }
 
-        return Response(content)
+        print customer
+        return Response([content])
 
 
 class ProcessOrderController(APIView):
@@ -88,6 +97,6 @@ class ProcessOrderController(APIView):
         customer = User.objects.get(id=request.data.get('user_id'))
         Order.objects.create(user=customer, price=product.get_price(), status='Order Placed')
 
-        content = {'status': 'OK'}
+        content = [{'status': 'OK'}]
 
         return Response(content)
