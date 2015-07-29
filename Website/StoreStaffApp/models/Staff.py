@@ -1,15 +1,11 @@
 __author__ = 'bog02'
 
-from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-class StaffLogin(models.Model):
-    user = models.OneToOneField(User)
-
-    # we could use json field for addresses
-    status = models.BooleanField(default=True)
+class StaffLogin(AbstractUser):
 
     class Meta:
         app_label = 'SkyStore'
         db_table = 'staff_login'
+

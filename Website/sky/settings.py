@@ -50,7 +50,6 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'Warehouse',
     'RewardsApp',
-    'StoreStaffApp',
     'djangosecure',
     'sslserver',
     'SkyStore',

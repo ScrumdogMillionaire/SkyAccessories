@@ -3,6 +3,7 @@ __author__ = 'bog02'
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Order(models.Model):
 
     STATUSES = [('Order Placed', 'Order Placed'), ('Out for Delivery', 'Out for Delivery'), ('Delivered', 'Delivered')]
@@ -35,3 +36,5 @@ class Order(models.Model):
     class Meta:
         app_label = 'SkyStore'
         db_table = 'order'
+
+

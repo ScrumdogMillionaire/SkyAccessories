@@ -15,8 +15,15 @@ from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
 from . import serializers
 
+from django.contrib.auth.models import User
+
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 class OrderListController(APIView):
+
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, format='json'):
         orders = Order.objects.all()
@@ -61,9 +68,26 @@ class AuthTokenController(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        user_id = User.objects.only('id').get(username=user).id
 
         content = {
             'token': unicode(token.key),
+            'user': user_id,
         }
+
+        return Response(content)
+
+
+class ProcessOrderController(APIView):
+
+    renderer_classes = (renderers.JSONRenderer,)
+
+    def post(self, request):
+
+        product = Product.objects.get(pk=request.data.get('prod_id'))
+        customer = User.objects.get(id=request.data.get('user_id'))
+        Order.objects.create(user=customer, price=product.get_price(), status='Order Placed')
+
+        content = {'status': 'OK'}
 
         return Response(content)
