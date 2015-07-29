@@ -71,19 +71,21 @@ class AuthTokenController(APIView):
         user = User.objects.only('id').get(username=user)
         user_id = user.id
         email = user.email
-
-        customer = {
-            'user_id': user_id,
-            'email': email,
-        }
+        username = user.username
+        first_name = user.first_name
+        last_name = user.last_name
 
         content = {
             'token': unicode(token.key),
-            'user': user_id,
-            'customer': customer,
+            'user_id': user_id,
+            'email': email,
+            'username': username,
+            'first_name': first_name,
+            'last_name': last_name,
         }
 
-        print customer
+        print unicode(user)
+        print content
         return Response([content])
 
 
