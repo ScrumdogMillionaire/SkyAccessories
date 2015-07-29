@@ -19,17 +19,16 @@
 
         <div class="col s4">
             <div class="card-panel z-depth-0">
-                <img src="{%  static 'assets/Sky_logo_2014_small.png' %}"/>
+                <img src="{{ product.product_image }}"/>
             </div>
         </div>
         <div class="col s8">
 
             <div class="card-panel z-depth-0">
                 <span class="red-text">£{{ product.price }}</span>
-                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket
-
-        </button></p>
-                Description:
+                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket</button></p>
+                Category: {{ product.category }}
+                <p>Description:</p>
                 <p>{{ product.description }}</p>
             </div>
         </div>

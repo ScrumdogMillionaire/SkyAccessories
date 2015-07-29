@@ -34,6 +34,8 @@ def accountsettings(request):
     return render(request, "accountsettings.html", {})
 
 def login(request):
+    if request.user.is_authenticated():
+        return redirect('/skystore/')
     formLogin = loginForm()
     return render(request, "login.html", {})
 
@@ -44,22 +46,29 @@ def productlist(request):
     return render(request, "productlist.html", {})
 
 def adminpage(request):
-    return render(request, "adminpage.html", {})
+    if not request.user.is_staff:
+        return redirect('/skystore/')
+    products = Product.objects.all()
+    return render(request, "adminpage.html", {'products': products})
 
 def addproduct(request):
+
     if request.method == "POST":
 
         form = AddProductForm(request.POST, request.FILES)
 
         if form.is_valid():
+            print 'valid'
             if handle_uploaded_file(request.FILES['fileinput'], request.POST.get('productname')) == 0:
-                image_path = 'SkyStore/uploaded/' + request.POST.get('productname')
-                Product.objects.create(name=request.POST.get('productname'), description=request.POST.get('description'), price=request.POST.get('price'), product_image=image_path)
-                return render(request, "adminpage.html")
+                image_path = 'SkyStore/uploaded/' + request.POST.get('productname') + '.jpg'
+                Product.objects.create(name=request.POST.get('productname'), category=request.POST.get('category'), description=request.POST.get('description'), price=request.POST.get('price'), product_image=image_path)
+                return redirect("/skystore/adminpage/")
     else:
         form = AddProductForm()
-    return render(request, "addproduct.html", {'form': form})
+    return redirect("/skystore/adminpage/")
 
+def addproductpage(request):
+    return render(request, "addproduct.html", {})
 
 def handle_uploaded_file(f, prod_name):
     with open('SkyStore/uploaded/' + prod_name + '.jpeg', 'wb+') as destination:
