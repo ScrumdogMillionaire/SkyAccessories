@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -58,34 +61,30 @@ public class BuyProductNFC extends Activity {
                 ImageView productPicture = (ImageView) findViewById(R.id.productPicture);
                 new ImageDownloader(productPicture).execute(getString(R.string.ip) + watch.getPictureURL());
 
-                FileInputStream fis = null;
-
                 try {
-                    fis = openFileInput("userstate");
+                    FileInputStream fis = openFileInput("userstate");
                     ObjectInputStream is = new ObjectInputStream(fis);
                     User restoredUser = (User) is.readObject();
                     is.close();
                     fis.close();
-                    Log.d("user first name", restoredUser.getFirstName());
 
                     User.makeUser(restoredUser.getToken(), restoredUser.getId(), restoredUser.getPoints(), restoredUser.getEmail(), restoredUser.getUsername(), restoredUser.getFirstName(), restoredUser.getLastName());
+                    Log.d("User loaded success:", User.getInstance().getPoints() + "");
 
-                    Log.d("It all worked", User.getInstance().getPoints() + "");
+                    TextView text = (TextView) findViewById(R.id.text);
+                    text.setText("Do you wish to buy this product?");
 
-                    RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId, this);
+                    Button order = (Button) findViewById(R.id.orderButton);
+                    order.setVisibility(View.VISIBLE);
 
-                    Toast.makeText(
-                            this,
-                            "Product ordered",
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    Button cancel = (Button) findViewById(R.id.noOrder);
+                    cancel.setVisibility(View.VISIBLE);
 
-                } catch (Exception e) {
+                    Button login = (Button) findViewById(R.id.loginButton);
+                    login.setVisibility(View.INVISIBLE);
+                } catch (Exception e){
                     e.printStackTrace();
                 }
-
-
-
             }
         }
         //process the msgs array
@@ -115,7 +114,32 @@ public class BuyProductNFC extends Activity {
 
     private void loadProduct(String payloadString){
         watch = RetrieveJSON.getProduct(Integer.parseInt(payloadString), this);
+    }
 
-        //TODO change gui
+
+
+    public void orderProduct(View v){
+        try {
+            RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId, this);
+
+            Toast.makeText(
+                    this,
+                    "Product ordered",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadMenu(View v){
+        Intent resultIntent = new Intent(this, MainMenu.class);
+        startActivity(resultIntent);
+    }
+
+    public void loadLogin(View v){
+        Intent resultIntent = new Intent(this, LandingActivity.class);
+        startActivity(resultIntent);
     }
 }
