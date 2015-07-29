@@ -11,11 +11,9 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=14)
     product_image = models.ImageField(upload_to="images", storage=fs)
-
     # Dimensions
     # Weight
     # Brand
-
     class Meta:
         app_label = 'SkyStore'
         db_table = 'product'

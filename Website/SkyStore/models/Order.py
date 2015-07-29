@@ -1,7 +1,6 @@
 __author__ = 'bog02'
 
 from django.db import models
-# from Website.SkyStore.models.Customer import Customer
 from django.contrib.auth.models import User
 
 
@@ -15,7 +14,6 @@ class Order(models.Model):
     expected_delivery_date = models.DateField(null=True)  # Expected Delivery Date
 
     status = models.CharField(max_length=20, choices=STATUSES)  # Status of Order
-    # user = models.ForeignKey(Customer, null=True)  # User who the order belongs to
     user = models.ForeignKey(User, null=True)  # User who the order belongs to
     price = models.DecimalField(decimal_places=2, max_digits=14)
 
@@ -38,3 +36,5 @@ class Order(models.Model):
     class Meta:
         app_label = 'SkyStore'
         db_table = 'order'
+
+

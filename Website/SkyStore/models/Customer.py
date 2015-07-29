@@ -43,3 +43,4 @@ __author__ = 'bog02'
     #     app_label = 'SkyStore'
     #     db_table = 'customer_login'
 
+   

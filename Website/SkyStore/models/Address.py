@@ -14,10 +14,11 @@ class Address(models.Model):
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=100, null=True)
     postcode = models.CharField(max_length=8, null=True)
-    # user = models.ForeignKey('Customer', null=True)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, related_name='address', default=None)
 
     class Meta:
         app_label = 'SkyStore'
         db_table = 'address'
 
+    def __unicode__(self):              # __unicode__ on Python 2
+        return "%s %s %s" % (self.street_line1, self.street_line2, self.city)

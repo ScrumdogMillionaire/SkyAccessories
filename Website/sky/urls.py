@@ -17,9 +17,23 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from Website import SkyStore
-from Website.SkyStore.views.OrderListController import OrderListController
+# from Website.SkyStore.views.ApiController import Controller import OrderListController
+from Website.SkyStore.views.ApiController import OrderListController
+from Website.SkyStore.views.ApiController import StoreListController
+from Website.SkyStore.views.ApiController import ProductListController
+from Website.SkyStore.views.ApiController import AuthTokenController
+from Website.SkyStore.views.ApiController import ProcessOrderController
+from rest_framework.authtoken import views
 
 
 urlpatterns = [
-        url(r'^skystore/', include('SkyStore.urls')),
+
+    url(r'^skystore/', include('SkyStore.urls')),
+    url(r'^api/orders/$', OrderListController.as_view()),
+    url(r'^api/stores/$', StoreListController.as_view()),
+    url('^api/product/(?P<prod_id>[0-9]+)$', ProductListController.as_view()),
+    url(r'^api-auth/', AuthTokenController.as_view()),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^api/place-order/', ProcessOrderController.as_view())
+
 ]

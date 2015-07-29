@@ -47,9 +47,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'Warehouse',
     'RewardsApp',
-    'StoreStaffApp',
+    'djangosecure',
+    'sslserver',
     'SkyStore',
 )
 
@@ -62,10 +64,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'djangosecure.middleware.SecurityMiddleware',
 )
+
 
 ROOT_URLCONF = 'sky.urls'
 
+# SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
@@ -133,5 +138,11 @@ TEMPLATE_DIRS = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':
-        ['rest_framework.permissions.AllowAny']
+        ['rest_framework.permissions.AllowAny'],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', )
 }
+
