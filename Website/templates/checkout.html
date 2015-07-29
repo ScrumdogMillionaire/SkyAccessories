@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<div class="row">
+
+    <div class="col s12">
+        <h5>Delivery Address</h5>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="row card-panel z-depth-0">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input value="{{ delivery_address.street_line1 }}" id="line_1" type="text" class="validate" required>
+                <label for="line_1">Address Line 1</label>
+            </div>
+            <div class="input-field col s12">
+                <input value="{{ delivery_address.street_line2 }}" id="line_2"  type="text" class="validate" required>
+                <label for="line_2">Address Line 2</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s7">
+                <input value="{{ delivery_address.city }}" id="city"  type="text" class="validate" required>
+                <label for="city">City</label>
+            </div>
+            <div class="input-field col s5">
+                <input value="{{ delivery_address.county }}" id="county"  type="text" class="validate" required>
+                <label for="county">County</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input value="{{ delivery_address.postcode }}" id="postcode" type="text" class="validate" required>
+                <label for="postcode">Postcode</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<a href="/skystore/revieworder/" class="btn z-depth-0">Review Order</a>
+
+
+
+{% endblock %}

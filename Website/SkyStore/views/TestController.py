@@ -58,7 +58,7 @@ def myaccount(request):
             print "User:", user
 
             # Save Address
-            address = addressform.save()
+            address = addressform.save(commit=False)
             address.user_id = user.id
             print "address:", user.id
             address.save()
@@ -68,8 +68,8 @@ def myaccount(request):
             user = authenticate(username=username, password=password)
             auth_login(request, user)
 
-            return render(request, "myaccount.html", {})
-    return render(request, "myaccount.html", {})
+            return render(request, "accountsettings.html", {})
+    return render(request, "accountsettings.html", {})
 
 def register(request):
     addressform = addressRegister()

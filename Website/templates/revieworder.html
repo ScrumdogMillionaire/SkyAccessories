@@ -4,11 +4,17 @@
 
 {% block body_block %}
 
+<div class="row">
+
+    <div class="col s12">
+        <h5>Review Order</h5>
+        <div class="divider"></div>
+    </div>
+</div>
 
 
 
-
-          <table class="striped">
+<table class="striped">
         <thead>
           <tr>
               <th data-field="id">Product</th>
@@ -19,7 +25,7 @@
         </thead>
 
         <tbody>
-        {% for product in current_basket %}
+        {% for product in order %}
         <br>
           <tr>
             <td><img src="{{product.image}}"></td>
@@ -30,8 +36,17 @@
         {% endfor %}
         </tbody>
       </table>
-<a href="/skystore/checkout/"class="btn z-depth-0">Checkout</a>
 
+  <form action="/charge" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+    data-image="{%  static 'assets/Sky_logo-2.png' %}"
+    data-name="Sky Accessories"
+    data-description=""
+    data-amount="2000">
+  </script>
+</form>
 
 
 

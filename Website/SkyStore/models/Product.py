@@ -3,7 +3,6 @@ __author__ = 'bog02'
 from django.db import models
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from ShoppingBag import ShoppingBag
 
 fs = FileSystemStorage(location=settings.STATIC_ROOT)
 

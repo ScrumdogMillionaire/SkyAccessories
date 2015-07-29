@@ -81,7 +81,11 @@
 							<!-- Shopping Cart -->
 							<a href="/skystore/basket/" class="blue-grey-text text-darken-4">
 								<i class="material-icons blue-grey-text text-darken-4 right">shopping_cart</i>
-								Basket (0)
+								{%if request.session.basket == None%}
+								<span id="basket_number">Basket (0)</span>
+								{% else %}
+								<span id="basket_number">Basket ({{request.session.basket|length}})</span>
+								{% endif %}
 							</a>
 						</li>
 					</ul>
@@ -160,6 +164,26 @@
 		    gutter: 10,
 		    isFitWidth: true
 	    });
+
+		$('.addbasket').click(function(){
+			$.ajax({
+
+				url: "/skystore/addtobasket/",
+				type: 'POST',
+				dataType: "json",
+				data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+				success: function(response) {
+                      result = response.number_of_products;
+					$("#basket_number").text('Basket ('+result+')');
+					Materialize.toast(response.product_name+' added to basket', 3000);
+                },
+				error: function(rs, e) {
+                       alert(rs.responseText);
+                }
+
+
+			});
+		});
 
 		$(document).ready(function(){
 

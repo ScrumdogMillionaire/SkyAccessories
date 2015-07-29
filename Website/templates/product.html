@@ -26,9 +26,8 @@
 
             <div class="card-panel z-depth-0">
                 <span class="red-text">£{{ product.price }}</span>
-                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket
-
-        </button></p>
+                <p><a class="addbasket" method="POST" onclick="add_to_basket();" name={{product.id}} href="	#">Add to Basket</a></p>
+                <p>stock: {{product.stock}}</p>
                 Description:
                 <p>{{ product.description }}</p>
             </div>
@@ -46,7 +45,6 @@
             </div>
         </div>
     </div>
-<a href="{% url 'addtobasket' product.id %}">Add to Basket</a>
 
 
 {% endblock %}
