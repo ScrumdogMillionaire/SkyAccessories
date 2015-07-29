@@ -79,7 +79,7 @@ public class FindStore extends FragmentActivity {
             if (storeID != null){
                 for (Marker store : storeLocations){
                     if (store.getLocationDescription().equals(storeID)){
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(), store.getLongitude()), 10));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(), store.getLongitude()), 17));
                         break;
                     }
                 }

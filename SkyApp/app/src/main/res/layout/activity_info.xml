@@ -22,4 +22,79 @@
         android:textSize="40sp"
         android:layout_height="wrap_content" />
 
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/accounttitle"
+        android:background="@drawable/reward"/>
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/star"
+        android:background="@drawable/location"/>
+
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/location"
+        android:background="@drawable/account"/>
+
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/user"
+        android:background="@drawable/info"/>
+
+    <ImageView
+        android:id="@+id/padlock"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/info"
+        android:background="@drawable/padlock"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF8E3A"
+        android:text="Use your points to redeem rewards."
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@id/accounttitle"
+        android:layout_toRightOf="@id/star"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF8E3A"
+        android:text="Search for local Sky Stores."
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/star"
+        android:layout_toRightOf="@id/star"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF8E3A"
+        android:text="View and edit your account details."
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/star"
+        android:layout_toRightOf="@id/star"/>
+
 </RelativeLayout>

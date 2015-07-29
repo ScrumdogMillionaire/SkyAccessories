@@ -5,7 +5,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+
+import java.util.UUID;
 
 
 public class RedeemReward extends Activity {
@@ -62,5 +65,23 @@ public class RedeemReward extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendEmail(View v) {
+        Mail m = new Mail("tom.w.lloyd@googlemail.com", "TazAmyS4ndra");
+
+        String randomString = UUID.randomUUID().toString();
+
+        String[] toArr = {"tom.w.lloyd@googlemail.com", "jr397@exeter.ac.uk"};
+        m.setTo(toArr);
+        m.setFrom("vouchers@sky.com");
+        m.setSubject("Your Sky Rewards Voucher");
+        m.setBody("Hi " + User.getInstance().getFirstName() + ", \r\n \r\nHere is your Sky Rewards voucher: \r\n \r\n<b>" + randomString + "</b>\r\n \r\nThe Sky Rewards Team");
+
+        try {
+            m.send();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
