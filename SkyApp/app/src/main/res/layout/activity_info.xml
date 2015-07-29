@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/accounttitle"
+        android:id="@+id/infotitle"
         android:text="Information"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/accounttitle"
+        android:layout_below="@id/infotitle"
         android:background="@drawable/reward"/>
 
     <ImageView
@@ -68,16 +68,18 @@
         android:background="@drawable/padlock"/>
 
     <TextView
+        android:id="@+id/starText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FF8E3A"
         android:text="Use your points to redeem rewards."
         android:layout_marginLeft="20dp"
         android:layout_marginTop="35dp"
-        android:layout_below="@id/accounttitle"
+        android:layout_below="@id/infotitle"
         android:layout_toRightOf="@id/star"/>
 
     <TextView
+        android:id="@+id/locationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FF8E3A"
@@ -88,13 +90,45 @@
         android:layout_toRightOf="@id/star"/>
 
     <TextView
+        android:id="@+id/userText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FF8E3A"
         android:text="View and edit your account details."
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/star"
+        android:layout_below="@id/location"
         android:layout_toRightOf="@id/star"/>
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF8E3A"
+        android:text="Find out more about the app."
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/user"
+        android:layout_toRightOf="@id/star"/>
+
+    <TextView
+        android:id="@+id/logoutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF8E3A"
+        android:text="Log out."
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/info"
+        android:layout_toRightOf="@id/star"/>
+
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ver 1.1.01"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
