@@ -62,6 +62,16 @@ footer.page-footer {
 
 }
 
+
+.divider {
+  background-color: #26a69a;
+}
+
+.col.s6{
+
+	background-color: #fff;
+}
+
 #reg {
 
 	position: absolute; 

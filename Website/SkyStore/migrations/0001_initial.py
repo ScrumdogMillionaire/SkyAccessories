@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 from django.conf import settings
+import django.core.files.storage
 
 
 class Migration(migrations.Migration):
@@ -50,7 +51,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, null=True)),
                 ('description', models.TextField()),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
-                ('product_image', models.ImageField(upload_to=b'')),
+                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/iri03/SkyAccessories/Website/sky/static/'), upload_to=b'images')),
             ],
             options={
                 'db_table': 'product',
