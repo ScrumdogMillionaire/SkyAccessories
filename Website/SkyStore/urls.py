@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from Website.SkyStore.views.OrderListController import OrderListController
+# from Website.SkyStore.views.ApiController import OrderListController
 
 urlpatterns = [
+    url(r'^$', 'SkyStore.views.TestController.home', name='home'),
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
     url(r'^$', 'SkyStore.views.TestController.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
@@ -31,7 +32,12 @@ urlpatterns = [
     url(r'^addtobasket/$', 'SkyStore.views.BasketController.add_to_basket', name="addtobasket"),
     url(r'^removefrombasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.remove_from_basket', name="removefrombasket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
-    url(r'^api/orders/$', OrderListController.as_view()),
+    url(r'^adminpage/', 'SkyStore.views.TestController.adminpage', name="adminpage"),
+    url(r'^addproductpage/', 'SkyStore.views.TestController.addproductpage', name="addproductpage"),
+    url(r'^addproduct/', 'SkyStore.views.TestController.addproduct', name="addproduct"),
+    # url(r'^api/orders/$', OrderListController.as_view()),
+
+    #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
     url(r'^checkout/', 'SkyStore.views.ProductController.checkout', name="checkout"),
     url(r'^revieworder/', 'SkyStore.views.ProductController.review_order', name="revieworder"),

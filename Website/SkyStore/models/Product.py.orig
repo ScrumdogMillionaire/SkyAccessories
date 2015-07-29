@@ -14,11 +14,14 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to="images", storage=fs)
 =======
     product_image = models.ImageField(default=None)
->>>>>>> forms
+#
 
     # Dimensions
     # Weight
     # Brand
+
+    def get_price(self):
+        return self.price
 
     class Meta:
         app_label = 'SkyStore'

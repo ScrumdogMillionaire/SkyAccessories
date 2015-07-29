@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %}Admin Page{% endblock %}
+
+{% block body_block %}
+
+    <div class="row">
+
+      <div class="col s12">
+        <h5>Add Product</h5>
+        <div class="divider"></div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col s12">
+            <div class="card-panel z-depth-0">
+                <form action="/skystore/addproduct/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="productname" autofocus name="productname" placeholder="Product Name" type="text" required>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="input-field col s12">
+                          <select class="browser-default" id="category" name="category">
+                              <option value="" disabled selected>Choose the product category</option>
+                              <option value="Children">Children</option>
+                              <option value="Womens">Womens</option>
+                              <option value="Mens">Mens</option>
+                          </select>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="description" name="description" placeholder="Description" type="text" required>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="price" name="price" placeholder="£00.00" type="text" required>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <input type="file" name="fileinput" id="fileinput">
+                    </div>
+
+                    <button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add
+                      <i class="material-icons right">send</i>
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
