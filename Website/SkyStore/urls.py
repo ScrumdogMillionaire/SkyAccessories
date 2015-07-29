@@ -19,7 +19,7 @@ from Website.SkyStore.views.OrderListController import OrderListController
 
 urlpatterns = [
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
-    url(r'^home/', 'SkyStore.views.TestController.home', name='home'),
+    url(r'^$', 'SkyStore.views.TestController.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', 'SkyStore.views.TestController.register', name='register'),
     url(r'^myaccount/', 'SkyStore.views.TestController.myaccount', name='myaccount'),
