@@ -1,5 +1,6 @@
 package com.bootcamp.skyapp;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -71,6 +72,18 @@ public class FindStore extends FragmentActivity {
 
         try {
             storeLocations = RetrieveJSON.getMarkers();
+
+            Intent pass = getIntent();
+            String storeID = pass.getStringExtra("storeName");
+
+            if (storeID != null){
+                for (Marker store : storeLocations){
+                    if (store.getLocationDescription().equals(storeID)){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(), store.getLongitude()), 10));
+                        break;
+                    }
+                }
+            }
         } catch (Exception e) {
             Toast.makeText(
                     this,
