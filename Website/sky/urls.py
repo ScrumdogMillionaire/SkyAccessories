@@ -23,6 +23,7 @@ from Website.SkyStore.views.ApiController import StoreListController
 from Website.SkyStore.views.ApiController import ProductListController
 from Website.SkyStore.views.ApiController import AuthTokenController
 from Website.SkyStore.views.ApiController import ProcessOrderController
+from Website.SkyStore.views.ApiController import RewardController
 from rest_framework.authtoken import views
 
 
@@ -34,6 +35,7 @@ urlpatterns = [
     url('^api/product/(?P<prod_id>[0-9]+)$', ProductListController.as_view()),
     url(r'^api-auth/', AuthTokenController.as_view()),
     url(r'^api-token-auth/', views.obtain_auth_token),
-    url(r'^api/place-order/', ProcessOrderController.as_view())
+    url(r'^api/place-order/', ProcessOrderController.as_view()),
+    url(r'^api-rewards/', RewardController.as_view()),
 
 ]

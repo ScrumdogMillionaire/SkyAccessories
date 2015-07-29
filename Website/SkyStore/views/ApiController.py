@@ -13,7 +13,11 @@ from serializers import ProductSerializer
 from Website.SkyStore.models.Order import Order
 from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
+from Website.RewardsApp.models import Reward
+# from Website.RewardsApp.models import Reward
 from . import serializers
+import datetime
+
 
 from django.contrib.auth.models import User
 
@@ -69,11 +73,15 @@ class AuthTokenController(APIView):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         user = User.objects.only('id').get(username=user)
+
         user_id = user.id
         email = user.email
         username = user.username
         first_name = user.first_name
         last_name = user.last_name
+
+        reward = Reward.objects.only('id').get(user_id=user.id)
+        reward_points = reward.points
 
         content = {
             'token': unicode(token.key),
@@ -82,6 +90,7 @@ class AuthTokenController(APIView):
             'username': username,
             'first_name': first_name,
             'last_name': last_name,
+            'reward_points': reward_points,
         }
 
         print unicode(user)
@@ -91,14 +100,24 @@ class AuthTokenController(APIView):
 
 class ProcessOrderController(APIView):
 
+    permission_classes = (IsAuthenticated,)
     renderer_classes = (renderers.JSONRenderer,)
 
     def post(self, request):
-
+        print request.data.get('prod_id')
+        curr_time = datetime.datetime.now().strftime("%y-%m-%d")
         product = Product.objects.get(pk=request.data.get('prod_id'))
         customer = User.objects.get(id=request.data.get('user_id'))
-        Order.objects.create(user=customer, price=product.get_price(), status='Order Placed')
+        Order.objects.create(user=customer, price=product.price, status='Order Placed', creation_date=curr_time)
 
         content = [{'status': 'OK'}]
 
         return Response(content)
+
+
+class RewardController(APIView):
+
+    def get(self, request, format='json'):
+        rewards = Reward.objects.all()
+        serialized_reward = OrderSerializer(rewards, many=True)
+        return Response(serialized_reward.data)

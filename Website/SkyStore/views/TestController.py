@@ -2,11 +2,11 @@
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
-from SkyStore.forms.customerForm import Register
-from SkyStore.forms.addressForm import addressRegister
-from SkyStore.forms.addproductForm import AddProductForm
+from Website.SkyStore.forms.customerForm import Register
+from Website.SkyStore.forms.addressForm import addressRegister
+from Website.SkyStore.forms.addproductForm import AddProductForm
 from django.shortcuts import redirect
-from SkyStore.forms.loginForm import Login as loginForm
+from Website.SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
 from django.contrib.auth.models import User

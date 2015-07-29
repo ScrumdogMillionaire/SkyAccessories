@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 
 fs = FileSystemStorage(location=settings.STATIC_ROOT)
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
     description = models.TextField()
@@ -14,6 +15,7 @@ class Product(models.Model):
     # Dimensions
     # Weight
     # Brand
+
     class Meta:
         app_label = 'SkyStore'
         db_table = 'product'
