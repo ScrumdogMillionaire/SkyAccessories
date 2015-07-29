@@ -6,9 +6,46 @@
 
 {% block body_block %}
 
-	{{product.name}}
+    <div class="row">
 
-	<img src="{{ product.image.url }}">
+      <div class="col s12">
+        <h5>{{product.name}}</h5>
+        <div class="divider"></div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col s4">
+            <div class="card-panel z-depth-0">
+                <img src="{%  static 'assets/Sky_logo_2014_small.png' %}"/>
+            </div>
+        </div>
+        <div class="col s8">
+
+            <div class="card-panel z-depth-0">
+                <span class="red-text">£{{ product.price }}</span>
+                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket
+
+        </button></p>
+                Description:
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col s12">
+            <h5>Customer Reviews</h5>
+            <div class="divider"></div>
+            <div class="card-panel z-depth-0">
+                Reviews
+            </div>
+        </div>
+    </div>
 <a href="{% url 'addtobasket' product.id %}">Add to Basket</a>
 
 

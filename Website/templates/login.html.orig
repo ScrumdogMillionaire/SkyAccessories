@@ -27,7 +27,11 @@
           </div>
         </div>
 
+<<<<<<< HEAD
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+=======
         <button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Submit
+>>>>>>> c903519220e799343ae9648c6ce38929ef2bee3a
           <i class="material-icons right">send</i>
         </button>
 

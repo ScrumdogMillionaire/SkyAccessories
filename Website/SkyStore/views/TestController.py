@@ -30,7 +30,7 @@ def productlist(request):
 
 def login(request):
     formLogin = loginForm()
-    return render(request, "login.html", {'formLogin': formLogin})
+    return render(request, "login.html", {})
 
 def basket(request):
     return render(request, "basket.html", {})

@@ -18,23 +18,23 @@ from django.contrib import admin
 from Website.SkyStore.views.OrderListController import OrderListController
 
 urlpatterns = [
+    url(r'^$', 'SkyStore.views.AccountController.home', name='home'),
     url(r'^index/', 'SkyStore.views.TestController.index', name='index'),
-    url(r'^home/', 'SkyStore.views.TestController.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', 'SkyStore.views.TestController.register', name='register'),
     url(r'^myaccount/', 'SkyStore.views.TestController.myaccount', name='myaccount'),
     url(r'^login/', 'SkyStore.views.TestController.login', name="login"),
     url(r'^loginuser/', 'SkyStore.views.TestController.loginuser', name="loginuser"),
     url(r'^logout/', 'SkyStore.views.TestController.logout_view', name="logout"),
-    url(r'^accountsettings/', 'SkyStore.views.AccountController.accountsettings', name="accountsettings"),
-    url(r'^basket/', 'SkyStore.views.BasketController.basket', name="basket"),
-    url(r'^addtobasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.add_to_basket', name="addtobasket"),
-    url(r'^removefrombasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.remove_from_basket', name="removefrombasket"),
+    url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
+    url(r'^basket/', 'SkyStore.views.TestController.basket', name="basket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
     url(r'^api/orders/$', OrderListController.as_view()),
-    url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
 
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
+<<<<<<< HEAD
+=======
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
+>>>>>>> c903519220e799343ae9648c6ce38929ef2bee3a
     url(r'^product/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),
 ]
