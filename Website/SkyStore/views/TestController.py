@@ -9,7 +9,7 @@ from SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
 from django.contrib.auth.models import User
-# from SkyStore.models import Product
+from Website.SkyStore.models.Product import Product
 
 from django.contrib.auth import logout
 
@@ -18,7 +18,8 @@ def logout_view(request):
     return redirect('/skystore/')
 
 def home(request):
-    return render(request, "home.html", {})
+    products = Product.objects.all()[:8]
+    return render(request, "home.html", {'products' : products})
 
 def index(request):
     return render(request, "base.html", {})
