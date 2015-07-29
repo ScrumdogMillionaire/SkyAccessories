@@ -1,12 +1,14 @@
 package com.bootcamp.skyapp;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.UUID;
 
@@ -18,30 +20,36 @@ public class RedeemReward extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redeem_reward);
 
+        String fontPath = "skymed.ttf";
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+
+        TextView title = (TextView) findViewById(R.id.accounttitle);
+        title.setTypeface(tf);
+
         int points = User.getInstance().getPoints();
 
         if (points < 1000){
             Button reward1 = (Button) findViewById(R.id.button1);
             reward1.setClickable(false);
-            reward1.setBackgroundResource(R.drawable.pause);// TODO: change pause drawable to grey image (square icons)
+            reward1.setBackgroundResource(R.drawable.freefilmg);// TODO: change pause drawable to grey image (square icons)
         }
 
         if (points < 2000){
             Button reward2 = (Button) findViewById(R.id.button2);
             reward2.setClickable(false);
-            reward2.setBackgroundResource(R.drawable.pause);
+            reward2.setBackgroundResource(R.drawable.nowtvg);
         }
 
         if (points < 3000){
             Button reward3 = (Button) findViewById(R.id.button3);
             reward3.setClickable(false);
-            reward3.setBackgroundResource(R.drawable.pause);
+            reward3.setBackgroundResource(R.drawable.sportg);
         }
 
         if (points < 4000){
             Button reward4 = (Button) findViewById(R.id.button4);
             reward4.setClickable(false);
-            reward4.setBackgroundResource(R.drawable.pause);
+            reward4.setBackgroundResource(R.drawable.giftcardg);
         }
     }
 
