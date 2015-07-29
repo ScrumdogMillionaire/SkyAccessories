@@ -56,7 +56,7 @@ public class BuyProductNFC extends Activity {
                 }
 
                 ImageView productPicture = (ImageView) findViewById(R.id.productPicture);
-                new ImageDownloader(productPicture).execute("http://192.168.1.2:3001/" + watch.getPictureURL());
+                new ImageDownloader(productPicture).execute(getString(R.string.ip) + watch.getPictureURL());
 
                 FileInputStream fis = null;
 
@@ -72,7 +72,7 @@ public class BuyProductNFC extends Activity {
 
                     Log.d("It all worked", User.getInstance().getPoints() + "");
 
-                    RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId);
+                    RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId, this);
 
                     Toast.makeText(
                             this,
@@ -114,7 +114,7 @@ public class BuyProductNFC extends Activity {
     }
 
     private void loadProduct(String payloadString){
-        watch = RetrieveJSON.getProduct(Integer.parseInt(payloadString));
+        watch = RetrieveJSON.getProduct(Integer.parseInt(payloadString), this);
 
         //TODO change gui
     }

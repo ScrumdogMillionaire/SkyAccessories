@@ -1,5 +1,6 @@
 package com.bootcamp.skyapp;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -80,11 +81,11 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
 
     }
 
-    public static ArrayList<Marker> getMarkers() {
+    public static ArrayList<Marker> getMarkers(Context ctx) {
         JSONArray jarry = new JSONArray();
         ArrayList<Marker> markers = new ArrayList<Marker>();
 
-        //AsyncTask task = new RetrieveJSON().execute("http://192.168.1.14:3001/api/stores/");
+        //AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "api/stores/");
         AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/markers");
 
         try {
@@ -108,12 +109,12 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
         return markers;
     }
 
-    public static Product getProduct(int productID){
+    public static Product getProduct(int productID, Context ctx){
         JSONArray jarry = new JSONArray();
         Product watch = new Product("", "");
 
-        //AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
-        AsyncTask task = new RetrieveJSON().execute("http://192.168.1.2:3001/api/product/"+productID);
+        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
+        //AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "api/product/"+productID);
 
         try {
             jarry = (JSONArray) task.get();

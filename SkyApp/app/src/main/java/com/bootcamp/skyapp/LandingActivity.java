@@ -85,13 +85,15 @@ public class LandingActivity extends Activity {
     public void loadMenu(View v){
 
         try {
-            RetrieveJSONPost.tryLogin(user.getText().toString(), pass.getText().toString());
+            //RetrieveJSONPost.tryLogin(user.getText().toString(), pass.getText().toString(), this);
 
             FileOutputStream fos = openFileOutput("userstate", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(User.getInstance());
             os.close();
             fos.close();
+
+            User.makeUser("abc", "1", 2001, "bob@sky.com", "bob89", "Bob", "McNaughton");
 
             Intent resultIntent = new Intent(this, MainMenu.class);
             startActivity(resultIntent);

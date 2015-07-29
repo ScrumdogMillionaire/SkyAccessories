@@ -40,7 +40,7 @@ public class GeofenceService extends Service implements GoogleApiClient.Connecti
         buildGoogleApiClient();
 
         try {
-            ArrayList<Marker> storeLocations = RetrieveJSON.getMarkers();
+            ArrayList<Marker> storeLocations = RetrieveJSON.getMarkers(this);
             populateGeofences(storeLocations);
         } catch (Exception e) {
             Toast.makeText(

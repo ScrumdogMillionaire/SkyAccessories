@@ -71,7 +71,7 @@ public class FindStore extends FragmentActivity {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(54.437499, -2.384573), 6));
 
         try {
-            storeLocations = RetrieveJSON.getMarkers();
+            storeLocations = RetrieveJSON.getMarkers(this);
 
             Intent pass = getIntent();
             String storeID = pass.getStringExtra("storeName");

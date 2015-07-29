@@ -1,5 +1,6 @@
 package com.bootcamp.skyapp;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -89,10 +90,10 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
 
     }
 
-    public static void tryLogin(String user, String password) throws Exception {
+    public static void tryLogin(String user, String password, Context ctx) throws Exception {
         JSONArray jarry = new JSONArray();
 
-        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api-auth/", "email_or_username", user, "password", password, null);
+        AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "api-auth/", "email_or_username", user, "password", password, null);
 
         jarry = (JSONArray) task.get();
 
@@ -111,7 +112,7 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
 
     }
 
-    public static void placeOrder(String token, String userID, String productID) {
-        AsyncTask task = new RetrieveJSONPost().execute("http://192.168.1.2:3001/api/place-order/", "user_id", userID, "prod_id", productID, token);
+    public static void placeOrder(String token, String userID, String productID, Context ctx) {
+        //AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "api/place-order/", "user_id", userID, "prod_id", productID, token);
     }
 }
