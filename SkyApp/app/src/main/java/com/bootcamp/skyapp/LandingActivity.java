@@ -25,6 +25,10 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -82,6 +86,21 @@ public class LandingActivity extends Activity {
 
         try {
             RetrieveJSONPost.tryLogin(user.getText().toString(), pass.getText().toString());
+
+            FileOutputStream fos = openFileOutput("userstate", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(User.getInstance());
+            os.close();
+            fos.close();
+
+            FileInputStream fis = openFileInput("userstate");
+            ObjectInputStream is = new ObjectInputStream(fis);
+            User restoredUser = (User) is.readObject();
+            is.close();
+            fis.close();
+
+            Log.d("user first name", restoredUser.getFirstName());
+
             Intent resultIntent = new Intent(this, MainMenu.class);
             startActivity(resultIntent);
         } catch (Exception e) {

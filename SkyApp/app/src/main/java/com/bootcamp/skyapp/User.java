@@ -1,9 +1,11 @@
 package com.bootcamp.skyapp;
 
+import java.io.Serializable;
+
 /**
  * Created by tll01 on 29/07/2015.
  */
-public class User {
+public class User implements Serializable {
     private String token;
     private String id;
     private int points;
