@@ -29,8 +29,11 @@ urlpatterns = [
     url(r'^accountsettings/', 'SkyStore.views.TestController.accountsettings', name="accountsettings"),
     url(r'^basket/', 'SkyStore.views.TestController.basket', name="basket"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
+    url(r'^adminpage/', 'SkyStore.views.TestController.adminpage', name="adminpage"),
+    url(r'^addproduct/', 'SkyStore.views.TestController.addproduct', name="addproduct"),
     # url(r'^api/orders/$', OrderListController.as_view()),
-    # url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
+
+    #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
     url(r'^product/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),
 ]

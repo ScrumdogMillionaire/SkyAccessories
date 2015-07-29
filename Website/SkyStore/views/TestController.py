@@ -4,11 +4,15 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from SkyStore.forms.customerForm import Register
 from SkyStore.forms.addressForm import addressRegister
+from SkyStore.forms.addproductForm import AddProductForm
 from django.shortcuts import redirect
 from SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
 from django.contrib.auth.models import User
+
+from Website.SkyStore.models.Product import Product
+
 # from SkyStore.models import Product
 
 from django.contrib.auth import logout
@@ -38,6 +42,34 @@ def basket(request):
 
 def productlist(request):
     return render(request, "productlist.html", {})
+
+def adminpage(request):
+    return render(request, "adminpage.html", {})
+
+def addproduct(request):
+    if request.method == "POST":
+
+        form = AddProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            if handle_uploaded_file(request.FILES['fileinput'], request.POST.get('productname')) == 0:
+                image_path = 'SkyStore/uploaded/' + request.POST.get('productname')
+                Product.objects.create(name=request.POST.get('productname'), description=request.POST.get('description'), price=request.POST.get('price'), product_image=image_path)
+                return render(request, "adminpage.html")
+    else:
+        form = AddProductForm()
+    return render(request, "addproduct.html", {'form': form})
+
+
+def handle_uploaded_file(f, prod_name):
+    with open('SkyStore/uploaded/' + prod_name + '.jpeg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+    return 0
+
+def addimage(request):
+    return render(request, "addproduct.html", {})
 
 def myaccount(request):
     if request.method == "POST":
