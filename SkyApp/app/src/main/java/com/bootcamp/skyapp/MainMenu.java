@@ -30,6 +30,11 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.ogaclejapan.arclayout.ArcLayout;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -197,6 +202,18 @@ public class MainMenu extends Activity {
 
     public void loadActivity(Class<?> activity) {
         Intent resultIntent = new Intent(this, activity);
+
+        if (activity == LandingActivity.class){ //Logout
+            resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            try {
+                //Opens and closes user login status (/Empties file)
+                openFileOutput("userstate", Context.MODE_PRIVATE).close();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
         startActivity(resultIntent);
     }
 }
