@@ -18,16 +18,16 @@
     <div class="row">
 
         <div class="col s4">
-            <div class="card-panel z-depth-0">
-                <img src="{{ product.product_image }}"/>
+            <div class="card-image z-depth-0">
+                <img src="/{{ product.product_image }}"/>
             </div>
         </div>
         <div class="col s8">
 
             <div class="card-panel z-depth-0">
                 <span class="red-text">£{{ product.price }}</span>
-                <p><a class="addbasket" method="POST" onclick="add_to_basket();" name={{product.id}} href="	#">Add to Basket</a></p>
-                <p>stock: {{product.stock}}</p>
+                <p><a class="addbasket btn z-depth-0" method="POST" onclick="add_to_basket();" name={{product.id}} href="	#">Add to Basket</a></p>
+                <p>Stock: {{product.stock}}</p>
                 Description:
 
 

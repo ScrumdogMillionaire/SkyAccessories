@@ -4,8 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-def accountsettings(request):
-    return render(request, "accountsettings.html", {})
+
 
 
 # def create_login(request):
