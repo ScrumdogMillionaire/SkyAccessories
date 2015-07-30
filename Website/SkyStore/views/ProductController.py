@@ -8,6 +8,7 @@ from django.db.models import Q
 from datetime import date, timedelta
 from django.db import OperationalError
 import requests
+from Website.RewardsApp.models import Reward
 
 
 def product_handler(request, product_id):
@@ -127,6 +128,9 @@ def successful_order(request):
                 i.save()
                 print "i", i
         request.session['basket'] = []
+        rewards = Reward.objects.get(user_id = request.user)
+        rewards.points += order.price*10
+        rewards.save()
 
         send_simple_message(request.user, order)
 
@@ -165,10 +169,36 @@ def get_basket_price(basket):
     return price
 
 def send_simple_message(customer, order):
-   return requests.post(
+    order_string = "Hi "+ customer.username+ ",\nYour order has been successfully placed.\nDate Order Placed: "+ str(order.creation_date) +"\nDelivery Date: "+ str(order.expected_delivery_date) +"\n"
+    product_items = order.productitem_set.all()
+    order.products = []
+    for product_item in product_items:
+        print product_item.id
+        product = Product.objects.get(pk=product_item.product_id)
+
+        if product not in order.products:
+            product.quantity = 1
+            order.products.append(product)
+        else:
+            order.products[order.products.index(product)].quantity += 1
+    for i in order.products:
+        order_string += "Name: "+ i.name + " : "+ unichr(163) + str(i.price) + "\n"
+    order_string += "______________________\n"
+    order_string += "Total cost: "+ unichr(163) + str(order.price)+"\n"
+    order_string += "______________________\n\n"
+    order_string += "Delivery Address:\n"
+    address = get_delivery_address(customer)
+    order_string += address.street_line1 +"\n"
+    order_string += address.street_line2 +"\n"
+    order_string += address.city +"\n"
+    order_string += address.county +"\n"
+    order_string += address.postcode +"\n\n"
+    order_string+= "Thanks for your order."
+
+    return requests.post(
        "https://api.mailgun.net/v3/sandbox2247e4430337465194da28f52b4e090b.mailgun.org/messages",
        auth=("api", "key-49ea010ba13f50e4b7c9bc12e258132b"),
        data={"from": "Mailgun Sandbox <postmaster@sandbox2247e4430337465194da28f52b4e090b.mailgun.org>",
              "to": customer.username+ " <"+customer.email+">",
              "subject": "Your order has been confirmed",
-             "text": "Put order here"})
+             "text": order_string})

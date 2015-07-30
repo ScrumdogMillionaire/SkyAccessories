@@ -96,11 +96,15 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         email_or_username = attrs.get('email_or_username')
         password = attrs.get('password')
 
+        print email_or_username
+        print password
+
         if email_or_username and password:
             user = authenticate(username=email_or_username, password=password)
-            print user
+            print "HELLO",user
             if user:
                 if not user.is_active:
+                    print "User is not active"
                     msg = 'User account is disabled.'
                     raise exceptions.ValidationError(msg)
             else:
@@ -109,6 +113,7 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         else:
             msg = 'Must include "email or username" and "password"'
             raise exceptions.ValidationError(msg)
-
+        print "end of function"
         attrs['user'] = user
+        print "attrs:", attrs
         return attrs

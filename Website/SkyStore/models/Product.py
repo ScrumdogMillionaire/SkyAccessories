@@ -20,7 +20,7 @@ class Product(models.Model):
     # Brand
 
     def get_product_stock_level(self):
-        return len(Product.objects.all())
+        return len(self.productitem_set.filter(status="not_ordered"))
 
     @property
     def available(self):

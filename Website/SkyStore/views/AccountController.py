@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from Website.SkyStore.models.Product import Product
 from Website.SkyStore.models.Address import Address
+from Website.RewardsApp.models import Reward
+
 
 def accountsettings(request):
     if request.user.is_authenticated:
@@ -28,8 +30,10 @@ def accountsettings(request):
 
             print "Orders", orders
             delivery_address = get_delivery_address(request.user)
+            reward_points = Reward.objects.get(user_id=request.user.id)
+
             return render(request, "accountsettings.html", {'orders': orders, 'delivery_address': delivery_address,
-                                                            'address_updated': address_changed})
+                                                            'address_updated': address_changed, 'reward_points':reward_points})
         return render(request, "accountsettings.html", {})
     return render(request, "home.html", {})
 

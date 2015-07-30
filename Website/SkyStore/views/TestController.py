@@ -18,6 +18,7 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from Website.SkyStore.models.ProductItem import ProductItem
 from Website.SkyStore.models.Address import Address
+from Website.RewardsApp.models import Reward
 
 
 # from SkyStore.models import Product
@@ -85,10 +86,11 @@ def accountsettings(request):
 
 def addproduct(request):
 
+
     if request.method == "POST":
 
         form = AddProductForm(request.POST, request.FILES)
-
+        print request.POST
         if form.is_valid():
             print 'valid'
             if handle_uploaded_file(request.FILES['fileinput'], request.POST.get('productname')) == 0:
@@ -116,10 +118,12 @@ def myaccount(request):
     if request.method == "POST":
         print "post"
         # Save Customer
-        username = request.POST['username']
+        username = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
         email = request.POST['email']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
 
         dupeUsername = User.objects.filter(username=username)
         if len(dupeUsername) > 0:
@@ -132,11 +136,12 @@ def myaccount(request):
         if confirm_password != password:
             return render(request, "register.html", {'passwordError' : 'Passwords do not match'})
 
-        user = User.objects.create_user(username=username, email=email)
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name)
         # Hash the password
         user.set_password(password)
         user.save()
         print "User:", user
+        rewards = Reward.objects.create(points=100, user=user)
 
         # Save Address
         line1 = request.POST['line1']
@@ -155,8 +160,8 @@ def myaccount(request):
         user = authenticate(username=username, password=password)
         auth_login(request, user)
 
-        return render(request, "accountsettings.html", {})
-    return render(request, "accountsettings.html", {})
+        return home(request)
+    return home(request)
 
 def register(request):
     addressform = addressRegister()

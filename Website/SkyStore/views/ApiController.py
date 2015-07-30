@@ -15,6 +15,7 @@ from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
 from Website.RewardsApp.models import Reward
 # from Website.RewardsApp.models import Reward
+from PIL import Image
 from . import serializers
 from datetime import date, timedelta
 
@@ -23,6 +24,7 @@ from django.contrib.auth.models import User
 
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+import requests
 
 
 class OrderListController(APIView):
@@ -52,8 +54,13 @@ class ProductListController(APIView):
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        # product.product_image = str(product.product_image).replace("static/media/"," ")
+        # image = Image(product.product_image)
+        # product.product_image = image
+        # print image
+        print product.product_image
         serialized_product = ProductSerializer(product)
-
+        print serialized_product.data
         return Response([serialized_product.data])
 
 
@@ -108,10 +115,15 @@ class ProcessOrderController(APIView):
         product = Product.objects.get(pk=request.data.get('prod_id'))
         customer = User.objects.get(id=request.data.get('user_id'))
         reward = customer.user_reward
-        reward.decrement_points(product.price*100)
+        reward.decrement_points(product.price*10)
         reward.save()
-        Order.objects.create(user=customer, price=product.price, status='Order Placed', creation_date=date.today(), expected_delivery_date=timedelta(days=3)+date.today())
+        order = Order.objects.create(user=customer, price=product.price, status='Order Placed', creation_date=date.today(), expected_delivery_date=timedelta(days=3)+date.today())
+        product_item = product.productitem_set.filter(status="not_ordered")[0]
+        product_item.status = "ordered"
+        product_item.order = order
+        product_item.save()
 
+        send_simple_message(request.user, order)
         content = [{'status': 'OK'}]
 
         return Response(content)
@@ -137,3 +149,41 @@ class RewardController(APIView):
 
         return Response(content)
 
+
+def send_simple_message(customer, order):
+    order_string = "Hi "+ customer.username+ ",\nYour order has been successfully placed.\nDate Order Placed: "+ str(order.creation_date) +"\nDelivery Date: "+ str(order.expected_delivery_date) +"\n"
+    product_items = order.productitem_set.all()
+    order.products = []
+    for product_item in product_items:
+        print product_item.id
+        product = Product.objects.get(pk=product_item.product_id)
+
+        if product not in order.products:
+            product.quantity = 1
+            order.products.append(product)
+        else:
+            order.products[order.products.index(product)].quantity += 1
+    for i in order.products:
+        order_string += "Name: "+ i.name + " : "+ unichr(163) + str(i.price) + "\n"
+    order_string += "______________________\n"
+    order_string += "Total cost: "+ unichr(163) + str(order.price)+"\n"
+    order_string += "______________________\n\n"
+    order_string += "Delivery Address:\n"
+    address = get_delivery_address(customer)
+    order_string += address.street_line1 +"\n"
+    order_string += address.street_line2 +"\n"
+    order_string += address.city +"\n"
+    order_string += address.county +"\n"
+    order_string += address.postcode +"\n\n"
+    order_string+= "Thanks for your order."
+
+    return requests.post(
+       "https://api.mailgun.net/v3/sandbox2247e4430337465194da28f52b4e090b.mailgun.org/messages",
+       auth=("api", "key-49ea010ba13f50e4b7c9bc12e258132b"),
+       data={"from": "Mailgun Sandbox <postmaster@sandbox2247e4430337465194da28f52b4e090b.mailgun.org>",
+             "to": customer.username+ " <"+customer.email+">",
+             "subject": "Your order has been confirmed",
+             "text": order_string})
+
+def get_delivery_address(user):
+    return user.address.filter(address_type='default').all()[0]

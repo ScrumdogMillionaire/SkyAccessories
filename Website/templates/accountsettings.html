@@ -7,7 +7,7 @@
     <ul class="tabs">
         <!-- NOTE: Indicator color in .tabs .indicator -->
         <li class="tab col s3"><a class="active blue-grey-text text-darken-4" href="#test1">Settings</a></li>
-        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test2">Payment</a></li>
+        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test2">Reward Points</a></li>
         <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test3">Orders</a></li>
     </ul>
  <!-- General Settings -->
@@ -24,7 +24,10 @@
         </div>
     <!-- Payment Settings-->
     <div id="test2" class="col s12">
-        <div class="card-panel z-depth-0">Payment Settings</div>
+        <div class="card-panel z-depth-0">
+            <p>Current Reward Points: {{reward_points.points}}</p>
+        </div>
+
     </div>
 
 
