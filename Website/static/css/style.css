@@ -26,6 +26,10 @@ footer.page-footer {
 	/*margin-top: 20px; */
 }
 
+#idpc_dropdown {
+	display: inherit;
+}
+
 #drop-search {
 	display:  none;
 	padding-left: 20px;

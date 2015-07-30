@@ -1,0 +1,32 @@
+{%  extends 'base.html' %}
+
+{%  load static from staticfiles %}
+
+{% block title %}Sky Accessories{% endblock %}
+
+{% block body_block %}
+
+    <div class="col s12 offset-m2 m8 offset-l3 l6">
+        <div class="card-panel z-depth-0">
+            <div class="row center">
+                <div class="col s12"><h5>Sign Up Here!</h5></div>
+                <div class="col s12 m4 l2"><p></p></div>
+                <div class="col s12 m4 l8"><p></p>
+                    <form action="/skystore/myaccount/" method="POST" name="register">{% csrf_token %}
+                        {{ customerform.as_p }}
+                        {{ addressform.as_p }}
+<<<<<<< HEAD
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Sign up
+                          <i class="material-icons">send</i>
+                        </button>
+=======
+                        <input type="submit" value="Register">
+>>>>>>> forms
+                    </form>
+                </div>
+                <div class="col s12 m4 l2"><p></p></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
