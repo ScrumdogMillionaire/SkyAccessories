@@ -16,7 +16,7 @@ from Website.SkyStore.models.Product import Product
 from Website.RewardsApp.models import Reward
 # from Website.RewardsApp.models import Reward
 from . import serializers
-import datetime
+from datetime import date, timedelta
 
 
 from django.contrib.auth.models import User
@@ -53,6 +53,7 @@ class ProductListController(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serialized_product = ProductSerializer(product)
+
         return Response([serialized_product.data])
 
 
@@ -93,8 +94,6 @@ class AuthTokenController(APIView):
             'reward_points': reward_points,
         }
 
-        print unicode(user)
-        print content
         return Response([content])
 
 
@@ -108,7 +107,10 @@ class ProcessOrderController(APIView):
         # curr_time = datetime.datetime.now().strftime("%y-%m-%d")
         product = Product.objects.get(pk=request.data.get('prod_id'))
         customer = User.objects.get(id=request.data.get('user_id'))
-        Order.objects.create(user=customer, price=product.price, status='Order Placed')
+        reward = customer.user_reward
+        reward.decrement_points(product.price*100)
+        reward.save()
+        Order.objects.create(user=customer, price=product.price, status='Order Placed', creation_date=date.today(), expected_delivery_date=timedelta(days=3)+date.today())
 
         content = [{'status': 'OK'}]
 
@@ -121,3 +123,17 @@ class RewardController(APIView):
         rewards = Reward.objects.all()
         serialized_reward = OrderSerializer(rewards, many=True)
         return Response(serialized_reward.data)
+
+    def post(self, request, format='json'):
+
+        permission_classes = (IsAuthenticated,)
+        points = request.data.get('points')
+
+        reward = Reward.objects.get(user_id=request.data.get('user_id'))
+        reward.decrement_points(decrement=int(points))
+        reward.save()
+
+        content = [{'status': 'OK'}]
+
+        return Response(content)
+

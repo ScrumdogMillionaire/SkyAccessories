@@ -83,7 +83,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'price',
-            'product_image'
+            'product_image',
+            'available',
         )
 
 

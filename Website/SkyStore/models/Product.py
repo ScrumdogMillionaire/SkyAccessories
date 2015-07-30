@@ -16,6 +16,13 @@ class Product(models.Model):
     # Weight
     # Brand
 
+    def get_product_stock_level(self):
+        return len(Product.objects.all())
+
+    @property
+    def available(self):
+        return self.get_product_stock_level() > 0
+
     class Meta:
         app_label = 'SkyStore'
         db_table = 'product'

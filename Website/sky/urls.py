@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api/place-order/', ProcessOrderController.as_view()),
     url(r'^api-rewards/', RewardController.as_view()),
+    url(r'^api/reward/update/', RewardController.as_view()),
 
 ]
 

@@ -19,7 +19,7 @@ class Reward(models.Model):
         return self.points
 
     def decrement_points(self, decrement):
-        self.points = self.points - decrement
+        self.points = self.points + decrement
 
     def get_cash_equivalent(self):
         return self.points/100
