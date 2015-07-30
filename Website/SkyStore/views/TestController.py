@@ -2,16 +2,20 @@
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
-from SkyStore.forms.customerForm import Register
-from SkyStore.forms.addressForm import addressRegister
-from SkyStore.forms.addproductForm import AddProductForm
+from Website.SkyStore.forms.customerForm import Register
+from Website.SkyStore.forms.addressForm import addressRegister
+from Website.SkyStore.forms.addproductForm import AddProductForm
 from django.shortcuts import redirect
-from SkyStore.forms.loginForm import Login as loginForm
+from Website.SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
 from django.contrib.auth.models import User
 from Website.SkyStore.models.Order import Order
 from Website.SkyStore.models.Product import Product
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 from Website.SkyStore.models.ProductItem import ProductItem
 from Website.SkyStore.models.Address import Address
 
@@ -159,6 +163,7 @@ def register(request):
     customerform = Register()
     return render(request, "register.html", {'customerform': customerform, 'addressform': addressform})
 
+
 def loginuser(request):
     # Data must be cleaned before passing
     # authenticated_user = authenticate(username=username, password=password)
@@ -183,6 +188,12 @@ def loginuser(request):
     else:
         return render(request, "login.html", {'error' : 'Invalid login information'})
 
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 # Return all the products in the database

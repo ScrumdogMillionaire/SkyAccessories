@@ -6,9 +6,19 @@ from django.contrib.auth.models import User
 from Website.SkyStore.models.Address import Address
 from Website.SkyStore.models.Store import Store
 from Website.SkyStore.models.Product import Product
+from Website.RewardsApp.models import Reward
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.core import exceptions
+
+
+class RewardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Reward
+        fields = (
+            'points'
+        )
 
 
 class AddressSerializer(serializers.ModelSerializer):
@@ -23,6 +33,7 @@ class AddressSerializer(serializers.ModelSerializer):
 class CustomerSerializer(serializers.ModelSerializer):
 
     address = serializers.StringRelatedField(many=True)
+    user_reward = serializers.PrimaryKeyRelatedField(read_only=True)
     # addresses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
@@ -30,7 +41,8 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'email',
-            'address'
+            'address',
+            'user_reward',
         )
 
 
@@ -71,7 +83,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'price',
-            'product_image'
+            'product_image',
+            'available',
         )
 
 
@@ -84,7 +97,6 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email_or_username and password:
-
             user = authenticate(username=email_or_username, password=password)
             print user
             if user:
