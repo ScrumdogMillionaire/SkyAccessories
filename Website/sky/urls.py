@@ -26,6 +26,9 @@ from Website.SkyStore.views.ApiController import ProcessOrderController
 from Website.SkyStore.views.ApiController import RewardController
 from rest_framework.authtoken import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
 
@@ -39,3 +42,5 @@ urlpatterns = [
     url(r'^api-rewards/', RewardController.as_view()),
 
 ]
+
+urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

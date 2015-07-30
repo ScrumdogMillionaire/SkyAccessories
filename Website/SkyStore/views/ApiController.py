@@ -53,7 +53,7 @@ class ProductListController(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serialized_product = ProductSerializer(product)
-        return Response(serialized_product.data)
+        return Response([serialized_product.data])
 
 
 class AuthTokenController(APIView):
@@ -105,10 +105,10 @@ class ProcessOrderController(APIView):
 
     def post(self, request):
         print request.data.get('prod_id')
-        curr_time = datetime.datetime.now().strftime("%y-%m-%d")
+        # curr_time = datetime.datetime.now().strftime("%y-%m-%d")
         product = Product.objects.get(pk=request.data.get('prod_id'))
         customer = User.objects.get(id=request.data.get('user_id'))
-        Order.objects.create(user=customer, price=product.price, status='Order Placed', creation_date=curr_time)
+        Order.objects.create(user=customer, price=product.price, status='Order Placed')
 
         content = [{'status': 'OK'}]
 
