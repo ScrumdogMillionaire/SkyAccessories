@@ -48,11 +48,13 @@
 
 					<!-- Sky Home Button-->
 
-					<a href="/skystore/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/logo1.png' %}"/></a>
-
 					<!-- Menu Icon-->
 
-					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="right" data-tooltip="Menu"><i class="material-icons prefix blue-grey-text text-darken-4">menu</i></a>
+					<a href="#" data-activates="side-menu" class="button-collapse tooltipped" data-position="bottom" data-tooltip="Menu">
+                        <i class="material-icons blue-grey-text text-darken-4 right">menu
+                            <img class="responsive-img" src="{%  static 'assets/skylogo1.jpg' %}"/>
+                        </i>
+                    </a>
 
 					<!-- Navigation on the right -->
 
@@ -88,7 +90,7 @@
 						<li>
 							<!-- Shopping Cart -->
 							<a href="/skystore/basket/" class="blue-grey-text text-darken-4">
-								<i class="material-icons blue-grey-text text-darken-4 right">shopping_cart</i>
+								<i class="material-icons blue-grey-text text-darken-4 right">shopping_basket</i>
 								{%if request.session.basket == None%}
 								<span id="basket_number">Basket (0)</span>
 								{% else %}
@@ -101,6 +103,9 @@
 					<!-- Side Navigation-->
 
 					<ul class="side-nav" id="side-menu">
+
+                        <li><a href="/skystore/" class="blue-grey-text text-darken-4">Home</a></li>
+
                         <li class="no-padding">
 
                             <ul class="collapsible" data-collapsible="accordion">

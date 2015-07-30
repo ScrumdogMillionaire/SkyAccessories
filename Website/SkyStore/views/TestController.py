@@ -74,6 +74,11 @@ def adminpage(request):
         product.quantity = len(product.productitem_set.filter(status="not_ordered"))
     return render(request, "adminpage.html", {'products': products, 'orders': orders})
 
+def accountsettings(request):
+    useraddress = Address.objects.all()
+    print useraddress
+    return render(request, "accountsettings.html", {'useraddress': useraddress})
+
 def addproduct(request):
 
     if request.method == "POST":
@@ -83,7 +88,7 @@ def addproduct(request):
         if form.is_valid():
             print 'valid'
             if handle_uploaded_file(request.FILES['fileinput'], request.POST.get('productname')) == 0:
-                image_path = 'SkyStore/uploaded/' + request.POST.get('productname') + '.jpg'
+                image_path = 'static/media/' + request.POST.get('productname') + '.jpg'
                 Product.objects.create(name=request.POST.get('productname'), category=request.POST.get('category'), description=request.POST.get('description'), price=request.POST.get('price'), product_image=image_path)
                 return redirect("/skystore/adminpage/")
     else:
@@ -94,7 +99,7 @@ def addproductpage(request):
     return render(request, "addproduct.html", {})
 
 def handle_uploaded_file(f, prod_name):
-    with open('SkyStore/uploaded/' + prod_name + '.jpeg', 'wb+') as destination:
+    with open('static/media/' + prod_name + '.jpg', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
