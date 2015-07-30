@@ -61,7 +61,7 @@ def checkout(request):
             return render(request, "checkout.html", {'delivery_address': delivery_address})
     else:
 
-        return render(request, "checkout.html")
+        return render(request, "login.html")
 
 def review_order(request):
     if request.method == "POST":

@@ -13,12 +13,13 @@
     <ul class="tabs">
         <!-- NOTE: Indicator color in .tabs .indicator -->
         <li class="tab col s3"><a class="active blue-grey-text text-darken-4" href="#test1">Product</a></li>
-        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test2">Users</a></li>
-        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test3">Orders</a></li>
+        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test2">Orders</a></li>
+        <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test3">Users</a></li>
     </ul>
 
     <div id="test1">
     <div class="row">
+
         <div class="col s4">
             <div class="card-panel z-depth-0">
                 <a href="/skystore/addproductpage/">+ Add Product</a>
@@ -28,14 +29,16 @@
         <div class="col s8">
             <div class="card-panel z-depth-0">
                 <h5>Products in Database:</h5>
+
                 <form method="POST" action="/skystore/adminpage/">{% csrf_token %}
                 <ul>
                     {% for product in products %}
-                    <div class="input-field col s7">
-                    <input value="{{product.quantity}}" id="{{product.id}}" name="{{product.id}}" type="text" class="validate" required>
-                    <label for="{{product.id}}"><a href="/skystore/product/{{ product.id }}">{{ product.name }}</a></label>
-                    </div>
+                    <li>
 
+                        <label for="{{product.id}}"><a href="/skystore/product/{{ product.id }}">{{ product.name }}</a></label>
+                        <input value="{{product.quantity}}" id="{{product.id}}" name="{{product.id}}" type="text" class="validate" required>
+
+                    </li>
                     {% endfor %}
                 </ul>
                     <button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Update Stock
@@ -44,21 +47,26 @@
 
             </div>
         </div>
-    </div>
-    </div>
 
-    <div id="test2" class="col s12">
-        <div class="card-panel z-depth-0">Users Admin Page</div>
     </div>
-    <div id="test3" class="col s12">
+    </div>
+    <div id="test2" class="col s12">
         <div class="card-panel z-depth-0">
         {% for order in orders %}
-
-                        <li>{{order.creation_date}}</li>
-
+                        <br>
+            <ul>
+                        <li>Creation date: {{order.creation_date}}</li>
+                        <li>Expected Delivery date: {{order.expected_delivery_date}}</li>
+                        <li>Price: £{{order.price}}</li>
+            </ul>
                     {% endfor %}
             </div>
     </div>
+
+    <div id="test3" class="col s12">
+        <div class="card-panel z-depth-0">Users Admin Page</div>
+    </div>
+
 
 
 
