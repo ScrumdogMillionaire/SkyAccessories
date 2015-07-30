@@ -1,25 +1,33 @@
 
 from django.shortcuts import render
-<<<<<<< HEAD
-from Website.SkyStore.models.Address import Address
-# Create your views here.
-=======
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
+from SkyStore.forms.customerForm import Register
+from SkyStore.forms.addressForm import addressRegister
+from SkyStore.forms.addproductForm import AddProductForm
+from django.shortcuts import redirect
+from SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
->>>>>>> template2
-
 from django.contrib.auth.models import User
+<<<<<<< HEAD
+from Website.SkyStore.models.Product import Product
+=======
+
+from Website.SkyStore.models.Product import Product
+
 # from SkyStore.models import Product
+>>>>>>> adminui
 
 from django.contrib.auth import logout
 
 def logout_view(request):
     logout(request)
+    return redirect('/skystore/')
 
 def home(request):
-    return render(request, "home.html", {})
+    products = Product.objects.all()[:8]
+    return render(request, "home.html", {'products' : products})
 
 def index(request):
     return render(request, "base.html", {})
@@ -27,11 +35,54 @@ def index(request):
 def productlist(request):
     return render(request, "productlist.html", {})
 
-def accountsettings(request):
-    return render(request, "accountsettings.html", {})
+
 
 def login(request):
+    if request.user.is_authenticated():
+        return redirect('/skystore/')
+    formLogin = loginForm()
     return render(request, "login.html", {})
+
+def basket(request):
+    return render(request, "basket.html", {})
+
+def productlist(request):
+    return render(request, "productlist.html", {})
+
+def adminpage(request):
+    if not request.user.is_staff:
+        return redirect('/skystore/')
+    products = Product.objects.all()
+    return render(request, "adminpage.html", {'products': products})
+
+def addproduct(request):
+
+    if request.method == "POST":
+
+        form = AddProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            print 'valid'
+            if handle_uploaded_file(request.FILES['fileinput'], request.POST.get('productname')) == 0:
+                image_path = 'SkyStore/uploaded/' + request.POST.get('productname') + '.jpg'
+                Product.objects.create(name=request.POST.get('productname'), category=request.POST.get('category'), description=request.POST.get('description'), price=request.POST.get('price'), product_image=image_path)
+                return redirect("/skystore/adminpage/")
+    else:
+        form = AddProductForm()
+    return redirect("/skystore/adminpage/")
+
+def addproductpage(request):
+    return render(request, "addproduct.html", {})
+
+def handle_uploaded_file(f, prod_name):
+    with open('SkyStore/uploaded/' + prod_name + '.jpeg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+    return 0
+
+def addimage(request):
+    return render(request, "addproduct.html", {})
 
 def myaccount(request):
     if request.method == "POST":
@@ -53,27 +104,48 @@ def myaccount(request):
             print "User:", user
 
             # Save Address
-            address = addressform.save()
+            address = addressform.save(commit=False)
             address.user_id = user.id
             print "address:", user.id
             address.save()
 
             # Login User
 
-            login_user(username, password, request)
+            user = authenticate(username=username, password=password)
+            auth_login(request, user)
 
-            return render(request, "myaccount.html", {})
-    return render(request, "myaccount.html", {})
+            return render(request, "accountsettings.html", {})
+    return render(request, "accountsettings.html", {})
 
 def register(request):
     addressform = addressRegister()
     customerform = Register()
     return render(request, "register.html", {'customerform': customerform, 'addressform': addressform})
 
-def login_user(username, password, request):
+def loginuser(request):
     # Data must be cleaned before passing
-    authenticated_user = authenticate(username=username, password=password)
-    auth_login(request, authenticated_user)
+    # authenticated_user = authenticate(username=username, password=password)
+    # auth_login(request, authenticated_user)
+    print "enter login"
+    username = request.POST['username']
+    password = request.POST['password']
+
+    # username = cleaned_data['username']
+    # password = cleaned_data['password']
+    user = authenticate(username=username, password=password)
+
+    print user
+    if user is not None:
+        if user.is_active:
+            auth_login(request, user)
+            return redirect('/skystore/')
+            # Redirect to a success page.
+        else:
+            return render(request, "login.html", {'error' : 'Account is disabled'})
+            # Return a 'disabled account' error message
+    else:
+        return render(request, "login.html", {'error' : 'Invalid login information'})
+
 
 
 # Return all the products in the database

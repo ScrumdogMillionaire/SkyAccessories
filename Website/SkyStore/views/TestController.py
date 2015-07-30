@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from Website.SkyStore.models.Order import Order
 from Website.SkyStore.models.Product import Product
 from Website.SkyStore.models.ProductItem import ProductItem
+from Website.SkyStore.models.Address import Address
+
 
 # from SkyStore.models import Product
 
@@ -23,7 +25,7 @@ def logout_view(request):
     return redirect('/skystore/')
 
 def home(request):
-    products = Product.objects.all()[:8]
+    products = Product.objects.all()[:6]
     return render(request, "home.html", {'products' : products})
 
 def index(request):
@@ -95,35 +97,48 @@ def addimage(request):
 
 def myaccount(request):
     if request.method == "POST":
-        customerform = Register(request.POST)
-        addressform = addressRegister(request.POST)
         print "post"
-        if customerform.is_valid() & addressform.is_valid():
-            # Save Customer
-            print "here"
-            username = customerform.cleaned_data['username']
-            password = customerform.cleaned_data['password']
+        # Save Customer
+        username = request.POST['username']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        email = request.POST['email']
 
-            user = customerform.save(commit=False)
+        dupeUsername = User.objects.filter(username=username)
+        if len(dupeUsername) > 0:
+            return render(request, "register.html", {'usernameError' : 'User name is taken'})
 
-            user = User.objects.create_user(username=username, email=user.email)
-            # Hash the password
-            user.set_password(password)
-            user.save()
-            print "User:", user
+        dupeEmail = User.objects.filter(email=email)
+        if len(dupeEmail) > 0:
+            return render(request, "register.html", {'emailError' : 'Email is already used'})
 
-            # Save Address
-            address = addressform.save(commit=False)
-            address.user_id = user.id
-            print "address:", user.id
-            address.save()
+        if confirm_password != password:
+            return render(request, "register.html", {'passwordError' : 'Passwords do not match'})
 
-            # Login User
+        user = User.objects.create_user(username=username, email=email)
+        # Hash the password
+        user.set_password(password)
+        user.save()
+        print "User:", user
 
-            user = authenticate(username=username, password=password)
-            auth_login(request, user)
+        # Save Address
+        line1 = request.POST['line1']
+        line2 = request.POST['line2']
+        postcode = request.POST['postcode']
+        county = request.POST['county']
+        town = request.POST['town']
 
-            return render(request, "accountsettings.html", {})
+        address = Address(street_line1=line1, street_line2=line2, city=town, county=county, postcode=postcode, user=user)
+        address.user_id = user.id
+        print "address:", user.id
+        address.save()
+
+        # Login User
+
+        user = authenticate(username=username, password=password)
+        auth_login(request, user)
+
+        return render(request, "accountsettings.html", {})
     return render(request, "accountsettings.html", {})
 
 def register(request):

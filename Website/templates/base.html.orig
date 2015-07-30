@@ -22,31 +22,37 @@
 
 </head>
 
-<script>
-  window.intercomSettings = {
-    app_id: "x1ma52lv"
-  };
-</script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/x1ma52lv';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> adminui
 <body>
 
     <!-- NavBar -->
 	<header>
 		<div class="navbar-fixed">
+            {% if user.is_staff %}
+                <!-- Non-Staff Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content z-depth-0">
+                    <li><a href="/skystore/adminpage/" class="blue-grey-text text-darken-4"><h6>Admin Page</h6></a></li>
+                    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
+                    <li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
+                </ul>
+            {% else %}
+                <!-- Staff Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content z-depth-0">
+                    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
+                    <li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
+                </ul>
+            {% endif %}
 
-			<!-- Dropdown Structure -->
-			<ul id="dropdown1" class="dropdown-content z-depth-0">
-			  	<li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4"><h6>My Account</h6></a></li>
-			  	<li><a href="/skystore/logout/" class="blue-grey-text text-darken-4"><h6>Sign Out</h6></a></li>
-			</ul>
 
 			<nav class="z-depth-0 white" role="navigation">
 				<div class="nav-wrapper container">
 
 					<!-- Sky Home Button-->
 
-					<a href="/skystore/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/Sky_logo-2.png' %}"/></a>
+					<a href="/skystore/" class="brand-logo center"><img class="logo-header" src="{%  static 'assets/logo1.png' %}"/></a>
 
 					<!-- Menu Icon-->
 
@@ -87,7 +93,11 @@
 							<!-- Shopping Cart -->
 							<a href="/skystore/basket/" class="blue-grey-text text-darken-4">
 								<i class="material-icons blue-grey-text text-darken-4 right">shopping_cart</i>
-								Basket (0)
+								{%if request.session.basket == None%}
+								<span id="basket_number">Basket (0)</span>
+								{% else %}
+								<span id="basket_number">Basket ({{request.session.basket|length}})</span>
+								{% endif %}
 							</a>
 						</li>
 					</ul>
@@ -95,25 +105,46 @@
 					<!-- Side Navigation-->
 
 					<ul class="side-nav" id="side-menu">
-                        <li><a href="/skystore/productlist/" class="blue-grey-text text-darken-4">Categories</a></li>
-						<li>
-							<a id="search-buttn" href="#" class="blue-grey-text text-darken-4">
-								Search
-							</a>
-						</li>
+                        <li class="no-padding">
+
+                            <ul class="collapsible" data-collapsible="accordion">
+
+                                <li class="bold">
+                                    <a class="collapsible-header bold">Categories</a>
+                                    <div class="collapsible-body">
+                                        <ul>
+                                            <li>
+                                                <a href="/skystore/search/?search=Children">Children</a>
+                                            </li>
+                                            <li>
+                                                <a href="/skystore/search/?search=Women">Women</a>
+                                            </li>
+                                            <li>
+                                                <a href="/skystore/search/?search=Men">Men</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a id="search-buttn" href="#" class="blue-grey-text text-darken-4">
+                                Search
+                            </a>
+                        </li>
                         {% if request.user.is_authenticated %}
-						    <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4">My Account</a></li>
+                            <li><a href="/skystore/accountsettings/" class="blue-grey-text text-darken-4">My Account</a></li>
                         {%  else %}
                             <li><a href="/skystore/login/" class="blue-grey-text text-darken-4">Sign In</a></li>
                         {% endif %}
-						<li><a href="/skystore/basket/" class="blue-grey-text text-darken-4">Basket</a></li>
+                        <li><a href="/skystore/basket/" class="blue-grey-text text-darken-4">Basket</a></li>
 
-					</ul>
+                    </ul>
 				</div>
 			</nav>
 		</div>
-
-
 
 
 	</header>
@@ -121,22 +152,18 @@
     <!-- CONTENT -->
     <main class="blue-grey lighten-5">
 		<div id="main_content" class="container">
-			<div id="drop-search" class="blue-grey lighten-5">
+			<div id="drop-search" class="blue-grey darken-4">
 				
-<<<<<<< HEAD
-					<form method="GET" action="/skystore/search/">{% csrf_token %}
-=======
-					<form method="GET" action="/skystore/search/">
->>>>>>> c9c6107c29aa9d4ce7e56fd2d4fbfbd6ed89c15e
+					<form action="/skystore/search/" method="GET">
 						<input id="search" name="search" class="white-text" type="search" autocomplete="off" placeholder="Search..." required>
 					</form>
 				
 			</div>
 
 			<div id="top-spacer"></div>
-			{% block body_block %}
+                {% block body_block %}
 
-			{% endblock %}
+                {% endblock %}
 		</div>
 	</main>
 
@@ -171,6 +198,26 @@
 		    isFitWidth: true
 	    });
 
+		$('.addbasket').click(function(){
+			$.ajax({
+
+				url: "/skystore/addtobasket/",
+				type: 'POST',
+				dataType: "json",
+				data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+				success: function(response) {
+                      result = response.number_of_products;
+					$("#basket_number").text('Basket ('+result+')');
+					Materialize.toast(response.product_name+' added to basket', 3000);
+                },
+				error: function(rs, e) {
+                       alert(rs.responseText);
+                }
+
+
+			});
+		});
+
 		$(document).ready(function(){
 
 			var status = 0;
@@ -189,14 +236,6 @@
 		    		$("#drop-search").slideUp();
 		    		status = 0;
 		    	}   
-		    });
-
-
-		    $("#containersss").nested({
-		    	selector: '.box',
-		    	minWidth: 250,
-		    	gutter: 10,
-		    	resizeToFit: true,
 		    });
 
 		    //Side Nav
@@ -219,11 +258,11 @@
 
 	</script>
 
-	<script>
-  window.intercomSettings = { app_id: 'thkb07zh' };
-</script>
-<!-- Replace 'APP_ID' with your app ID -->
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/APP_ID';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+{#	<script>#}
+{#  window.intercomSettings = { app_id: 'thkb07zh' };#}
+{#</script>#}
+{#<!-- Replace 'APP_ID' with your app ID -->#}
+{#<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/APP_ID';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>#}
 
 </body>
 </html>

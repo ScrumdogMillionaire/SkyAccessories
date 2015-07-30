@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-{% for product in products%}
-{{product.name}}
-{%endfor%}
-
-{{noproducts}}
-=======
 {%  extends 'base.html' %}
 
 {%  load static from staticfiles %}
@@ -18,11 +11,12 @@
 	
 	<div class="grid">
 
-				{% for product in products%}
+        {% for product in products%}
 
 
-		<div class="grid-item">
+            <div class="grid-item">
 
+<<<<<<< HEAD
 			<div class="card z-depth-0">
 				<div class="card-image">
 					<a href=""><img src="images/sample-1.jpg"></a>
@@ -31,15 +25,27 @@
 					<a href="/skystore/product/{{product.id}}"><span class="card-title teal-text text-lighten-1">{{product.name}}</span></a>
 				</div>
 				<div class="card-action">
-					<a href="#">Add to Basket</a>
+					<a class="addbasket" method="POST" onclick="add_to_basket();" name={{product.id}} href="	#">Add to Basket</a>
 				</div>
 			</div>
+=======
+                <div class="card z-depth-0">
+                    <div class="card-image">
+                        <a href=""><img src="images/sample-1.jpg"></a>
+                    </div>
+                    <div class="card-content">
+                        <a href="/skystore/product/{{product.id}}"><span class="card-title teal-text text-lighten-1">{{product.name}}</span></a>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Add to Basket</a>
+                    </div>
+                </div>
+>>>>>>> adminui
 
-			
-		</div>
+            </div>
 
 
-			{%endfor%}	
+        {%endfor%}
 
 
 	
@@ -49,4 +55,3 @@
 	
 
 {% endblock %}
->>>>>>> c9c6107c29aa9d4ce7e56fd2d4fbfbd6ed89c15e

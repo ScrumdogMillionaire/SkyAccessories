@@ -113,10 +113,10 @@
                                                 <a href="/skystore/search/?search=Children">Children</a>
                                             </li>
                                             <li>
-                                                <a href="/skystore/search/?search=Women">Women</a>
+                                                <a href="/skystore/search/?search=Womens">Women</a>
                                             </li>
                                             <li>
-                                                <a href="/skystore/search/?search=Men">Men</a>
+                                                <a href="/skystore/search/?search=Mens">Men</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -178,12 +178,29 @@
     <script src="{%  static 'js/jquery-ui.js' %}"></script>
 	<script src="{%  static 'js/materialize.js' %}"></script>
 	<script src="{%  static 'js/masonry.pkgd.min.js'%}"></script>
-	<script src="{%  static 'js/jquery.nested.js'%}"></script>
+	<script src="{%  static 'js/postcodes.min.js'%}"></script>
 
     <!-- Javascrit -->
+
 	<script type="text/javascript">
         $( document ).ready(function(){
             $(".button-collapse").sideNav();
+
+
+
+            $('#lookup_field').setupPostcodeLookup({
+		  // api_key: 'ak_icp9dqfxLOIeIaLFEVeJIB4neQ2ab',
+		  api_key: 'ak_icp9dqfxLOIeIaLFEVeJIB4neQ2ab',
+		  output_fields: {
+		    line_1: '#line1',  
+		    line_2: '#line2',
+		    district: '#town',
+		    postal_county: '#county',
+		    postcode: '#postcode'
+		  }
+		});
+
+
         })
 
         $('.grid').masonry({
@@ -259,11 +276,11 @@
 
 	</script>
 
-{#	<script>#}
-{#  window.intercomSettings = { app_id: 'thkb07zh' };#}
-{#</script>#}
-{#<!-- Replace 'APP_ID' with your app ID -->#}
-{#<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/APP_ID';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>#}
+<script>
+  window.intercomSettings = { app_id: 'thkb07zh' };
+</script>
+<!-- Replace 'APP_ID' with your app ID -->
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/APP_ID';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
 </body>
 </html>
