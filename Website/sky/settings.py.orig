@@ -49,15 +49,10 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'Warehouse',
-    'RewardsApp',
-    'StoreStaffApp',
-<<<<<<< HEAD
+    # 'RewardsApp',
     'djangosecure',
     'sslserver',
-    # 'SkyStore',
-=======
     'SkyStore',
->>>>>>> template2
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,10 +70,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'sky.urls'
 
-<<<<<<< HEAD
-SECURE_SSL_REDIRECT = True
-=======
->>>>>>> template2
+# SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
@@ -154,3 +146,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication', )
 }
 
+<<<<<<< HEAD
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_URL = '/static/media/'
+=======
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_URL = '/static/media/'
+>>>>>>> db-dev

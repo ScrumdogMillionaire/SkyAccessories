@@ -7,7 +7,7 @@ from Website.SkyStore.models.Product import Product
 from Website.SkyStore.models.Address import Address
 
 def accountsettings(request):
- if request.user.is_authenticated:
+    if request.user.is_authenticated:
         if not request.user.is_staff:
             address_changed = False
             if request.method == "POST":
