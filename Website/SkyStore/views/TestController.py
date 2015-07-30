@@ -31,8 +31,6 @@ def index(request):
 def productlist(request):
     return render(request, "productlist.html", {})
 
-#teste
-st
 def login(request):
     if request.user.is_authenticated():
         return redirect('/skystore/')

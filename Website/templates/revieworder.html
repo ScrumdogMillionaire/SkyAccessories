@@ -4,6 +4,12 @@
 
 {% block body_block %}
 
+{%if address_updated%}
+<!--Display an alert here -->
+
+
+{% endif %}
+
 <div class="row">
 
     <div class="col s12">
@@ -37,14 +43,15 @@
         </tbody>
       </table>
 
-  <form action="/successfulorder" method="POST">
+  <form action="/skystore/successfulorder/" method="POST">{% csrf_token %}
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
     data-image="{%  static 'assets/Sky_logo-2.png' %}"
     data-name="Sky Accessories"
     data-description=""
-    data-amount="2000">
+    data-amount="{{price}}"
+          data-currency="GBP">
   </script>
 </form>
 

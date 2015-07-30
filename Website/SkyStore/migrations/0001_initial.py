@@ -52,6 +52,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
                 ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/mpa45/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
+                ('category', models.CharField(default=b'default', max_length=20, choices=[(b'Default', b'Default'), (b'Children', b'Children'), (b'Womens', b'Womens'), (b'Mens', b'Mens')])),
             ],
             options={
                 'db_table': 'product',
@@ -61,33 +62,13 @@ class Migration(migrations.Migration):
             name='ProductItem',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('status', models.CharField(default=b'not_ordered', max_length=20, null=True, choices=[(b'not_ordered', b'not_ordered'), (b'ordered', b'ordered')])),
                 ('serial_number', models.CharField(max_length=20)),
                 ('order', models.ForeignKey(to='SkyStore.Order', null=True)),
                 ('product', models.ForeignKey(to='SkyStore.Product', null=True)),
             ],
             options={
                 'db_table': 'product_item',
-            },
-        ),
-        migrations.CreateModel(
-            name='ShoppingBag',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('user', models.OneToOneField(null=True, to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'db_table': 'shopping_bag',
-            },
-        ),
-        migrations.CreateModel(
-            name='StaffLogin',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('status', models.BooleanField(default=True)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'db_table': 'staff_login',
             },
         ),
         migrations.CreateModel(

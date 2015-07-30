@@ -4,8 +4,10 @@
 
 {% block body_block %}
 
+{%if no_basket %}
+Empty Basket
 
-
+{%else%}
 
 
           <table class="striped">
@@ -32,7 +34,7 @@
       </table>
 <a href="/skystore/checkout/"class="btn z-depth-0">Checkout</a>
 
-
+{% endif %}
 
 
 {% endblock %}

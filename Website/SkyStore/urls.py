@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^search/', 'SkyStore.views.ProductController.search', name="search"),
     url(r'^checkout/', 'SkyStore.views.ProductController.checkout', name="checkout"),
     url(r'^revieworder/', 'SkyStore.views.ProductController.review_order', name="revieworder"),
+    url(r'^successfulorder/', 'SkyStore.views.ProductController.successful_order', name="successfulorder"),
     #url(r'^all/$', 'SkyStore.views.TestController.products', name="products"),
     url(r'^product/(?P<product_id>\d+)/$', 'SkyStore.views.ProductController.product_handler', name="product"),
 ]

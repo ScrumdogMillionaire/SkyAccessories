@@ -202,9 +202,14 @@
 				dataType: "json",
 				data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
 				success: function(response) {
-                      result = response.number_of_products;
+					if(response.in_stock){
+						result = response.number_of_products;
 					$("#basket_number").text('Basket ('+result+')');
 					Materialize.toast(response.product_name+' added to basket', 3000);
+					}else{
+						Materialize.toast('No more '+response.product_name+' available', 3000);
+					}
+
                 },
 				error: function(rs, e) {
                        alert(rs.responseText);
