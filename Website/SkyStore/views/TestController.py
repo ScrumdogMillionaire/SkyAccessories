@@ -60,9 +60,17 @@ def adminpage(request):
         if request.method == "POST":
             product_id = str(product.id)
             print request.POST
-            if str(product.quantity) != str(request.POST.get(product_id)):
+            if int(product.quantity) < int(request.POST.get(product_id)):
                 print product.id, product.quantity, request.POST.get("1")
-                ProductItem.objects.create(status='not_ordered', serial_number = '12345', product_id=product.id)
+                for i in range(int(request.POST.get(product_id)) - int(product.quantity)):
+                    ProductItem.objects.create(status='not_ordered', serial_number = '12345', product_id=product.id)
+
+            elif int(product.quantity) > int(request.POST.get(product_id)):
+                product_items = product.productitem_set.filter(status="not_ordered")[:int(product.quantity) - int(request.POST.get(product_id))]
+                for product_item in product_items:
+                    product_item.status = "removed"
+                    product_item.save(update_fields=['status'])
+
         product.quantity = len(product.productitem_set.filter(status="not_ordered"))
     return render(request, "adminpage.html", {'products': products, 'orders': orders})
 
