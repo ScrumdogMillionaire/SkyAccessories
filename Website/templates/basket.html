@@ -28,6 +28,8 @@ Empty Basket
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
             <td>{{product.quantity}}</td>
+              <td><a method="GET" href="/skystore/increasequantity/{{product.id}}/"><i class="material-icons teal-text">add</i></a> </td>
+              <td><a method="GET" href="/skystore/removefrombasket/{{product.id}}/"><i class="material-icons red-text">remove</i></a> </td>
           </tr>
         {% endfor %}
         </tbody>

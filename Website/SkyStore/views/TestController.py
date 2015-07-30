@@ -10,8 +10,9 @@ from SkyStore.forms.loginForm import Login as loginForm
 from Website.SkyStore.forms.customerForm import Register
 from Website.SkyStore.forms.addressForm import addressRegister
 from django.contrib.auth.models import User
-
+from Website.SkyStore.models.Order import Order
 from Website.SkyStore.models.Product import Product
+from Website.SkyStore.models.ProductItem import ProductItem
 
 # from SkyStore.models import Product
 
@@ -44,10 +45,24 @@ def productlist(request):
     return render(request, "productlist.html", {})
 
 def adminpage(request):
+
+
+
     if not request.user.is_staff:
         return redirect('/skystore/')
     products = Product.objects.all()
-    return render(request, "adminpage.html", {'products': products})
+    orders = Order.objects.all()
+    for product in products:
+        product.quantity = len(product.productitem_set.filter(status="not_ordered"))
+        print 'Product quantity', product.quantity
+        if request.method == "POST":
+            product_id = str(product.id)
+            print request.POST
+            if str(product.quantity) != str(request.POST.get(product_id)):
+                print product.id, product.quantity, request.POST.get("1")
+                ProductItem.objects.create(status='not_ordered', serial_number = '12345', product_id=product.id)
+        product.quantity = len(product.productitem_set.filter(status="not_ordered"))
+    return render(request, "adminpage.html", {'products': products, 'orders': orders})
 
 def addproduct(request):
 

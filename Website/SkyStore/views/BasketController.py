@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 import json
 from django.core import serializers
+from django.shortcuts import redirect
 
 
 def add_to_basket(request):
@@ -62,15 +63,34 @@ def add_to_basket(request):
 
 
 def remove_from_basket(request, product_id):
-    if request.session.get('basket') is None:
-        request.session['basket'] = []
     try:
-        product = Product.objects.get(id=product_id)
-        request.session.get('basket').remove(product)
+        current_basket = request.session.get('basket')
+        current_basket.remove(product_id)
+        request.session['basket'] = current_basket
+        current_basket = get_current_basket(current_basket)
+        if len(current_basket) == 0:
+            return render(request, 'basket.html', {'no_basket' : True})
         print "product removed"
     except ObjectDoesNotExist:
         pass
-    return render(request, 'basket.html')
+    return render(request, 'basket.html', {'current_basket' : current_basket})
+
+def increase_quantity(request, product_id):
+    try:
+        request_basket = request.session.get('basket')
+        product = Product.objects.get(id=product_id)
+        stock = len(product.productitem_set.filter(status="not_ordered"))
+        current_basket = get_current_basket(request_basket)
+        if stock > current_basket[current_basket.index(product)].quantity:
+            request_basket.append(product_id)
+            request.session['basket']=request_basket
+            return basket(request)
+
+        return basket(request)
+
+
+    except ObjectDoesNotExist:
+        pass
 
 
 def basket(request):

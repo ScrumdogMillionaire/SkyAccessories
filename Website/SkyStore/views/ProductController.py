@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from datetime import date, timedelta
 from django.db import OperationalError
+import requests
 
 
 def product_handler(request, product_id):
@@ -126,6 +127,9 @@ def successful_order(request):
                 i.save()
                 print "i", i
         request.session['basket'] = []
+
+        send_simple_message(request.user, order)
+
         return render(request, "successfulorder.html", {'order': order})
     return render(request, "home.html")
 
@@ -159,3 +163,12 @@ def get_basket_price(basket):
     for i in basket:
         price += (i.price * i.quantity)
     return price
+
+def send_simple_message(customer, order):
+   return requests.post(
+       "https://api.mailgun.net/v3/sandbox2247e4430337465194da28f52b4e090b.mailgun.org/messages",
+       auth=("api", "key-49ea010ba13f50e4b7c9bc12e258132b"),
+       data={"from": "Mailgun Sandbox <postmaster@sandbox2247e4430337465194da28f52b4e090b.mailgun.org>",
+             "to": customer.username+ " <"+customer.email+">",
+             "subject": "Your order has been confirmed",
+             "text": "Put order here"})

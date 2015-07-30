@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^basket/', 'SkyStore.views.BasketController.basket', name="basket"),
     url(r'^addtobasket/$', 'SkyStore.views.BasketController.add_to_basket', name="addtobasket"),
     url(r'^removefrombasket/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.remove_from_basket', name="removefrombasket"),
+    url(r'^increasequantity/(?P<product_id>\d+)/$', 'SkyStore.views.BasketController.increase_quantity', name="increasequantity"),
     url(r'^productlist/', 'SkyStore.views.TestController.productlist', name="productlist"),
     url(r'^adminpage/', 'SkyStore.views.TestController.adminpage', name="adminpage"),
     url(r'^addproductpage/', 'SkyStore.views.TestController.addproductpage', name="addproductpage"),
