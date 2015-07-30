@@ -2,6 +2,7 @@ package com.bootcamp.skyapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -61,6 +62,21 @@ public class BuyProductNFC extends Activity {
                 ImageView productPicture = (ImageView) findViewById(R.id.productPicture);
                 new ImageDownloader(productPicture).execute(getString(R.string.ip) + watch.getPictureURL());
 
+                String fontPath = "skymed.ttf";
+                Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+
+                TextView title = (TextView) findViewById(R.id.productname);
+                title.setTypeface(tf);
+                title.setText(watch.getName());
+
+                TextView price = (TextView) findViewById(R.id.price);
+                price.setTypeface(tf);
+                price.setText("£" + watch.getPrice());
+
+                TextView desc = (TextView) findViewById(R.id.desc);
+                desc.setTypeface(tf);
+                desc.setText(watch.getDescription());
+
                 try {
                     FileInputStream fis = openFileInput("userstate");
                     ObjectInputStream is = new ObjectInputStream(fis);
@@ -119,8 +135,26 @@ public class BuyProductNFC extends Activity {
 
 
     public void orderProduct(View v){
+        if (!watch.isAvailable()) {
+            Toast.makeText(
+                    this,
+                    "Product out of stock.",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+
+        } else {
         try {
             RetrieveJSONPost.placeOrder(User.getInstance().getToken(), User.getInstance().getId(), watchId, this);
+
+
+            Log.d("Points before: ", User.getInstance().getPoints() + "");
+
+            User.getInstance().setPoints(User.getInstance().getPoints() + (int) Double.parseDouble(watch.getPrice()) * 100);
+
+            User.getInstance().saveState(this);
+
+            Log.d("Points after: ", User.getInstance().getPoints() + "");
 
             Toast.makeText(
                     this,
@@ -128,9 +162,19 @@ public class BuyProductNFC extends Activity {
                     Toast.LENGTH_SHORT
             ).show();
 
+
+            loadMenu(v);
+
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
+
+            Toast.makeText(
+                    this,
+                    "Service Unavailable",
+                    Toast.LENGTH_SHORT
+            ).show();
+        } }
     }
 
     public void loadMenu(View v){

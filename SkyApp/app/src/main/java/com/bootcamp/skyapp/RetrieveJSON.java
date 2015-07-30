@@ -85,8 +85,8 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
         JSONArray jarry = new JSONArray();
         ArrayList<Marker> markers = new ArrayList<Marker>();
 
-        //AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "api/stores/");
-        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/markers");
+        AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "/api/stores/");
+        //AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/markers");
 
         try {
             jarry = (JSONArray) task.get();
@@ -111,18 +111,21 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
 
     public static Product getProduct(int productID, Context ctx){
         JSONArray jarry = new JSONArray();
-        Product watch = new Product("", "");
+        Product watch = new Product("", "", "", "", false);
 
-        AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
-        //AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "api/product/"+productID);
+        //AsyncTask task = new RetrieveJSON().execute("http://demo2219975.mockable.io/orders/"+productID);
+        AsyncTask task = new RetrieveJSON().execute(ctx.getString(R.string.ip) + "/api/product/"+productID);
 
         try {
             jarry = (JSONArray) task.get();
 
             String name = jarry.getJSONObject(0).get("name").toString();
             String url = jarry.getJSONObject(0).get("product_image").toString();
+            String price = jarry.getJSONObject(0).get("price").toString();
+            String description = jarry.getJSONObject(0).get("description").toString();
+            boolean available = jarry.getJSONObject(0).getBoolean("available");
 
-           watch = new Product(name, url);
+           watch = new Product(name, url, price, description, available);
         } catch (Exception e) {
             e.printStackTrace();
         }

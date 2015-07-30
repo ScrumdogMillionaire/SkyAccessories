@@ -68,6 +68,16 @@ public class MainMenu extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("Points on main page: ", User.getInstance().getPoints() + "");
+
+        TextView points = (TextView) findViewById(R.id.points);
+        points.setText(User.getInstance().getPoints() + " points");
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_menu, menu);

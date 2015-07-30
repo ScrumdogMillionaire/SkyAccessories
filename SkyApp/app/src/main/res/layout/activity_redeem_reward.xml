@@ -16,12 +16,12 @@
 
     <TextView
         android:id="@+id/accounttitle"
-        android:text="Rewards"
+        android:text="Redeem Your Reward"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/skylogo"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:layout_height="wrap_content" />
 
     <Button
@@ -83,6 +83,62 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/giftcardx"
             />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="150dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#FF8E3A"
+            android:textStyle="bold"
+            android:layout_marginTop="-35dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button1"
+            android:layout_toLeftOf="@id/middle"
+            android:text="1000 points"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="150dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#FF8E3A"
+        android:textStyle="bold"
+        android:layout_marginTop="-35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button2"
+        android:layout_toRightOf="@id/middle"
+        android:text="2000 points"/>
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="150dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#FF8E3A"
+        android:textStyle="bold"
+        android:layout_marginTop="-35dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button3"
+        android:layout_toLeftOf="@id/middle"
+        android:text="3000 points"/>
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="150dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#FF8E3A"
+        android:textStyle="bold"
+        android:layout_marginTop="-35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button4"
+        android:layout_toRightOf="@id/middle"
+        android:text="4000 points"/>
 
 
 

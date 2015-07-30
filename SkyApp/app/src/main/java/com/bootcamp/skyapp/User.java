@@ -1,5 +1,9 @@
 package com.bootcamp.skyapp;
 
+import android.content.Context;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -87,5 +91,17 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void saveState(Context ctx) {
+        try {
+            FileOutputStream fos = ctx.getApplicationContext().openFileOutput("userstate", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(User.getInstance());
+            os.close();
+            fos.close();
+        } catch (Exception e) {
+
+        }
     }
 }

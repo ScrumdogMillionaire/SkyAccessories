@@ -93,7 +93,7 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
     public static void tryLogin(String user, String password, Context ctx) throws Exception {
         JSONArray jarry = new JSONArray();
 
-        AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "api-auth/", "email_or_username", user, "password", password, null);
+        AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "/api-auth/", "email_or_username", user, "password", password, null);
 
         jarry = (JSONArray) task.get();
 
@@ -113,6 +113,11 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
     }
 
     public static void placeOrder(String token, String userID, String productID, Context ctx) {
-        //AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "api/place-order/", "user_id", userID, "prod_id", productID, token);
+        AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "/api/place-order/", "user_id", userID, "prod_id", productID, token);
+    }
+
+    public static void changePoints(String token, String userID, int changeInPoints, Context ctx) {
+        AsyncTask task = new RetrieveJSONPost().execute(ctx.getString(R.string.ip) + "/api/reward/update/", "user_id", userID, "points", changeInPoints + "", token);
+        User.getInstance().setPoints(User.getInstance().getPoints() + changeInPoints);
     }
 }
