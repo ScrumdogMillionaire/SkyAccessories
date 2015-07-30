@@ -28,13 +28,19 @@
         <div class="col s8">
             <div class="card-panel z-depth-0">
                 <h5>Products in Database:</h5>
+                <form method="POST" action="/skystore/adminpage/">{% csrf_token %}
                 <ul>
                     {% for product in products %}
-
-                        <li><a href="/skystore/product/{{ product.id }}">{{ product.name }}</a></li>
+                    <div class="input-field col s7">
+                    <input value="{{product.quantity}}" id="{{product.id}}" name="{{product.id}}" type="text" class="validate" required>
+                    <label for="{{product.id}}"><a href="/skystore/product/{{ product.id }}">{{ product.name }}</a></label>
+                    </div>
 
                     {% endfor %}
                 </ul>
+                    <button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Update Stock
+                    </button>
+                    </form>
 
             </div>
         </div>
@@ -45,7 +51,13 @@
         <div class="card-panel z-depth-0">Users Admin Page</div>
     </div>
     <div id="test3" class="col s12">
-        <div class="card-panel z-depth-0">Orders Admin Page</div>
+        <div class="card-panel z-depth-0">
+        {% for order in orders %}
+
+                        <li>{{order.creation_date}}</li>
+
+                    {% endfor %}
+            </div>
     </div>
 
 

@@ -10,19 +10,71 @@
         <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test2">Payment</a></li>
         <li class="tab col s3"><a class="blue-grey-text text-darken-4" href="#test3">Orders</a></li>
     </ul>
-
+ <!-- General Settings -->
     <div id="test1" class="col s12">
         <div class="card-panel z-depth-0">
+        <div class="row card-panel z-depth-0">
+    <form class="col s12" method="POST" action="/skystore/accountsettings/">{% csrf_token %}
+        {% include 'address.html' %}
+        <input type="submit" value="Update Delivery Address" class="btn z-depth-0">
+    </form>
+</div>
 
-            <h6>{{ useraddress.street_line1 }}</h6>
-
-        </div>
     </div>
+        </div>
+    <!-- Payment Settings-->
     <div id="test2" class="col s12">
         <div class="card-panel z-depth-0">Payment Settings</div>
     </div>
+
+
     <div id="test3" class="col s12">
-        <div class="card-panel z-depth-0">Your Orders</div>
+        <div class="card-panel z-depth-0">
+
+            {%for order in orders%}
+            <br>
+
+             <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input disabled value="{{order.creation_date}}" id="disabled" type="text" class="validate">
+                      <label for="disabled">Order Date</label>
+                    </div>
+                  </div>
+                    <div class="row">
+                    <div class="input-field col s12">
+                      <input disabled value="{{order.price}}" id="disabled" type="text" class="validate">
+                      <label for="disabled">Order Price</label>
+                    </div>
+
+                  </div>
+
+                    {% for product in order.products %}
+                    <div class="row">
+                    <div class="input-field col s6">
+                      <input disabled value="{{product.name}}" id="disabled" type="text" class="validate">
+                      <label for="disabled">Name</label>
+                    </div>
+                        <div class="input-field col s6">
+                      <input disabled value="{{product.quantity}}" id="disabled" type="text" class="validate">
+                      <label for="disabled">Quantity</label>
+                    </div>
+
+                  </div>
+                    {% endfor %}
+                </form>
+              </div>
+            {% endfor %}
+
+
+
+
+
+
+
+        </div>
+
     </div>
 
 {% endblock %}

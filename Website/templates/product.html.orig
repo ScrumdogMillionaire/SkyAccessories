@@ -19,17 +19,22 @@
 
         <div class="col s4">
             <div class="card-panel z-depth-0">
-                <img src="{%  static 'assets/Sky_logo_2014_small.png' %}"/>
+                <img src="{{ product.product_image }}"/>
             </div>
         </div>
         <div class="col s8">
 
             <div class="card-panel z-depth-0">
                 <span class="red-text">£{{ product.price }}</span>
-                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket
-
-        </button></p>
+<<<<<<< HEAD
+                <p><a class="addbasket" method="POST" onclick="add_to_basket();" name={{product.id}} href="	#">Add to Basket</a></p>
+                <p>stock: {{product.stock}}</p>
                 Description:
+=======
+                <p><button class="btn waves-effect waves-light z-depth-0" type="submit" name="action">Add to Basket</button></p>
+                Category: {{ product.category }}
+                <p>Description:</p>
+>>>>>>> adminui
                 <p>{{ product.description }}</p>
             </div>
         </div>
@@ -47,12 +52,5 @@
         </div>
     </div>
 
-
-<<<<<<< HEAD
-	<img src="{{ product.image.url }}">
-<a href="{% url 'addtobasket' product.id %}">Add to Basket</a>
-
-=======
->>>>>>> c9c6107c29aa9d4ce7e56fd2d4fbfbd6ed89c15e
 
 {% endblock %}

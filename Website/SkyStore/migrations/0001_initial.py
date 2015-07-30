@@ -51,8 +51,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, null=True)),
                 ('description', models.TextField()),
                 ('price', models.DecimalField(max_digits=14, decimal_places=2)),
-                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/iri03/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
-                ('category', models.CharField(default=b'default', max_length=20, choices=[(b'Default', b'Default'), (b'Children', b'Children'), (b'Womens', b'Womens'), (b'Mens', b'Mens')])),
+                ('product_image', models.ImageField(storage=django.core.files.storage.FileSystemStorage(location=b'/Users/mpa45/SkyAccessories/Website/sky/static/'), null=True, upload_to=b'images')),
+		('category', models.CharField(default=b'default', max_length=20, choices=[(b'Default', b'Default'), (b'Children', b'Children'), (b'Womens', b'Womens'), (b'Mens', b'Mens')])),
             ],
             options={
                 'db_table': 'product',

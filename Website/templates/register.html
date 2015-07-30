@@ -6,21 +6,78 @@
 
 {% block body_block %}
 
-    <div class="col s12 offset-m2 m8 offset-l3 l6">
-        <div class="card-panel z-depth-0">
-            <div class="row center">
-                <div class="col s12"><h5>Sign Up Here!</h5></div>
-                <div class="col s12 m4 l2"><p></p></div>
-                <div class="col s12 m4 l8"><p></p>
-                    <form action="/skystore/myaccount/" method="POST" name="register">{% csrf_token %}
-                        {{ customerform.as_p }}
-                        {{ addressform.as_p }}
-                        <input type="submit" value="Register">
-                    </form>
-                </div>
-                <div class="col s12 m4 l2"><p></p></div>
-            </div>
-        </div>
+<div class="row">
+
+    <div class="col s12">
+        <h5>Sign up</h5>
+        <div class="divider"></div>
     </div>
+</div>
+
+<div class="card-panel z-depth-0">
+    <div class="red-text">
+    {{ usernameError }}
+    {{ emailError }}
+    {{ passwordError }}
+    </div>
+    <div class="row">
+        <form action="/skystore/myaccount/" method="POST" class="col s12" name="register">{% csrf_token %}
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="username" id="username" type="text" class="validate" required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field col s6">
+                    <input name="email" id="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="password" id="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col s6">
+                    <input name="confirm_password"id="confirm_password" type="password" class="validate" required>
+                    <label for="confirm_password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12" name="lookup_field" id="lookup_field">
+                    
+                </div>
+                <div class="input-field col s6">
+                    <!-- <input id="postcode_lookup" type="text" class="validate">
+                    <label for="postcode_lookup">Postcode</label> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Address Line 1" name="line1" id="line1" type="text" class="validate" required>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Address Line 2" name="line2" id="line2" type="text" class="validate" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Town" name="town" id="town" type="text" class="validate" required>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="County" name="county" id="county" type="text" class="validate" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input class="btn" type="submit" value="Register">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Postcode" name="postcode" id="postcode" type="text" class="validate" required>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
 
 {% endblock %}

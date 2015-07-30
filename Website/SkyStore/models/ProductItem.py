@@ -4,7 +4,7 @@ from django.db import models
 # from Product import Product
 # from Order import Order
 
-STATUS = [('not_ordered', 'not_ordered'), ('ordered', 'ordered')]
+STATUS = [('not_ordered', 'not_ordered'), ('ordered', 'ordered'), ('removed','removed')]
 
 
 class ProductItem(models.Model):
