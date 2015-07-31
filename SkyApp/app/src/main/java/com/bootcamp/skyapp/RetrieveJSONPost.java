@@ -64,10 +64,9 @@ public class RetrieveJSONPost extends AsyncTask<String, Integer, JSONArray> {
             while ((line = reader.readLine()) != null)
             {
                 sb.append(line + "\n");
+                Log.d("Line", line);
             }
             result = sb.toString();
-
-            Log.d("Raw output is: ", result);
 
             JSONArray jArray = new JSONArray(result);
 

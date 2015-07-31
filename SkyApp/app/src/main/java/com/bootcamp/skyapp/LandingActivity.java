@@ -97,7 +97,7 @@ public class LandingActivity extends Activity {
             Log.d("This is why", "It failed", e);
             Toast toast = Toast.makeText(
                     this,
-                    "Login Failed! :(",
+                    "Login Failed!",
                     Toast.LENGTH_SHORT
             );
 

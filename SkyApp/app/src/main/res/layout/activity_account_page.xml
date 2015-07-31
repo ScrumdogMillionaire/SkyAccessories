@@ -26,24 +26,13 @@
 
     <TextView
         android:id="@+id/username"
-        android:text="Username:"
+        android:text="Email:"
         android:layout_width="wrap_content"
         android:textColor="#26A69A"
         android:layout_below="@+id/accounttitle"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/email"
-        android:text="Email:"
-        android:textColor="#26A69A"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -51,10 +40,10 @@
         android:text="Points:"
         android:textColor="#26A69A"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/email"
+        android:layout_below="@+id/username"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
 
@@ -64,34 +53,22 @@
         android:textColor="#FF8E3A"
         android:layout_below="@id/accounttitle"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/username"
+        android:layout_toRightOf="@+id/lastname"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
-        android:textSize="20sp"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/emailValue"
-        android:text="J.Bloggs@email.com"
-        android:textColor="#FF8E3A"
-        android:layout_below="@id/usernameValue"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/username"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/pointsValue"
         android:text="1000"
         android:textColor="#FF8E3A"
-        android:layout_below="@id/emailValue"
+        android:layout_below="@id/usernameValue"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/username"
+        android:layout_toRightOf="@+id/firstname"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -102,7 +79,7 @@
         android:layout_below="@+id/points"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -111,10 +88,10 @@
         android:textColor="#FF8E3A"
         android:layout_below="@id/pointsValue"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/username"
+        android:layout_toRightOf="@+id/lastname"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -125,7 +102,7 @@
         android:layout_below="@+id/firstname"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -134,10 +111,10 @@
         android:textColor="#FF8E3A"
         android:layout_below="@id/firstnameValue"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/username"
+        android:layout_toRightOf="@+id/firstname"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
 
     <Button

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class RedeemReward extends Activity {
 
         String randomString = UUID.randomUUID().toString();
 
-        String[] toArr = {"tom.w.lloyd@googlemail.com", "jr397@exeter.ac.uk"};
+        String[] toArr = {User.getInstance().getEmail()};
         m.setTo(toArr);
         m.setFrom("vouchers@sky.com");
         m.setSubject("Your Sky Rewards Voucher");
@@ -80,14 +81,20 @@ public class RedeemReward extends Activity {
                 RetrieveJSONPost.changePoints(User.getInstance().getToken(), User.getInstance().getId(), -2000, this);
                 break;
             case R.id.button3:
-                RetrieveJSONPost.changePoints(User.getInstance().getToken(), User.getInstance().getId(), -3000, this);
+                RetrieveJSONPost.changePoints(User.getInstance().getToken(), User.getInstance().getId(), -4000, this);
                 break;
             case R.id.button4:
-                RetrieveJSONPost.changePoints(User.getInstance().getToken(), User.getInstance().getId(), -4000, this);
+                RetrieveJSONPost.changePoints(User.getInstance().getToken(), User.getInstance().getId(), -8000, this);
                 break;
         }
 
         User.getInstance().saveState(this);
+
+        Toast.makeText(
+                this,
+                "You have redeemed your reward!",
+                Toast.LENGTH_SHORT
+        ).show();
 
         hideButtons(User.getInstance().getPoints());
     }
@@ -111,7 +118,7 @@ public class RedeemReward extends Activity {
             points1.setTextColor(Color.DKGRAY);
         }
 
-        if (points < 3000){
+        if (points < 4000){
             Button reward3 = (Button) findViewById(R.id.button3);
             reward3.setClickable(false);
             reward3.setBackgroundResource(R.drawable.sportg);
@@ -120,7 +127,7 @@ public class RedeemReward extends Activity {
             points1.setTextColor(Color.DKGRAY);
         }
 
-        if (points < 4000){
+        if (points < 8000){
             Button reward4 = (Button) findViewById(R.id.button4);
             reward4.setClickable(false);
             reward4.setBackgroundResource(R.drawable.giftcardg);

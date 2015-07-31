@@ -23,9 +23,6 @@ public class AccountPage extends Activity {
         username.setTypeface(tf);
         username.setText(User.getInstance().getUsername());
 
-        TextView email = (TextView) findViewById(R.id.emailValue);
-        email.setTypeface(tf);
-        email.setText(User.getInstance().getEmail());
 
         TextView points = (TextView) findViewById(R.id.pointsValue);
         points.setTypeface(tf);
@@ -41,8 +38,7 @@ public class AccountPage extends Activity {
 
         TextView user = (TextView) findViewById(R.id.username);
         user.setTypeface(tf);
-        TextView em = (TextView) findViewById(R.id.email);
-        em.setTypeface(tf);
+
         TextView point = (TextView) findViewById(R.id.points);
         point.setTypeface(tf);
         TextView fn = (TextView) findViewById(R.id.firstname);

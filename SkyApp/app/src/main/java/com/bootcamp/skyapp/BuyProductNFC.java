@@ -150,7 +150,7 @@ public class BuyProductNFC extends Activity {
 
             Log.d("Points before: ", User.getInstance().getPoints() + "");
 
-            User.getInstance().setPoints(User.getInstance().getPoints() + (int) Double.parseDouble(watch.getPrice()) * 100);
+            User.getInstance().setPoints(User.getInstance().getPoints() + (int) Double.parseDouble(watch.getPrice()) * 10);
 
             User.getInstance().saveState(this);
 

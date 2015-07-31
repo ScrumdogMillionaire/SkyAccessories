@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"/>
 
     <EditText
-        android:hint="Sky ID"
+        android:hint="Email"
         android:id="@+id/loginUser"
         android:singleLine="true"
         android:drawableRight="@drawable/person"

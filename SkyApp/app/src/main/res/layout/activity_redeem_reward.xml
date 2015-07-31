@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button3"
         android:layout_toLeftOf="@id/middle"
-        android:text="3000 points"/>
+        android:text="4000 points"/>
 
     <TextView
         android:id="@+id/text4"
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button4"
         android:layout_toRightOf="@id/middle"
-        android:text="4000 points"/>
+        android:text="8000 points"/>
 
 
 

@@ -125,6 +125,9 @@ public class RetrieveJSON extends AsyncTask<String, Integer, JSONArray> {
             String description = jarry.getJSONObject(0).get("description").toString();
             boolean available = jarry.getJSONObject(0).getBoolean("available");
 
+            url = url.replace("/static/media", "");
+            url = "/static/media" + url;
+
            watch = new Product(name, url, price, description, available);
         } catch (Exception e) {
             e.printStackTrace();
